@@ -1,1 +1,9 @@
-# AkashDarwin-SDGP-SE-30-MindBenders
+# SDGP-SE-30-MindBenders
+
+Members:
+
+Akash 
+Tharusha
+Dinil
+Dumidu
+Tharkana
