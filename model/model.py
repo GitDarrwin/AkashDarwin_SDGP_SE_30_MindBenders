@@ -9,7 +9,7 @@ from keras.models import Model
 # Load and preprocess data
 train_df = pd.read_csv('Csv/train.csv')
 test_df = pd.read_csv('Csv/test.csv')
-
+print("hekki")
 train_datagen = ImageDataGenerator(rescale=1./255, shear_range=0.2, zoom_range=0.2, horizontal_flip=True)
 test_datagen = ImageDataGenerator(rescale=1./255)
 
