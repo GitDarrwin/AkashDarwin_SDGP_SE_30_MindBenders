@@ -1,4 +1,5 @@
 import '../../Utils/auth.dart';
+import '../sign_up_page/sign_up_page_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -50,7 +51,7 @@ class _SignInPageWidgetState extends State<SignInPageWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+      backgroundColor: Color(0xFF3E642A),
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
@@ -140,6 +141,7 @@ class _SignInPageWidgetState extends State<SignInPageWidget> {
                               return null;
                             },
                             decoration: InputDecoration(
+                              hintText: "Enter Valid Email",
                               hintStyle: FlutterFlowTheme.of(context).bodyText2,
                               enabledBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(
@@ -204,6 +206,7 @@ class _SignInPageWidgetState extends State<SignInPageWidget> {
                               return null;
                             },
                             decoration: InputDecoration(
+                              hintText: "Enter Valid Password up to 6 characters",
                               hintStyle: FlutterFlowTheme.of(context).bodyText2,
                               enabledBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(
@@ -305,13 +308,13 @@ class _SignInPageWidgetState extends State<SignInPageWidget> {
                       ),
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                            EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
                         child: InkWell(
                           onTap: () async {
-                            if (Navigator.of(context).canPop()) {
-                              context.pop();
-                            }
-                            context.pushNamed('Sign_Up_Page');
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) =>  SignUpPageWidget()),
+                            );
                           },
                           child: Text(
                             'Sign Up',
@@ -319,7 +322,7 @@ class _SignInPageWidgetState extends State<SignInPageWidget> {
                                 FlutterFlowTheme.of(context).bodyText1.override(
                                       fontFamily: 'Poppins',
                                       color: Color(0xFFFF0000),
-                                      fontSize: 12.0,
+                                      fontSize: 16.0,
                                     ),
                           ),
                         ),
@@ -373,8 +376,7 @@ class _SignInPageWidgetState extends State<SignInPageWidget> {
     setState(() {
       _loading = false;
     });
-
-    context.pushNamed('Menue_Option_Page');
+    context.goNamed('Menue_Option_Page');
 
   }
 }

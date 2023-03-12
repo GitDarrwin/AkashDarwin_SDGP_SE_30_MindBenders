@@ -29,6 +29,8 @@ class _MenueOptionPageWidgetState extends State<MenueOptionPageWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final _unfocusNode = FocusNode();
 
+  String? name_email= FirebaseAuth.instance.currentUser?.email;
+
   @override
   void initState() {
     super.initState();
@@ -79,21 +81,15 @@ class _MenueOptionPageWidgetState extends State<MenueOptionPageWidget> {
                 ),
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
-                  child: Text(
-                    'Dumidu Fernando',
-                    style: FlutterFlowTheme.of(context).bodyText1.override(
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.w600,
-                        ),
-                  ),
                 ),
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                   child: Text(
-                    'dumidu.20200515@iit.ac.lk',
+                    name_email!,
                     style: FlutterFlowTheme.of(context).bodyText1.override(
                           fontFamily: 'Poppins',
-                          fontSize: 12.0,
+                          fontSize: 15.0,
+                          fontWeight: FontWeight.w600,
                         ),
                   ),
                 ),

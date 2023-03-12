@@ -34,15 +34,9 @@ class _HomePageWidgetState extends State<HomePageWidget> {
       await Future.delayed(const Duration(milliseconds: 3000));
       User? user = FirebaseAuth.instance.currentUser;
         if (user == null) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) =>  SignInPageWidget()),
-          );
+          context.goNamed('Sign_in_page');
         } else {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) =>  MenueOptionPageWidget()),
-          );
+          context.goNamed('Menue_Option_Page');
           print("menue page");
         }
 
@@ -81,7 +75,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   onTap: () async {
                     await Future.delayed(const Duration(milliseconds: 5000));
 
-                    context.pushNamed('Sign_in_page');
+                    context.goNamed('Sign_in_page');
                   },
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
