@@ -13,6 +13,13 @@ class Auth {
     );
     //you can also store the user in Database
   }
+  Future<void> resetpassword(
+      String email) async{
+    await _auth.sendPasswordResetEmail(
+      email: email,
+    );
+    //you can also store the user in Database
+  }
   Future<void> signInWithEmailAndPassword(String email, String password) async {
     final user = await _auth.signInWithEmailAndPassword(
         email: email,

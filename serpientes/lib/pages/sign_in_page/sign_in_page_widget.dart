@@ -285,7 +285,7 @@ class _SignInPageWidgetState extends State<SignInPageWidget> {
                         padding:
                             EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 200.0, 0.0),
                         child: GestureDetector(
-                          onTap: ,
+                          onTap: () => resetpassword(),
                           child: RichText(
                             text: TextSpan(
                               children: [
@@ -413,5 +413,11 @@ class _SignInPageWidgetState extends State<SignInPageWidget> {
     });
     context.pushNamed('Menue_Option_Page');
 
+  }
+
+  resetpassword() async {
+    final email = _emailController.value.text;
+
+    await Auth().resetpassword(email);
   }
 }
