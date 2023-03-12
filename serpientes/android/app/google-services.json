@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "369323426850",
+    "project_id": "serpientes-56d1d",
+    "storage_bucket": "serpientes-56d1d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:369323426850:android:8d190da7387b60b6e0b67b",
+        "android_client_info": {
+          "package_name": "com.mycompany.sdgp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "369323426850-basqqr7081vq1oa2ua2ke1me4ll8rqc6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCq9dk1ePSPlxZUsb752An0svxmfYjjbiw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "369323426850-basqqr7081vq1oa2ua2ke1me4ll8rqc6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
