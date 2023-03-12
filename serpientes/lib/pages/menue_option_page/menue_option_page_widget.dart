@@ -1,3 +1,10 @@
+import 'dart:io';
+
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart';
+import 'package:sdgp/pages/sign_in_page/sign_in_page_model.dart';
+
+import '../sign_in_page/sign_in_page_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -157,6 +164,14 @@ class _MenueOptionPageWidgetState extends State<MenueOptionPageWidget> {
                   ),
                 ),
                 ListTile(
+                  onTap: (){
+                    //Use this log out user
+                    FirebaseAuth.instance.signOut();
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) =>  SignInPageWidget()),
+                    );
+                  },
                   title: Text(
                     'Sign out',
                     style: FlutterFlowTheme.of(context).title3.override(
@@ -176,8 +191,15 @@ class _MenueOptionPageWidgetState extends State<MenueOptionPageWidget> {
                   thickness: 3.0,
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 270.0, 0.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 260.0, 0.0, 0.0),
                   child: ListTile(
+                    onTap: () {
+                      if (Platform.isAndroid) {
+                        SystemNavigator.pop();
+                      } else if (Platform.isIOS) {
+                        exit(0);
+                      }
+                    },
                     title: Text(
                       'Exit',
                       style: FlutterFlowTheme.of(context).title3.override(

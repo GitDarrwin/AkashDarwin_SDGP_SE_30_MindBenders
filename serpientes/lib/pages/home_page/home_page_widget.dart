@@ -1,3 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
+
+import '../menue_option_page/menue_option_page_widget.dart';
+import '../sign_in_page/sign_in_page_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
@@ -28,8 +32,21 @@ class _HomePageWidgetState extends State<HomePageWidget> {
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       await Future.delayed(const Duration(milliseconds: 3000));
+      User? user = FirebaseAuth.instance.currentUser;
+        if (user == null) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) =>  SignInPageWidget()),
+          );
+        } else {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) =>  MenueOptionPageWidget()),
+          );
+          print("menue page");
+        }
 
-      context.pushNamed('Sign_in_page');
+      // context.pushNamed('Sign_in_page');
     });
   }
 

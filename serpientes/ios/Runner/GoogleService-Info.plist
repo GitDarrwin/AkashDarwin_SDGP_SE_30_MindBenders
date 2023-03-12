@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>369323426850-7fd62in3b7djl42uo6c34hvkunickhvm.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.369323426850-7fd62in3b7djl42uo6c34hvkunickhvm</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDfL9F_VJSnGLSyTbZ7pwr3lYgXh8fPX34</string>
+	<key>GCM_SENDER_ID</key>
+	<string>369323426850</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.mycompany.sdgp</string>
+	<key>PROJECT_ID</key>
+	<string>serpientes-56d1d</string>
+	<key>STORAGE_BUCKET</key>
+	<string>serpientes-56d1d.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:369323426850:ios:97be586ae76e1b40e0b67b</string>
+</dict>
+</plist>

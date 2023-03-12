@@ -1,3 +1,4 @@
+import '../../Utils/auth.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -20,6 +21,13 @@ class _SignInPageWidgetState extends State<SignInPageWidget> {
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final _unfocusNode = FocusNode();
+
+
+  final bool _isLogin = true;
+  bool _loading = false;
+  final _formkey = GlobalKey<FormState>();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   @override
   void initState() {
@@ -73,7 +81,7 @@ class _SignInPageWidgetState extends State<SignInPageWidget> {
                         padding:
                             EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                         child: Text(
-                          'serpientes',
+                          'Serpientes',
                           style: FlutterFlowTheme.of(context).bodyText1.override(
                                 fontFamily: 'Irish Grover',
                                 fontSize: 19.0,
@@ -95,7 +103,7 @@ class _SignInPageWidgetState extends State<SignInPageWidget> {
                       ),
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 75.0, 0.0),
+                            EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 90.0, 0.0),
                         child: Text(
                           'Hi there! Nice to see you again\n',
                           style: FlutterFlowTheme.of(context).bodyText1.override(
@@ -121,10 +129,16 @@ class _SignInPageWidgetState extends State<SignInPageWidget> {
                         child: Container(
                           width: 300.0,
                           child: TextFormField(
-                            controller: _model.textController1,
+                            controller: _emailController,
                             autofocus: true,
                             autofillHints: [AutofillHints.email],
                             obscureText: false,
+                            validator: (value){
+                              if (value == null || value.isEmpty){
+                                return 'Please enter your email';
+                              }
+                              return null;
+                            },
                             decoration: InputDecoration(
                               hintStyle: FlutterFlowTheme.of(context).bodyText2,
                               enabledBorder: UnderlineInputBorder(
@@ -160,8 +174,6 @@ class _SignInPageWidgetState extends State<SignInPageWidget> {
                             style: FlutterFlowTheme.of(context).bodyText1,
                             textAlign: TextAlign.center,
                             maxLines: null,
-                            validator: _model.textController1Validator
-                                .asValidator(context),
                           ),
                         ),
                       ),
@@ -182,9 +194,15 @@ class _SignInPageWidgetState extends State<SignInPageWidget> {
                         child: Container(
                           width: 300.0,
                           child: TextFormField(
-                            controller: _model.textController2,
+                            controller: _passwordController,
                             autofocus: true,
                             obscureText: !_model.passwordVisibility,
+                            validator: (value){
+                              if (value == null || value.isEmpty){
+                                return 'Please enter your Password';
+                              }
+                              return null;
+                            },
                             decoration: InputDecoration(
                               hintStyle: FlutterFlowTheme.of(context).bodyText2,
                               enabledBorder: UnderlineInputBorder(
@@ -233,8 +251,6 @@ class _SignInPageWidgetState extends State<SignInPageWidget> {
                             ),
                             style: FlutterFlowTheme.of(context).bodyText1,
                             textAlign: TextAlign.center,
-                            validator: _model.textController2Validator
-                                .asValidator(context),
                           ),
                         ),
                       ),
@@ -261,9 +277,10 @@ class _SignInPageWidgetState extends State<SignInPageWidget> {
                         padding:
                             EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                         child: FFButtonWidget(
-                          onPressed: () async {
-                            context.pushNamed('Menue_Option_Page');
-                          },
+                          // onPressed: () async {
+                          //   context.pushNamed('Menue_Option_Page');
+                          // },
+                          onPressed: () => handleSubmit(),
                           text: 'Sign In',
                           options: FFButtonOptions(
                             width: 160.0,
@@ -340,5 +357,24 @@ class _SignInPageWidgetState extends State<SignInPageWidget> {
         ),
       ),
     );
+  }
+
+  handleSubmit() async{
+    final email = _emailController.value.text;
+    final password = _passwordController.value.text;
+
+    setState(() {
+      _loading = true;
+    });
+
+    //Checking if is login or register
+    await Auth().signInWithEmailAndPassword(email, password);
+
+    setState(() {
+      _loading = false;
+    });
+
+    context.pushNamed('Menue_Option_Page');
+
   }
 }
