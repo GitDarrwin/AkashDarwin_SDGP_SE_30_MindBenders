@@ -69,6 +69,7 @@ dependencies:
   cupertino_icons: ^1.0.0
   google_sign_in: ^6.0.2
 
+
 dependency_overrides:
   webview_flutter_android: 2.10.3
   webview_flutter_platform_interface: 1.9.5
