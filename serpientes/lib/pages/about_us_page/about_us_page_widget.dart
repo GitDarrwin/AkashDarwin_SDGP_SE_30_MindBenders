@@ -152,7 +152,7 @@ class _AboutUsPageWidgetState extends State<AboutUsPageWidget> {
                         children: [
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
-                                30.0, 10.0, 0.0, 0.0),
+                                35.0, 10.0, 0.0, 0.0),
                             child: Text(
                               'Akash Dawrin',
                               style:
@@ -164,7 +164,7 @@ class _AboutUsPageWidgetState extends State<AboutUsPageWidget> {
                           ),
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
-                                25.0, 10.0, 0.0, 0.0),
+                                40.0, 10.0, 0.0, 0.0),
                             child: Text(
                               'Tharusha \nGunawardana',
                               textAlign: TextAlign.center,
@@ -177,7 +177,7 @@ class _AboutUsPageWidgetState extends State<AboutUsPageWidget> {
                           ),
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
-                                45.0, 10.0, 0.0, 0.0),
+                                55.0, 10.0, 0.0, 0.0),
                             child: Text(
                               'Dumidu \nFernando',
                               textAlign: TextAlign.center,
@@ -192,13 +192,13 @@ class _AboutUsPageWidgetState extends State<AboutUsPageWidget> {
                       ),
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                            EdgeInsetsDirectional.fromSTEB(0.0, 45.0, 0.0, 0.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
-                                  55.0, 0.0, 0.0, 0.0),
+                                  60.0, 0.0, 0.0, 0.0),
                               child: Image.asset(
                                 'assets/images/dinil.png',
                                 width: 100.0,
@@ -224,7 +224,7 @@ class _AboutUsPageWidgetState extends State<AboutUsPageWidget> {
                         children: [
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
-                                60.0, 10.0, 0.0, 0.0),
+                                80.0, 10.0, 0.0, 0.0),
                             child: Text(
                               'Dinil Perera',
                               style:
@@ -236,7 +236,7 @@ class _AboutUsPageWidgetState extends State<AboutUsPageWidget> {
                           ),
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
-                                75.0, 10.0, 0.0, 0.0),
+                                80.0, 10.0, 0.0, 0.0),
                             child: Text(
                               'Tharkana Prabhath',
                               style:

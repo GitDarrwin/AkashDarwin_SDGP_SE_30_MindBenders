@@ -100,7 +100,7 @@ class _SearchPageWidgetState extends State<SearchPageWidget> {
                               Duration(milliseconds: 2000),
                               () => setState(() {}),
                             ),
-                            autofocus: true,
+                            autofocus: false,
                             obscureText: false,
                             decoration: InputDecoration(
                               hintText: 'Search Here...',

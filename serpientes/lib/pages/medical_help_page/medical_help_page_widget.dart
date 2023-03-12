@@ -85,12 +85,12 @@ class _MedicalHelpPageWidgetState extends State<MedicalHelpPageWidget> {
                       ),
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 0.0, 0.0),
+                            EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                         child: FlutterFlowWebView(
                           url:
                               'https://www.cdc.gov/niosh/topics/snakes/symptoms.html#:~:text=Seek%20medical%20attention%20as%20soon,from%20venom%20can%20be%20stopped.',
                           bypass: false,
-                          height: 630.0,
+                          height: 660.0,
                           verticalScroll: true,
                           horizontalScroll: false,
                         ),

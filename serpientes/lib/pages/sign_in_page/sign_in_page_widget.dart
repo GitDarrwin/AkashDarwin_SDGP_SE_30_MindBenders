@@ -1,3 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+
 import '../../Utils/auth.dart';
 import '../sign_up_page/sign_up_page_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -45,6 +48,27 @@ class _SignInPageWidgetState extends State<SignInPageWidget> {
 
     _unfocusNode.dispose();
     super.dispose();
+  }
+
+  Future<UserCredential?> signInWithGoogle() async {
+    // Create an instance of the firebase auth and google signin
+    FirebaseAuth auth = FirebaseAuth.instance;
+    final GoogleSignIn googleSignIn = GoogleSignIn();
+    //Triger the authentication flow
+    final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
+
+    //Obtain the auth details from the request
+    final GoogleSignInAuthentication googleAuth =
+    await googleUser!.authentication;
+    //Create a new credentials
+    final AuthCredential credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+    );
+    //Sign in the user with the credentials
+    final UserCredential userCredential =
+    await auth.signInWithCredential(credential);
+    return null;
   }
 
   @override
@@ -131,7 +155,7 @@ class _SignInPageWidgetState extends State<SignInPageWidget> {
                           width: 300.0,
                           child: TextFormField(
                             controller: _emailController,
-                            autofocus: true,
+                            autofocus: false,
                             autofillHints: [AutofillHints.email],
                             obscureText: false,
                             validator: (value){
@@ -197,7 +221,7 @@ class _SignInPageWidgetState extends State<SignInPageWidget> {
                           width: 300.0,
                           child: TextFormField(
                             controller: _passwordController,
-                            autofocus: true,
+                            autofocus: false,
                             obscureText: !_model.passwordVisibility,
                             validator: (value){
                               if (value == null || value.isEmpty){
@@ -259,20 +283,24 @@ class _SignInPageWidgetState extends State<SignInPageWidget> {
                       ),
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 170.0, 0.0),
-                        child: RichText(
-                          text: TextSpan(
-                            children: [
-                              TextSpan(
-                                text: 'Forgot Password?',
-                                style: TextStyle(),
-                              )
-                            ],
-                            style:
-                                FlutterFlowTheme.of(context).bodyText1.override(
-                                      fontFamily: 'Poppins',
-                                      color: Color(0xFF3E642A),
-                                    ),
+                            EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 200.0, 0.0),
+                        child: GestureDetector(
+                          onTap: ,
+                          child: RichText(
+                            text: TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: 'Forgot Password?',
+                                  style: TextStyle(),
+                                )
+                              ],
+                              style:
+                                  FlutterFlowTheme.of(context).bodyText1.override(
+                                        fontFamily: 'Poppins',
+                                        fontSize: 13,
+                                        color: Color(0xFF3E642A),
+                                      ),
+                            ),
                           ),
                         ),
                       ),
@@ -346,9 +374,16 @@ class _SignInPageWidgetState extends State<SignInPageWidget> {
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                         ),
-                        child: Image.asset(
-                          'assets/images/google_logo.webp',
-                          fit: BoxFit.cover,
+                        child: GestureDetector(
+                          onTap: () async {
+                            await signInWithGoogle();
+                              context.pushNamed('Menue_Option_Page');
+
+                          },
+                          child: Image.asset(
+                            'assets/images/google_logo.webp',
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                     ],
@@ -376,7 +411,7 @@ class _SignInPageWidgetState extends State<SignInPageWidget> {
     setState(() {
       _loading = false;
     });
-    context.goNamed('Menue_Option_Page');
+    context.pushNamed('Menue_Option_Page');
 
   }
 }

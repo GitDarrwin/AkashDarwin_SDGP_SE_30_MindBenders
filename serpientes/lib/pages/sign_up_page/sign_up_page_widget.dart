@@ -122,7 +122,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                           width: 300.0,
                           child: TextFormField(
                             controller: _model.textController1,
-                            autofocus: true,
+                            autofocus: false,
                             autofillHints: [AutofillHints.email],
                             textCapitalization: TextCapitalization.words,
                             obscureText: false,
@@ -187,7 +187,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                           width: 300.0,
                           child: TextFormField(
                             controller: _model.textController2,
-                            autofocus: true,
+                            autofocus: false,
                             textCapitalization: TextCapitalization.words,
                             obscureText: false,
                             decoration: InputDecoration(
@@ -296,7 +296,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                                 controller: _emailController,
                                 focusNode: focusNode,
                                 onEditingComplete: onEditingComplete,
-                                autofocus: true,
+                                autofocus: false,
                                 obscureText: false,
                                 decoration: InputDecoration(
                                   hintText: "Enter Valid Email",
@@ -364,7 +364,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                           width: 300.0,
                           child: TextFormField(
                             controller: _passwordController,
-                            autofocus: true,
+                            autofocus: false,
                             obscureText: !_model.passwordVisibility1,
                             decoration: InputDecoration(
                               hintText: "Enter Valid Password up to 6 characters",
@@ -426,7 +426,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                       ),
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 170.0, 0.0),
+                            EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 190.0, 0.0),
                         child: Text(
                           'Confirm Password',
                           style: FlutterFlowTheme.of(context).bodyText1.override(
@@ -442,7 +442,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                           width: 300.0,
                           child: TextFormField(
                             controller: _comfirmpasswordController,
-                            autofocus: true,
+                            autofocus: false,
                             obscureText: !_model.passwordVisibility2,
                             decoration: InputDecoration(
                               hintText: "Enter Valid Password up to 6 characters",
@@ -504,7 +504,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                       ),
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                            EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
                         child: FFButtonWidget(
                           onPressed: () => handleSubmit(),
                           text: 'Sign Up',
@@ -557,7 +557,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
         _loading = false;
       });
 
-      context.goNamed('Menue_Option_Page');
+      context.pushNamed('Menue_Option_Page');
     }
   }
 }
