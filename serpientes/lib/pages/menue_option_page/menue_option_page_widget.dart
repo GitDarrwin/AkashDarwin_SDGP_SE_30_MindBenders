@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
@@ -16,6 +17,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'menue_option_page_model.dart';
 export 'menue_option_page_model.dart';
+
+import 'dart:io';
+import 'package:http/http.dart' as http;
+
+
 
 class MenueOptionPageWidget extends StatefulWidget {
   const MenueOptionPageWidget({Key? key}) : super(key: key);
@@ -46,6 +52,7 @@ class _MenueOptionPageWidgetState extends State<MenueOptionPageWidget> {
     super.dispose();
   }
 
+ //google sing out service
   Future<void> logout() async {
     final GoogleSignIn googleSign = GoogleSignIn();
     await googleSign.signOut();
@@ -57,7 +64,7 @@ class _MenueOptionPageWidgetState extends State<MenueOptionPageWidget> {
       onWillPop: () async { return false; },
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        backgroundColor: Color(0xFF3E642A),
         drawer: Container(
           width: 220.0,
           child: Drawer(
@@ -81,8 +88,8 @@ class _MenueOptionPageWidgetState extends State<MenueOptionPageWidget> {
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                       ),
-                      child: Image.network(
-                        'https://picsum.photos/seed/309/600',
+                      child: Image.asset(
+                        'assets/images/'+random_avatar()+'.png',
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -468,5 +475,13 @@ class _MenueOptionPageWidgetState extends State<MenueOptionPageWidget> {
         ),
       ),
     );
+  }
+
+  //getting random avatar image
+  String random_avatar() {
+    final random = new Random();
+    var list=["avatar1","avatar2","avatar3","avatar4"];
+    var i = random.nextInt(list.length);
+    return list[i];
   }
 }

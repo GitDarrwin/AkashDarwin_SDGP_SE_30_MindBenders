@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -20,6 +22,7 @@ class _SearchPageWidgetState extends State<SearchPageWidget> {
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final _unfocusNode = FocusNode();
+  Map<String, dynamic>? searchedSnake;
 
   @override
   void initState() {
@@ -41,7 +44,7 @@ class _SearchPageWidgetState extends State<SearchPageWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+      backgroundColor: Color(0xFF3E642A),
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
@@ -59,8 +62,8 @@ class _SearchPageWidgetState extends State<SearchPageWidget> {
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(270.0, 20.0, 0.0, 0.0),
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            270.0, 20.0, 0.0, 0.0),
                         child: FlutterFlowIconButton(
                           borderColor: Colors.transparent,
                           borderRadius: 30.0,
@@ -81,11 +84,12 @@ class _SearchPageWidgetState extends State<SearchPageWidget> {
                             EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
                         child: Text(
                           'Search Snake',
-                          style: FlutterFlowTheme.of(context).bodyText1.override(
-                                fontFamily: 'Poppins',
-                                fontSize: 30.0,
-                                fontWeight: FontWeight.w600,
-                              ),
+                          style:
+                              FlutterFlowTheme.of(context).bodyText1.override(
+                                    fontFamily: 'Poppins',
+                                    fontSize: 30.0,
+                                    fontWeight: FontWeight.w600,
+                                  ),
                         ),
                       ),
                       Padding(
@@ -143,117 +147,118 @@ class _SearchPageWidgetState extends State<SearchPageWidget> {
                             style: FlutterFlowTheme.of(context).bodyText1,
                             validator: _model.textControllerValidator
                                 .asValidator(context),
+                            onFieldSubmitted: (val) async {
+                              QuerySnapshot<Map<String, dynamic>> snap =
+                                  await FirebaseFirestore.instance
+                                      .collection("Sankes")
+                                      .where('Name', isEqualTo: val.toLowerCase())
+                                      .get();
+                              List<QueryDocumentSnapshot<Map<String, dynamic>>>
+                                  snakes = snap.docs;
+                              if (snakes.isNotEmpty) {
+                                setState(() {
+                                  searchedSnake = snakes[0].data();
+                                });
+                              } else {
+                                setState(() {
+                                  searchedSnake = null;
+                                });
+                              }
+                            },
                           ),
                         ),
                       ),
+                      if(searchedSnake != null)
                       Padding(
                         padding:
                             EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                         child: Text(
-                          'Indian Cobra (Naja naja)',
-                          style: FlutterFlowTheme.of(context).bodyText1.override(
-                                fontFamily: 'Poppins',
-                                fontSize: 18.0,
-                                fontWeight: FontWeight.bold,
-                                decoration: TextDecoration.underline,
-                              ),
+                          searchedSnake?['Name'] ?? '',
+                          style:
+                              FlutterFlowTheme.of(context).bodyText1.override(
+                                    fontFamily: 'Poppins',
+                                    fontSize: 22.0,
+                                    fontWeight: FontWeight.bold,
+                                    decoration: TextDecoration.underline,
+
+                                  ),
                         ),
                       ),
-                      Padding(
+                      if(searchedSnake != null)
+                        Padding(
                         padding:
                             EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(20.0),
-                          child: Image.asset(
-                            'assets/images/cobra.png',
-                            width: 226.5,
-                            height: 174.4,
-                            fit: BoxFit.cover,
-                          ),
+                          child: searchedSnake == null
+                              ? Image.asset(
+                                  'assets/images/cobra.png',
+                                  width: 226.5,
+                                  height: 174.4,
+                                  fit: BoxFit.cover,
+                                )
+                              : Image.network(
+                                  searchedSnake!['image'],
+                                  width: 296.5,
+                                  height: 204.4,
+                                  fit: BoxFit.cover,
+                                ),
                         ),
                       ),
-                      Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 235.0, 0.0),
+                      if(searchedSnake != null)
+                        Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            0.0, 25.0, 235.0, 0.0),
                         child: Text(
                           'Description',
-                          style: FlutterFlowTheme.of(context).bodyText2.override(
-                                fontFamily: 'Poppins',
-                                fontSize: 15.0,
-                                fontWeight: FontWeight.bold,
-                                decoration: TextDecoration.underline,
-                              ),
+                          style:
+                              FlutterFlowTheme.of(context).bodyText2.override(
+                                    fontFamily: 'Poppins',
+                                    fontSize: 19.0,
+                                    fontWeight: FontWeight.bold,
+                                    decoration: TextDecoration.underline,
+                                  ),
                         ),
                       ),
-                      Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(15.0, 8.0, 15.0, 0.0),
+                      if(searchedSnake != null)
+                        Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            25.0, 12.0, 15.0, 0.0),
                         child: Text(
-                          'Belongs to the Family Elapidae and Genus Naja. A well-grown cobra can be 100 – 150 cm long.\nMostly they are black or dark brown, with white crossbars on each side.\nThey can be easily identified by their quite impressive hood, which expands when feeling threatened. Most encounters have been recorded during nighttime.\nAt daytime, less active and can be found in small dens or on bushes.',
+                          searchedSnake?['Description'] ?? '',
                           textAlign: TextAlign.start,
-                          style: FlutterFlowTheme.of(context).bodyText1.override(
-                                fontFamily: 'Poppins',
-                                fontSize: 13.0,
-                                fontWeight: FontWeight.w500,
-                              ),
+                          style:
+                              FlutterFlowTheme.of(context).bodyText1.override(
+                                    fontFamily: 'Poppins',
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.w500,
+                                  ),
                         ),
                       ),
                       Divider(
                         thickness: 3.0,
                       ),
-                      Padding(
+                      if(searchedSnake != null)
+                        Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
+                            EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
                         child: Text(
-                          'Scientific Name: Naja naja',
-                          style: FlutterFlowTheme.of(context).bodyText1.override(
-                                fontFamily: 'Poppins',
-                                fontSize: 14.0,
-                              ),
+                          'Scientific Name: ${searchedSnake?['Scientific Name'] ?? ''}',
+                          style:
+                              FlutterFlowTheme.of(context).bodyText1.override(
+                                    fontFamily: 'Poppins',
+                                    fontSize: 16.0,
+                                  ),
                         ),
                       ),
-                      Text(
-                        'Common Name : Cobra ',
-                        style: FlutterFlowTheme.of(context).bodyText1.override(
-                              fontFamily: 'Poppins',
-                              fontSize: 14.0,
-                            ),
-                      ),
-                      Text(
-                        'Kingdom : Animalia ',
-                        style: FlutterFlowTheme.of(context).bodyText1.override(
-                              fontFamily: 'Poppins',
-                              fontSize: 14.0,
-                            ),
-                      ),
-                      Text(
-                        'Order : Squamata',
-                        style: FlutterFlowTheme.of(context).bodyText1.override(
-                              fontFamily: 'Poppins',
-                              fontSize: 14.0,
-                            ),
-                      ),
+                      if(searchedSnake != null)
                       Text(
                         'Venom : Highly Venomous',
                         textAlign: TextAlign.start,
                         style: FlutterFlowTheme.of(context).bodyText1.override(
                               fontFamily: 'Poppins',
-                              fontSize: 14.0,
+                              fontSize: 16.0,
                             ),
-                      ),
-                      FlutterFlowIconButton(
-                        borderColor: Colors.transparent,
-                        borderRadius: 30.0,
-                        borderWidth: 1.0,
-                        buttonSize: 60.0,
-                        icon: Icon(
-                          Icons.chevron_right_rounded,
-                          color: FlutterFlowTheme.of(context).primaryText,
-                          size: 30.0,
-                        ),
-                        onPressed: () {
-                          print('IconButton pressed ...');
-                        },
                       ),
                     ],
                   ),
