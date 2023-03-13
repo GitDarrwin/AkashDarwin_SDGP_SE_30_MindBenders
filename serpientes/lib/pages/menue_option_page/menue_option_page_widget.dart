@@ -446,9 +446,6 @@ class _MenueOptionPageWidgetState extends State<MenueOptionPageWidget> {
                                   0.0, 20.0, 0.0, 0.0),
                               child: InkWell(
                                 onTap: () async {
-                                  if (Navigator.of(context).canPop()) {
-                                    context.pop();
-                                  }
                                   context.pushNamed('About_Us_Page');
                                 },
                                 child: Text(
