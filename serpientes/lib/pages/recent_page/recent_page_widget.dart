@@ -1,3 +1,4 @@
+import '../search_page/search_page_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -93,21 +94,37 @@ class _RecentPageWidgetState extends State<RecentPageWidget> {
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 50.0, 0.0, 0.0),
-                            child: Image.asset(
-                              'assets/images/snake_0.png',
-                              width: 189.0,
-                              height: 239.5,
-                              fit: BoxFit.cover,
+                            child: GestureDetector(
+                              onTap: () async {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) =>  SearchPageWidget(name: "king cobra")),
+                                );
+                              },
+                              child: Image.asset(
+                                'assets/images/snake_0.png',
+                                width: 189.0,
+                                height: 239.5,
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 50.0, 0.0, 0.0),
-                            child: Image.asset(
-                              'assets/images/snake_2.png',
-                              width: 202.2,
-                              height: 240.2,
-                              fit: BoxFit.cover,
+                            child: GestureDetector(
+                              onTap: () async {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) =>  SearchPageWidget(name: "pala polonga")),
+                                );
+                              },
+                              child: Image.asset(
+                                'assets/images/snake_2.png',
+                                width: 202.2,
+                                height: 240.2,
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
                         ],
@@ -115,17 +132,33 @@ class _RecentPageWidgetState extends State<RecentPageWidget> {
                       Row(
                         mainAxisSize: MainAxisSize.max,
                         children: [
-                          Image.asset(
-                            'assets/images/snake_3.png',
-                            width: 188.8,
-                            height: 248.8,
-                            fit: BoxFit.cover,
+                          GestureDetector(
+                            onTap: () async {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) =>  SearchPageWidget(name: "indian python")),
+                              );
+                            },
+                            child: Image.asset(
+                              'assets/images/snake_3.png',
+                              width: 188.8,
+                              height: 248.8,
+                              fit: BoxFit.cover,
+                            ),
                           ),
-                          Image.asset(
-                            'assets/images/snake_4.png',
-                            width: 201.2,
-                            height: 250.5,
-                            fit: BoxFit.cover,
+                          GestureDetector(
+                            onTap: () async {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) =>  SearchPageWidget(name: "ptyas mucosa")),
+                              );
+                            },
+                            child: Image.asset(
+                              'assets/images/snake_4.png',
+                              width: 201.2,
+                              height: 250.5,
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ],
                       ),

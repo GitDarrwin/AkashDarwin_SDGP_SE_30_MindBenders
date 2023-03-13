@@ -11,7 +11,8 @@ import 'search_page_model.dart';
 export 'search_page_model.dart';
 
 class SearchPageWidget extends StatefulWidget {
-  const SearchPageWidget({Key? key}) : super(key: key);
+  final String? name;
+  const SearchPageWidget({Key? key, this.name}) : super(key: key);
 
   @override
   _SearchPageWidgetState createState() => _SearchPageWidgetState();
@@ -23,6 +24,26 @@ class _SearchPageWidgetState extends State<SearchPageWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final _unfocusNode = FocusNode();
   Map<String, dynamic>? searchedSnake;
+  TextEditingController search = TextEditingController();
+
+  getSnake(String name) async {
+    QuerySnapshot<Map<String, dynamic>> snap =
+        await FirebaseFirestore.instance
+        .collection("Sankes")
+        .where('Name', isEqualTo: name.toLowerCase())
+        .get();
+    List<QueryDocumentSnapshot<Map<String, dynamic>>>
+    snakes = snap.docs;
+    if (snakes.isNotEmpty) {
+      setState(() {
+        searchedSnake = snakes[0].data();
+      });
+    } else {
+      setState(() {
+        searchedSnake = null;
+      });
+    }
+  }
 
   @override
   void initState() {
@@ -30,6 +51,10 @@ class _SearchPageWidgetState extends State<SearchPageWidget> {
     _model = createModel(context, () => SearchPageModel());
 
     _model.textController ??= TextEditingController();
+    _model.textController.text = widget.name ?? '';
+    if(widget.name != null){
+      getSnake(widget.name!);
+    }
   }
 
   @override
@@ -148,22 +173,7 @@ class _SearchPageWidgetState extends State<SearchPageWidget> {
                             validator: _model.textControllerValidator
                                 .asValidator(context),
                             onFieldSubmitted: (val) async {
-                              QuerySnapshot<Map<String, dynamic>> snap =
-                                  await FirebaseFirestore.instance
-                                      .collection("Sankes")
-                                      .where('Name', isEqualTo: val.toLowerCase())
-                                      .get();
-                              List<QueryDocumentSnapshot<Map<String, dynamic>>>
-                                  snakes = snap.docs;
-                              if (snakes.isNotEmpty) {
-                                setState(() {
-                                  searchedSnake = snakes[0].data();
-                                });
-                              } else {
-                                setState(() {
-                                  searchedSnake = null;
-                                });
-                              }
+                              await getSnake(val);
                             },
                           ),
                         ),
@@ -202,6 +212,20 @@ class _SearchPageWidgetState extends State<SearchPageWidget> {
                                   width: 296.5,
                                   height: 204.4,
                                   fit: BoxFit.cover,
+                                  loadingBuilder: (BuildContext context, Widget child,
+                                      ImageChunkEvent? loadingProgress) {
+                                    if (loadingProgress == null) {
+                                      return child;
+                                    }
+                                    return Center(
+                                      child: CircularProgressIndicator(
+                                        value: loadingProgress.expectedTotalBytes != null
+                                            ? loadingProgress.cumulativeBytesLoaded /
+                                            loadingProgress.expectedTotalBytes!
+                                            : null,
+                                      ),
+                                    );
+                                  },
                                 ),
                         ),
                       ),
