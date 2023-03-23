@@ -32,7 +32,7 @@ class _EmergencyPageWidgetState extends State<EmergencyPageWidget> {
       await Future.delayed(const Duration(milliseconds: 2000));
       await launchUrl(Uri(
         scheme: 'tel',
-        path: '1919',
+        path: '1990',
       ));
     });
   }
@@ -88,7 +88,7 @@ class _EmergencyPageWidgetState extends State<EmergencyPageWidget> {
                         padding:
                             EdgeInsetsDirectional.fromSTEB(0.0, 150.0, 0.0, 0.0),
                         child: Text(
-                          'Calling 1919......',
+                          'Calling 1990......',
                           style: FlutterFlowTheme.of(context).bodyText1.override(
                                 fontFamily: 'Poppins',
                                 fontSize: 40.0,

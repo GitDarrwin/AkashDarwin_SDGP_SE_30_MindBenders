@@ -28,7 +28,7 @@ class _SearchPageWidgetState extends State<SearchPageWidget> {
 
   getSnake(String name) async {
     QuerySnapshot<Map<String, dynamic>> snap =
-        await FirebaseFirestore.instance
+    await FirebaseFirestore.instance
         .collection("Sankes")
         .where('Name', isEqualTo: name.toLowerCase())
         .get();
@@ -106,20 +106,20 @@ class _SearchPageWidgetState extends State<SearchPageWidget> {
                       ),
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
+                        EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
                         child: Text(
                           'Search Snake',
                           style:
-                              FlutterFlowTheme.of(context).bodyText1.override(
-                                    fontFamily: 'Poppins',
-                                    fontSize: 30.0,
-                                    fontWeight: FontWeight.w600,
-                                  ),
+                          FlutterFlowTheme.of(context).bodyText1.override(
+                            fontFamily: 'Poppins',
+                            fontSize: 30.0,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                       ),
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                        EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                         child: Container(
                           width: 300.0,
                           child: TextFormField(
@@ -127,7 +127,7 @@ class _SearchPageWidgetState extends State<SearchPageWidget> {
                             onChanged: (_) => EasyDebounce.debounce(
                               '_model.textController',
                               Duration(milliseconds: 2000),
-                              () => setState(() {}),
+                                  () => setState(() {}),
                             ),
                             autofocus: false,
                             obscureText: false,
@@ -179,111 +179,111 @@ class _SearchPageWidgetState extends State<SearchPageWidget> {
                         ),
                       ),
                       if(searchedSnake != null)
-                      Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
-                        child: Text(
-                          searchedSnake?['Name'] ?? '',
-                          style:
-                              FlutterFlowTheme.of(context).bodyText1.override(
-                                    fontFamily: 'Poppins',
-                                    fontSize: 22.0,
-                                    fontWeight: FontWeight.bold,
-                                    decoration: TextDecoration.underline,
+                        Padding(
+                          padding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                          child: Text(
+                            searchedSnake?['Name'] ?? '',
+                            style:
+                            FlutterFlowTheme.of(context).bodyText1.override(
+                              fontFamily: 'Poppins',
+                              fontSize: 22.0,
+                              fontWeight: FontWeight.bold,
+                              decoration: TextDecoration.underline,
 
-                                  ),
+                            ),
+                          ),
                         ),
-                      ),
                       if(searchedSnake != null)
                         Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(20.0),
-                          child: searchedSnake == null
-                              ? Image.asset(
-                                  'assets/images/cobra.png',
-                                  width: 226.5,
-                                  height: 174.4,
-                                  fit: BoxFit.cover,
-                                )
-                              : Image.network(
-                                  searchedSnake!['image'],
-                                  width: 296.5,
-                                  height: 204.4,
-                                  fit: BoxFit.cover,
-                                  loadingBuilder: (BuildContext context, Widget child,
-                                      ImageChunkEvent? loadingProgress) {
-                                    if (loadingProgress == null) {
-                                      return child;
-                                    }
-                                    return Center(
-                                      child: CircularProgressIndicator(
-                                        value: loadingProgress.expectedTotalBytes != null
-                                            ? loadingProgress.cumulativeBytesLoaded /
-                                            loadingProgress.expectedTotalBytes!
-                                            : null,
-                                      ),
-                                    );
-                                  },
-                                ),
+                          padding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(20.0),
+                            child: searchedSnake == null
+                                ? Image.asset(
+                              'assets/images/cobra.png',
+                              width: 226.5,
+                              height: 174.4,
+                              fit: BoxFit.cover,
+                            )
+                                : Image.network(
+                              searchedSnake!['image'],
+                              width: 296.5,
+                              height: 204.4,
+                              fit: BoxFit.cover,
+                              loadingBuilder: (BuildContext context, Widget child,
+                                  ImageChunkEvent? loadingProgress) {
+                                if (loadingProgress == null) {
+                                  return child;
+                                }
+                                return Center(
+                                  child: CircularProgressIndicator(
+                                    value: loadingProgress.expectedTotalBytes != null
+                                        ? loadingProgress.cumulativeBytesLoaded /
+                                        loadingProgress.expectedTotalBytes!
+                                        : null,
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
                         ),
-                      ),
                       if(searchedSnake != null)
                         Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            0.0, 25.0, 235.0, 0.0),
-                        child: Text(
-                          'Description',
-                          style:
-                              FlutterFlowTheme.of(context).bodyText2.override(
-                                    fontFamily: 'Poppins',
-                                    fontSize: 19.0,
-                                    fontWeight: FontWeight.bold,
-                                    decoration: TextDecoration.underline,
-                                  ),
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 25.0, 235.0, 0.0),
+                          child: Text(
+                            'Description',
+                            style:
+                            FlutterFlowTheme.of(context).bodyText2.override(
+                              fontFamily: 'Poppins',
+                              fontSize: 19.0,
+                              fontWeight: FontWeight.bold,
+                              decoration: TextDecoration.underline,
+                            ),
+                          ),
                         ),
-                      ),
                       if(searchedSnake != null)
                         Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            25.0, 12.0, 15.0, 0.0),
-                        child: Text(
-                          searchedSnake?['Description'] ?? '',
-                          textAlign: TextAlign.start,
-                          style:
-                              FlutterFlowTheme.of(context).bodyText1.override(
-                                    fontFamily: 'Poppins',
-                                    fontSize: 16.0,
-                                    fontWeight: FontWeight.w500,
-                                  ),
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              25.0, 12.0, 15.0, 0.0),
+                          child: Text(
+                            searchedSnake?['Description'] ?? '',
+                            textAlign: TextAlign.start,
+                            style:
+                            FlutterFlowTheme.of(context).bodyText1.override(
+                              fontFamily: 'Poppins',
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
                         ),
-                      ),
                       Divider(
                         thickness: 3.0,
                       ),
                       if(searchedSnake != null)
                         Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
-                        child: Text(
-                          'Scientific Name: ${searchedSnake?['Scientific Name'] ?? ''}',
-                          style:
-                              FlutterFlowTheme.of(context).bodyText1.override(
-                                    fontFamily: 'Poppins',
-                                    fontSize: 16.0,
-                                  ),
-                        ),
-                      ),
-                      if(searchedSnake != null)
-                      Text(
-                        'Venom : Highly Venomous',
-                        textAlign: TextAlign.start,
-                        style: FlutterFlowTheme.of(context).bodyText1.override(
+                          padding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
+                          child: Text(
+                            'Scientific Name: ${searchedSnake?['Scientific Name'] ?? ''}',
+                            style:
+                            FlutterFlowTheme.of(context).bodyText1.override(
                               fontFamily: 'Poppins',
                               fontSize: 16.0,
                             ),
-                      ),
+                          ),
+                        ),
+                      if(searchedSnake != null)
+                        Text(
+                          'Venom : Highly Venomous',
+                          textAlign: TextAlign.start,
+                          style: FlutterFlowTheme.of(context).bodyText1.override(
+                            fontFamily: 'Poppins',
+                            fontSize: 16.0,
+                          ),
+                        ),
                     ],
                   ),
                 ),

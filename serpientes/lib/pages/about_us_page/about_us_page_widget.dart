@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'about_us_page_model.dart';
 export 'about_us_page_model.dart';
 
+
 class AboutUsPageWidget extends StatefulWidget {
   const AboutUsPageWidget({Key? key}) : super(key: key);
 
