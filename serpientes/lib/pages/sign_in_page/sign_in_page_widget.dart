@@ -1,15 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-
 import '../../Utils/auth.dart';
 import '../sign_up_page/sign_up_page_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'sign_in_page_model.dart';
 export 'sign_in_page_model.dart';
 
@@ -37,9 +33,6 @@ class _SignInPageWidgetState extends State<SignInPageWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => SignInPageModel());
-
-    _model.textController1 ??= TextEditingController();
-    _model.textController2 ??= TextEditingController();
   }
 
   @override
@@ -310,9 +303,6 @@ class _SignInPageWidgetState extends State<SignInPageWidget> {
                           padding:
                               EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                           child: FFButtonWidget(
-                            // onPressed: () async {
-                            //   context.pushNamed('Menue_Option_Page');
-                            // },
                             onPressed: () => handleSubmit(),
                             text: 'Sign In',
                             options: FFButtonOptions(
@@ -379,8 +369,7 @@ class _SignInPageWidgetState extends State<SignInPageWidget> {
                           child: GestureDetector(
                             onTap: () async {
                               await signInWithGoogle();
-                                context.pushNamed('Menue_Option_Page');
-
+                              context.pushNamed('Menue_Option_Page');
                             },
                             child: Image.asset(
                               'assets/images/google_logo.webp',
