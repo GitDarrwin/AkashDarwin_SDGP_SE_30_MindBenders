@@ -59,7 +59,8 @@ dependencies:
   firebase_core: ^2.5.0
   firebase_auth: ^4.0.3
   cloud_firestore: ^4.2.0
-  webviewx_plus: 
+  tflite: ^1.1.2
+  webviewx_plus:
     git:
       url: https://github.com/FlutterFlow/webviewx_plus.git
 
@@ -100,6 +101,8 @@ flutter:
     - assets/lottie_animations/
     - assets/rive_animations/
     - assets/pdfs/
+    - assets/label.txt
+    - assets/modelmobile.tflite
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sdgp/pages/sign_in_page/sign_in_page_model.dart';
+import 'package:tflite/tflite.dart';
 
 import '../sign_in_page/sign_in_page_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -17,6 +18,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'menue_option_page_model.dart';
 export 'menue_option_page_model.dart';
+import 'package:image_picker/image_picker.dart';
 
 import 'dart:io';
 import 'package:http/http.dart' as http;
@@ -35,6 +37,7 @@ class _MenueOptionPageWidgetState extends State<MenueOptionPageWidget> {
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final _unfocusNode = FocusNode();
+  late File  selectedMedia;
 
   String? name_email= FirebaseAuth.instance.currentUser?.email;
 
@@ -42,6 +45,38 @@ class _MenueOptionPageWidgetState extends State<MenueOptionPageWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => MenueOptionPageModel());
+    loadModel();
+  }
+
+  loadModel() async {
+    try{
+       await Tflite.loadModel(
+          model: "assets/modelmobile.tflite",
+          labels: "assets/label.txt",
+          // numThreads: 1, // defaults to 1
+          // isAsset: true, // defaults to true, set to false to load resources outside assets
+          // useGpuDelegate: false // defaults to false, set to true to use GPU delegate
+      );
+       print("load model");
+    } catch(error){
+      print(error);
+    }
+  }
+
+  runPathImage(String filepath) async {
+    int startTime = new DateTime.now().millisecondsSinceEpoch;
+    print(filepath);
+    var recognitions = await Tflite.runModelOnImage(
+        path: filepath,   // required
+        imageMean: 117.0,   // defaults to 117.0
+        imageStd: 1.0,  // defaults to 1.0
+        numResults: 5,    // defaults to 5
+        threshold: 0.1,   // defaults to 0.1
+        asynch: true      // defaults to true
+    );
+    int endTime = new DateTime.now().millisecondsSinceEpoch;
+    print("Inference took ${endTime - startTime}ms");
+    return recognitions;
   }
 
   @override
@@ -56,6 +91,19 @@ class _MenueOptionPageWidgetState extends State<MenueOptionPageWidget> {
   Future<void> logout() async {
     final GoogleSignIn googleSign = GoogleSignIn();
     await googleSign.signOut();
+  }
+
+  Future<void> pickImage() async {
+    try{
+      final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+      if (image==null)return;
+      final imageTemp = File(image.path);
+      setState(() {
+        selectedMedia = imageTemp;
+      });
+    }catch (error){
+      print("fails to open");
+    }
   }
 
   @override
@@ -277,38 +325,10 @@ class _MenueOptionPageWidgetState extends State<MenueOptionPageWidget> {
                                   0.0, 100.0, 0.0, 0.0),
                               child: FFButtonWidget(
                                 onPressed: () async {
-                                  final selectedMedia = await selectMedia(
-                                    multiImage: false,
-                                  );
-                                  if (selectedMedia != null &&
-                                      selectedMedia.every((m) => validateFileFormat(
-                                          m.storagePath, context))) {
-                                    setState(() => _model.isMediaUploading = true);
-                                    var selectedUploadedFiles = <FFUploadedFile>[];
-
-                                    try {
-                                      selectedUploadedFiles = selectedMedia
-                                          .map((m) => FFUploadedFile(
-                                                name: m.storagePath.split('/').last,
-                                                bytes: m.bytes,
-                                                height: m.dimensions?.height,
-                                                width: m.dimensions?.width,
-                                              ))
-                                          .toList();
-                                    } finally {
-                                      _model.isMediaUploading = false;
-                                    }
-                                    if (selectedUploadedFiles.length ==
-                                        selectedMedia.length) {
-                                      setState(() {
-                                        _model.uploadedLocalFile =
-                                            selectedUploadedFiles.first;
-                                      });
-                                    } else {
-                                      setState(() {});
-                                      return;
-                                    }
-                                  }
+                                  await pickImage();
+                                  print("hi");
+                                  print(selectedMedia.path);
+                                  print(await runPathImage(selectedMedia.path));
                                 },
                                 text: 'Take an Image',
                                 options: FFButtonOptions(
