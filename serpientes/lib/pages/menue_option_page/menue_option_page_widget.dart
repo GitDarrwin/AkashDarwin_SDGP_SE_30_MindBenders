@@ -7,6 +7,8 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sdgp/pages/sign_in_page/sign_in_page_model.dart';
 import 'package:tflite/tflite.dart';
 
+import '../loading_page/loading_page_widget.dart';
+import '../m_l_page/m_l_page_widget.dart';
 import '../sign_in_page/sign_in_page_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -38,6 +40,7 @@ class _MenueOptionPageWidgetState extends State<MenueOptionPageWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final _unfocusNode = FocusNode();
   late File  selectedMedia;
+  late List _classifiedResult;
 
   String? name_email= FirebaseAuth.instance.currentUser?.email;
 
@@ -49,13 +52,14 @@ class _MenueOptionPageWidgetState extends State<MenueOptionPageWidget> {
   }
 
   loadModel() async {
+    Tflite.close();
     try{
        await Tflite.loadModel(
           model: "assets/modelmobile.tflite",
           labels: "assets/label.txt",
-          // numThreads: 1, // defaults to 1
-          // isAsset: true, // defaults to true, set to false to load resources outside assets
-          // useGpuDelegate: false // defaults to false, set to true to use GPU delegate
+          numThreads: 1, // defaults to 1
+          isAsset: true, // defaults to true, set to false to load resources outside assets
+          useGpuDelegate: false // defaults to false, set to true to use GPU delegate
       );
        print("load model");
     } catch(error){
@@ -64,7 +68,7 @@ class _MenueOptionPageWidgetState extends State<MenueOptionPageWidget> {
   }
 
   runPathImage(String filepath) async {
-    int startTime = new DateTime.now().millisecondsSinceEpoch;
+    // int startTime = new DateTime.now().millisecondsSinceEpoch;
     print(filepath);
     var recognitions = await Tflite.runModelOnImage(
         path: filepath,   // required
@@ -74,9 +78,15 @@ class _MenueOptionPageWidgetState extends State<MenueOptionPageWidget> {
         threshold: 0.1,   // defaults to 0.1
         asynch: true      // defaults to true
     );
-    int endTime = new DateTime.now().millisecondsSinceEpoch;
-    print("Inference took ${endTime - startTime}ms");
-    return recognitions;
+
+    // int endTime = new DateTime.now().millisecondsSinceEpoch;
+    // print("Inference took ${endTime - startTime}ms");
+    setState(() {
+      _classifiedResult = recognitions!;
+      // recognitions?.map((result){
+      //   print(result["label"]);
+      // });
+    });
   }
 
   @override
@@ -95,7 +105,7 @@ class _MenueOptionPageWidgetState extends State<MenueOptionPageWidget> {
 
   Future<void> pickImage() async {
     try{
-      final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+      final image = await ImagePicker().pickImage(source: ImageSource.camera,maxHeight: 300);
       if (image==null)return;
       final imageTemp = File(image.path);
       setState(() {
@@ -325,10 +335,18 @@ class _MenueOptionPageWidgetState extends State<MenueOptionPageWidget> {
                                   0.0, 100.0, 0.0, 0.0),
                               child: FFButtonWidget(
                                 onPressed: () async {
-                                  await pickImage();
-                                  print("hi");
-                                  print(selectedMedia.path);
-                                  print(await runPathImage(selectedMedia.path));
+                                  // await pickImage();
+                                  // print("hi");
+                                  // print(selectedMedia.path);
+                                  // await runPathImage(selectedMedia.path);
+                                  // print("object");
+                                  // _classifiedResult.map((result){
+                                  //   print("${result["label"]} :  ${(result["confidence"] * 100).toStringAsFixed(1)}%");
+                                  // });
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) =>  LoadingPageWidget(name: "king cobra")),
+                                  );
                                 },
                                 text: 'Take an Image',
                                 options: FFButtonOptions(

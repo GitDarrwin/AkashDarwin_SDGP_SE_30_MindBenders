@@ -79,7 +79,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'Loading_Page',
           path: '/loadingPage',
-          builder: (context, params) => LoadingPageWidget(),
+          builder: (context, params) => LoadingPageWidget(name: '',),
         ),
         FFRoute(
           name: 'ML_Page',

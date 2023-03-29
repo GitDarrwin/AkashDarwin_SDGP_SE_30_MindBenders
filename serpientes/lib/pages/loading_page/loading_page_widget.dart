@@ -1,3 +1,9 @@
+import 'package:flutter/scheduler.dart';
+import 'package:material_dialogs/dialogs.dart';
+import 'package:material_dialogs/widgets/buttons/icon_button.dart';
+import 'package:material_dialogs/widgets/buttons/icon_outline_button.dart';
+
+import '../m_l_page/m_l_page_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -8,10 +14,11 @@ import 'loading_page_model.dart';
 export 'loading_page_model.dart';
 
 class LoadingPageWidget extends StatefulWidget {
-  const LoadingPageWidget({Key? key}) : super(key: key);
+  final String name;
+  const LoadingPageWidget({Key? key, required this.name}) : super(key: key);
 
   @override
-  _LoadingPageWidgetState createState() => _LoadingPageWidgetState();
+  _LoadingPageWidgetState createState() => _LoadingPageWidgetState(name);
 }
 
 class _LoadingPageWidgetState extends State<LoadingPageWidget> {
@@ -20,10 +27,17 @@ class _LoadingPageWidgetState extends State<LoadingPageWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final _unfocusNode = FocusNode();
 
+  _LoadingPageWidgetState(this.name);
+  final String name;
+
   @override
   void initState() {
     super.initState();
     _model = createModel(context, () => LoadingPageModel());
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      await Future.delayed(const Duration(milliseconds: 2000));
+      dialogboxpopup(name);
+    });
   }
 
   @override
@@ -123,5 +137,58 @@ class _LoadingPageWidgetState extends State<LoadingPageWidget> {
         ),
       ),
     );
+  }
+
+  void dialogboxpopup(String snakeName) {
+     if ((snakeName).isEmpty) {
+     Dialogs.materialDialog(
+          msg: "Can't find type of Snake !!",
+          title: "Cant' Find",
+          color: Colors.white,
+          context: context,
+          actions: [
+            IconsButton(
+              onPressed: () {
+                context.pushNamed('Menue_Option_Page');
+              },
+              text: 'Ok',
+              iconData: Icons.tag_faces_rounded,
+              color: Colors.red,
+              textStyle: TextStyle(color: Colors.white),
+              iconColor: Colors.white,
+            ),
+          ]);
+    } else {
+        Dialogs.materialDialog(
+          msg: 'Do you want more Details ?',
+          title: widget.name,
+          color: Colors.white,
+          context: context,
+          actions: [
+            IconsOutlineButton(
+              onPressed: () {
+                context.pushNamed('Menue_Option_Page');
+              },
+              text: 'No',
+              color: Colors.red,
+              iconData: Icons.cancel_outlined,
+              textStyle: TextStyle(color: Colors.white),
+              iconColor: Colors.white,
+            ),
+            IconsButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) =>  MLPageWidget()),
+                );
+              },
+              text: 'ok',
+              iconData: Icons.tag_faces_rounded,
+              color: Colors.green,
+              textStyle: TextStyle(color: Colors.white),
+              iconColor: Colors.white,
+            ),
+          ]);
+    }
   }
 }
