@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:material_dialogs/dialogs.dart';
 import 'package:material_dialogs/widgets/buttons/icon_button.dart';
@@ -29,6 +30,7 @@ class _LoadingPageWidgetState extends State<LoadingPageWidget> {
 
   _LoadingPageWidgetState(this.name);
   final String name;
+  late List snakeDetails;
 
   @override
   void initState() {
@@ -36,6 +38,7 @@ class _LoadingPageWidgetState extends State<LoadingPageWidget> {
     _model = createModel(context, () => LoadingPageModel());
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       await Future.delayed(const Duration(milliseconds: 2000));
+      gettingSnakeDetails();
       dialogboxpopup(name);
     });
   }
@@ -179,7 +182,7 @@ class _LoadingPageWidgetState extends State<LoadingPageWidget> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) =>  MLPageWidget()),
+                  MaterialPageRoute(builder: (context) =>  MLPageWidget(snakeDetails)),
                 );
               },
               text: 'ok',
@@ -190,5 +193,22 @@ class _LoadingPageWidgetState extends State<LoadingPageWidget> {
             ),
           ]);
     }
+  }
+
+  Future<void> gettingSnakeDetails() async {
+    QuerySnapshot<Map<String, dynamic>> snap =
+        await FirebaseFirestore.instance
+        .collection("Sankes")
+        .where('Name', isEqualTo: name.toLowerCase())
+        .get();
+    List<QueryDocumentSnapshot<Map<String, dynamic>>>
+    snakes = snap.docs;
+    if (snakes.isNotEmpty) {
+      setState(() {
+        var searchedSnake = snakes[0].data();
+        snakeDetails = [name,searchedSnake['image'],searchedSnake['Description'] ?? '',searchedSnake['Scientific Name'] ?? ''];
+      });
+    }
+
   }
 }

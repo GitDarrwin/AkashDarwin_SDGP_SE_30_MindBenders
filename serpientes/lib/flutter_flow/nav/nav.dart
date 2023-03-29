@@ -81,11 +81,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           path: '/loadingPage',
           builder: (context, params) => LoadingPageWidget(name: '',),
         ),
-        FFRoute(
-          name: 'ML_Page',
-          path: '/mLPage',
-          builder: (context, params) => MLPageWidget(),
-        ),
+        // FFRoute(
+        //   name: 'ML_Page',
+        //   path: '/mLPage',
+        //   // builder: (context, params) => MLPageWidget(),
+        // ),
         FFRoute(
           name: 'Medical_Help_Page',
           path: '/medicalHelpPage',

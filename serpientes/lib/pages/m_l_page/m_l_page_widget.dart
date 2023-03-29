@@ -8,7 +8,8 @@ import 'm_l_page_model.dart';
 export 'm_l_page_model.dart';
 
 class MLPageWidget extends StatefulWidget {
-  const MLPageWidget({Key? key}) : super(key: key);
+  final snakeDetails;
+  const MLPageWidget(List<dynamic> this.snakeDetails, {Key? key}) : super(key: key);
 
   @override
   _MLPageWidgetState createState() => _MLPageWidgetState();
@@ -69,7 +70,7 @@ class _MLPageWidgetState extends State<MLPageWidget> {
                             size: 30.0,
                           ),
                           onPressed: () async {
-                            context.pushNamed('Menue_Option_Page');
+                            context.goNamed('Menue_Option_Page');
                           },
                         ),
                       ),
@@ -87,8 +88,8 @@ class _MLPageWidgetState extends State<MLPageWidget> {
                             EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(20.0),
-                          child: Image.asset(
-                            'assets/images/result.png',
+                          child: Image.network(
+                            widget.snakeDetails[1],
                             width: 222.8,
                             height: 187.7,
                             fit: BoxFit.cover,
@@ -99,7 +100,7 @@ class _MLPageWidgetState extends State<MLPageWidget> {
                         padding:
                             EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                         child: Text(
-                          'Hump-nosed Viper',
+                          widget.snakeDetails[0],
                           style: FlutterFlowTheme.of(context).bodyText1.override(
                                 fontFamily: 'Poppins',
                                 fontSize: 20.0,
@@ -111,7 +112,7 @@ class _MLPageWidgetState extends State<MLPageWidget> {
                         padding:
                             EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
                         child: Text(
-                          'Hypnale hypnale',
+                          widget.snakeDetails[3],
                           style: FlutterFlowTheme.of(context).bodyText1.override(
                                 fontFamily: 'Poppins',
                                 fontSize: 14.0,
@@ -134,7 +135,7 @@ class _MLPageWidgetState extends State<MLPageWidget> {
                         padding:
                             EdgeInsetsDirectional.fromSTEB(15.0, 10.0, 15.0, 0.0),
                         child: Text(
-                          'Hump-nosed viper (Hypnale) bite is an important yet under-recognized cause of morbidity and mortality\nin Southern India and Sri Lanka, where three species have been identified,\nnamely Hypnale hypnale, H. zara and H. nepa. Specifically, H. hypnale has been reported from\nSri Lanka and the Western Ghats of South India, while the other two species are endemic to Sri Lanka alone\nIn Sri Lanka.',
+                          widget.snakeDetails[2],
                           style: FlutterFlowTheme.of(context).bodyText1.override(
                                 fontFamily: 'Poppins',
                                 fontSize: 13.0,
