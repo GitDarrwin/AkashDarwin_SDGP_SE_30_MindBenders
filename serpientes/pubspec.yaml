@@ -106,7 +106,6 @@ flutter:
     - assets/rive_animations/
     - assets/pdfs/
     - assets/labels.txt
-    - assets/modelmobile.tflite
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

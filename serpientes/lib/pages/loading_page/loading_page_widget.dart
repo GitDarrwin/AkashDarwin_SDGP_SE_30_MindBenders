@@ -16,10 +16,11 @@ export 'loading_page_model.dart';
 
 class LoadingPageWidget extends StatefulWidget {
   final String name;
-  const LoadingPageWidget({Key? key, required this.name}) : super(key: key);
+  final int confidence;
+  const LoadingPageWidget( {Key? key, required this.name, required this.confidence}) : super(key: key);
 
   @override
-  _LoadingPageWidgetState createState() => _LoadingPageWidgetState(name);
+  _LoadingPageWidgetState createState() => _LoadingPageWidgetState(name,confidence);
 }
 
 class _LoadingPageWidgetState extends State<LoadingPageWidget> {
@@ -28,7 +29,8 @@ class _LoadingPageWidgetState extends State<LoadingPageWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final _unfocusNode = FocusNode();
 
-  _LoadingPageWidgetState(this.name);
+  _LoadingPageWidgetState(this.name, int this.confidence);
+  final int confidence;
   final String name;
   late List snakeDetails;
 
@@ -39,7 +41,7 @@ class _LoadingPageWidgetState extends State<LoadingPageWidget> {
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       await Future.delayed(const Duration(milliseconds: 2000));
       gettingSnakeDetails();
-      dialogboxpopup(name);
+      dialogboxpopup(name,confidence);
     });
   }
 
@@ -142,7 +144,7 @@ class _LoadingPageWidgetState extends State<LoadingPageWidget> {
     );
   }
 
-  void dialogboxpopup(String snakeName) {
+  void dialogboxpopup(String snakeName, int confidence) {
      if ((snakeName).isEmpty) {
      Dialogs.materialDialog(
           msg: "Can't find type of Snake !!",
@@ -163,7 +165,7 @@ class _LoadingPageWidgetState extends State<LoadingPageWidget> {
           ]);
     } else {
         Dialogs.materialDialog(
-          msg: 'Do you want more Details ?',
+          msg: "Confidence Level : "+confidence.toString()+'\nDo you want more Details ?',
           title: widget.name,
           color: Colors.white,
           context: context,

@@ -28,10 +28,11 @@ def predict():
     # Convert prediction to class label and confidence level
     predicted_class = np.argmax(prediction)
     confidence_level = np.max(prediction)
+    print(confidence_level," ",predicted_class)
 
     # Return JSON response
     response = {'predicted_class': int(predicted_class), 'confidence_level': float(confidence_level)}
     return jsonify(response)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=3000)
+    app.run(host='0.0.0.0', port=5000)

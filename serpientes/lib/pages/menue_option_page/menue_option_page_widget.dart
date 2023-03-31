@@ -37,7 +37,12 @@ class _MenueOptionPageWidgetState extends State<MenueOptionPageWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final _unfocusNode = FocusNode();
   late File  selectedMedia;
-  late List _classifiedResult;
+  late var result;
+  // late List _classifiedResult;
+
+  final species_list = ["Ahaetulla nasuta", "Ahaetulla prasina", "Albino cobra", "Arani", "Buff-striped keel back", "CGR", "Checkered keel back",
+  "Chrysopelea ornata", "Cobra", "Common krait", "Daboia russelii", "Flowery wolf snake", "Forsten's cat snake", "Green pit viper", "Green vine snake",
+  "Hump-nosed viper", "Pipe snake", "Python", "Rat snake", "Russell's viper", "Sri Lanka cat snake", "Trinket snake", "Wolf snake"];
 
   String? name_email= FirebaseAuth.instance.currentUser?.email;
 
@@ -64,38 +69,38 @@ class _MenueOptionPageWidgetState extends State<MenueOptionPageWidget> {
   //   }
   // }
 
-  runPathImage(String filepath) async {
-    print(filepath);
-    // int startTime = new DateTime.now().millisecondsSinceEpoch;
-    var recognitions = await Tflite.runModelOnImage(
-        path: filepath,   // required
-        imageMean: 117.0,   // defaults to 117.0
-        imageStd: 1.0,  // defaults to 1.0
-        numResults: 5,    // defaults to 5
-        threshold: 0.1,   // defaults to 0.1
-        asynch: true      // defaults to true
-    );
-
-    // int endTime = new DateTime.now().millisecondsSinceEpoch;
-    // print("Inference took ${endTime - startTime}ms");
-     setState(() {
-      _classifiedResult = recognitions!;
-      print(recognitions);
-      // recognitions?.map((result){
-      //   print(result["label"]);
-      // });
-    });
-  }
+  // runPathImage(String filepath) async {
+  //   print(filepath);
+  //   // int startTime = new DateTime.now().millisecondsSinceEpoch;
+  //   var recognitions = await Tflite.runModelOnImage(
+  //       path: filepath,   // required
+  //       imageMean: 117.0,   // defaults to 117.0
+  //       imageStd: 1.0,  // defaults to 1.0
+  //       numResults: 5,    // defaults to 5
+  //       threshold: 0.1,   // defaults to 0.1
+  //       asynch: true      // defaults to true
+  //   );
+  //
+  //   // int endTime = new DateTime.now().millisecondsSinceEpoch;
+  //   // print("Inference took ${endTime - startTime}ms");
+  //    setState(() {
+  //     _classifiedResult = recognitions!;
+  //     print(recognitions);
+  //     // recognitions?.map((result){
+  //     //   print(result["label"]);
+  //     // });
+  //   });
+  // }
 
   Future<void> sendImage(File imageFile) async {
     // Define endpoint URL
-    var request = http.MultipartRequest('POST', Uri.parse('http://localhost:3000/predict'));
+    var request = http.MultipartRequest('POST', Uri.parse('http://localhost:5000/predict'));
     request.files.add(await http.MultipartFile.fromPath('image', imageFile.path));
 
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode == 200) {
-      print(await response.stream.bytesToString());
+      result= await response.stream.bytesToString();
     }
     else {
       print(response.reasonPhrase);
@@ -148,7 +153,7 @@ class _MenueOptionPageWidgetState extends State<MenueOptionPageWidget> {
 
   Future<void> pickImage() async {
     try{
-      final image = await ImagePicker().pickImage(source: ImageSource.gallery,maxHeight: 224,maxWidth: 224);
+      final image = await ImagePicker().pickImage(source: ImageSource.camera,maxHeight: 224,maxWidth: 224);
 
       if (image==null)return;
       final imageTemp = File(image.path);
@@ -385,13 +390,17 @@ class _MenueOptionPageWidgetState extends State<MenueOptionPageWidget> {
                                   // await runPathImage(selectedMedia.path);
                                   await sendImage(selectedMedia);
 
-                                  // _classifiedResult.map((result){
-                                  //   print("${result["label"]} :  ${(result["confidence"] * 100).toStringAsFixed(1)}%");
-                                  // // });
-                                  // Navigator.push(
-                                  //   context,
-                                  //   MaterialPageRoute(builder: (context) =>  LoadingPageWidget(name: "hypnale zara")),
-                                  // );
+                                  Map<String, dynamic> jsonResult = json.decode(result);
+                                  String name = species_list[jsonResult['predicted_class']];
+                                  double confidence = jsonResult['confidence_level'];
+                                  
+                                  print("Name : "+ name+ " confidence : "+ confidence.round().toString());
+
+                                  print(name);
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) =>  LoadingPageWidget(name: name,confidence: confidence.round(),)),
+                                  );
                                 },
                                 text: 'Take an Image',
                                 options: FFButtonOptions(
