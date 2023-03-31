@@ -8,6 +8,7 @@
 
     <application
         android:label="Serpientes"
+        android:usesCleartextTraffic="true"
         tools:replace="android:label"
         android:icon="@mipmap/ic_launcher"
         android:requestLegacyExternalStorage="true">

@@ -1,9 +1,23 @@
-0 Black Texture
-1 Blue Texture
-2 Green Texture
-3 Orange Texture
-4 Pink Texture
-5 Purple Texture
-6 Red Texture
-7 White Texture
-8 Yellow Texture
+Ahaetulla nasuta
+Ahaetulla prasina
+Albino cobra
+Arani
+Buff-striped keel back
+CGR
+Checkered keel back
+Chrysopelea ornata
+Cobra
+Common krait
+Daboia russelii
+Flowery wolf snake
+Forsten's cat snake
+Green pit viper
+Green vine snake
+Hump-nosed viper
+Pipe snake
+Python
+Rat snake
+Russell's viper
+Sri Lanka cat snake
+Trinket snake
+Wolf snake
