@@ -190,6 +190,9 @@ class _MenueOptionPageWidgetState extends State<MenueOptionPageWidget> {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+
     return WillPopScope(
       onWillPop: () async { return false; },
       child: Scaffold(
@@ -200,8 +203,7 @@ class _MenueOptionPageWidgetState extends State<MenueOptionPageWidget> {
           child: Drawer(
             elevation: 10.0,
             child: Container(
-              width: 100.0,
-              height: 100.0,
+              height: height,
               decoration: BoxDecoration(
                 color: Color(0xCDCBE8BA),
               ),
@@ -333,7 +335,7 @@ class _MenueOptionPageWidgetState extends State<MenueOptionPageWidget> {
                     thickness: 3.0,
                   ),
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 260.0, 0.0, 0.0),
+                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 280, 0.0, 0.0),
                     child: ListTile(
                       onTap: () {
                         if (Platform.isAndroid) {
@@ -366,220 +368,205 @@ class _MenueOptionPageWidgetState extends State<MenueOptionPageWidget> {
           ),
         ),
         body: SafeArea(
-          child: GestureDetector(
-            onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Column(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Container(
-                        width: 429.0,
-                        height: 859.0,
-                        decoration: BoxDecoration(
-                          color: Color(0xCDCBE8BA),
-                        ),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 340.0, 0.0),
-                              child: FlutterFlowIconButton(
-                                borderColor: Colors.transparent,
-                                borderRadius: 30.0,
-                                borderWidth: 1.0,
-                                buttonSize: 60.0,
-                                icon: Icon(
-                                  Icons.drag_handle,
-                                  color: FlutterFlowTheme.of(context).primaryText,
-                                  size: 30.0,
-                                ),
-                                onPressed: () async {
-                                  scaffoldKey.currentState!.openDrawer();
-                                },
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 100.0, 0.0, 0.0),
-                              child: FFButtonWidget(
-                                onPressed: () async {
-                                  try{
-                                    await pickImage();
-                                    if(selectedMedia!=null){
-                                      List result =  await snakeFind().sendImage(selectedMedia);
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(builder: (context) =>  LoadingPageWidget(name: result[0],confidence: result[1].round(),)),
-                                      );
-                                    }
-                                  }catch (error){
-                                    AnimatedSnackBar.material(
-                                      "Something went wrong !",
-                                      type: AnimatedSnackBarType.error,
-                                    ).show(context);
-                                  }
-                                },
-                                text: 'Take an Image',
-                                options: FFButtonOptions(
-                                  width: 230.0,
-                                  height: 50.0,
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 0.0, 0.0, 0.0),
-                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 0.0, 0.0, 0.0),
-                                  color: Color(0xFF3E642A),
-                                  textStyle: FlutterFlowTheme.of(context)
-                                      .subtitle2
-                                      .override(
-                                        fontFamily: 'Poppins',
-                                        color: Colors.white,
-                                        fontSize: 25.0,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                  borderSide: BorderSide(
-                                    color: Colors.transparent,
-                                    width: 1.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(12.0),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 50.0, 0.0, 0.0),
-                              child: FFButtonWidget(
-                                onPressed: () async {
-                                  context.pushNamed('Recent_Page');
-                                },
-                                text: 'Upload an image',
-                                options: FFButtonOptions(
-                                  width: 230.0,
-                                  height: 50.0,
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 0.0, 0.0, 0.0),
-                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 0.0, 0.0, 0.0),
-                                  color: Color(0xFF3E642A),
-                                  textStyle: FlutterFlowTheme.of(context)
-                                      .subtitle2
-                                      .override(
-                                        fontFamily: 'Poppins',
-                                        color: Colors.white,
-                                        fontSize: 25.0,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                  borderSide: BorderSide(
-                                    color: Colors.transparent,
-                                    width: 1.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(12.0),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 50.0, 0.0, 0.0),
-                              child: FFButtonWidget(
-                                onPressed: () async {
-                                  context.pushNamed('Search_Page');
-                                },
-                                text: 'Snake Details',
-                                options: FFButtonOptions(
-                                  width: 230.0,
-                                  height: 50.0,
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 0.0, 0.0, 0.0),
-                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 0.0, 0.0, 0.0),
-                                  color: Color(0xFF3E642A),
-                                  textStyle: FlutterFlowTheme.of(context)
-                                      .subtitle2
-                                      .override(
-                                        fontFamily: 'Poppins',
-                                        color: Colors.white,
-                                        fontSize: 25.0,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                  borderSide: BorderSide(
-                                    color: Colors.transparent,
-                                    width: 1.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(12.0),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 50.0, 0.0, 0.0),
-                              child: FFButtonWidget(
-                                onPressed: () async {
-                                  context.pushNamed('Emergency_Page');
-                                },
-                                text: 'Emergency',
-                                options: FFButtonOptions(
-                                  width: 230.0,
-                                  height: 50.0,
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 0.0, 0.0, 0.0),
-                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 0.0, 0.0, 0.0),
-                                  color: Color(0xFFFF0000),
-                                  textStyle: FlutterFlowTheme.of(context)
-                                      .subtitle2
-                                      .override(
-                                        fontFamily: 'Poppins',
-                                        color: Colors.white,
-                                        fontSize: 25.0,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                  borderSide: BorderSide(
-                                    color: Colors.transparent,
-                                    width: 1.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(12.0),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 60.0, 0.0, 0.0),
-                              child: Image.asset(
-                                'assets/images/snake_1.png',
-                                width: 100.0,
-                                height: 100.0,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 20.0, 0.0, 0.0),
-                              child: InkWell(
-                                onTap: () async {
-                                  context.pushNamed('About_Us_Page');
-                                },
-                                child: Text(
-                                  'About Us',
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyText1
-                                      .override(
-                                        fontFamily: 'Poppins',
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 18
-                                      ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
+          child: Container(
+            width: width,
+            height: height,
+            decoration: BoxDecoration(
+              color: Color(0xCDCBE8BA),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(
+                      0.0, 0.0, 340.0, 0.0),
+                  child: FlutterFlowIconButton(
+                    borderColor: Colors.transparent,
+                    borderRadius: 30.0,
+                    borderWidth: 1.0,
+                    buttonSize: 60.0,
+                    icon: Icon(
+                      Icons.drag_handle,
+                      color: FlutterFlowTheme.of(context).primaryText,
+                      size: 30.0,
+                    ),
+                    onPressed: () async {
+                      scaffoldKey.currentState!.openDrawer();
+                    },
                   ),
-                ],
-              ),
+                ),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(
+                      0.0, 125.0, 0.0, 0.0),
+                  child: FFButtonWidget(
+                    onPressed: () async {
+                      try{
+                        await pickImage();
+                        if(selectedMedia!=null){
+                          List result =  await snakeFind().sendImage(selectedMedia);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) =>  LoadingPageWidget(name: result[0],confidence: result[1].round(),)),
+                          );
+                        }
+                      }catch (error){
+                        AnimatedSnackBar.material(
+                          "Something went wrong !",
+                          type: AnimatedSnackBarType.error,
+                        ).show(context);
+                      }
+                    },
+                    text: 'Take an Image',
+                    options: FFButtonOptions(
+                      width: 230.0,
+                      height: 50.0,
+                      padding: EdgeInsetsDirectional.fromSTEB(
+                          0.0, 0.0, 0.0, 0.0),
+                      iconPadding: EdgeInsetsDirectional.fromSTEB(
+                          0.0, 0.0, 0.0, 0.0),
+                      color: Color(0xFF3E642A),
+                      textStyle: FlutterFlowTheme.of(context)
+                          .subtitle2
+                          .override(
+                            fontFamily: 'Poppins',
+                            color: Colors.white,
+                            fontSize: 25.0,
+                            fontWeight: FontWeight.w600,
+                          ),
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                        width: 1.0,
+                      ),
+                      borderRadius: BorderRadius.circular(12.0),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(
+                      0.0, 50.0, 0.0, 0.0),
+                  child: FFButtonWidget(
+                    onPressed: () async {
+                      context.pushNamed('Recent_Page');
+                    },
+                    text: 'Upload an image',
+                    options: FFButtonOptions(
+                      width: 230.0,
+                      height: 50.0,
+                      padding: EdgeInsetsDirectional.fromSTEB(
+                          0.0, 0.0, 0.0, 0.0),
+                      iconPadding: EdgeInsetsDirectional.fromSTEB(
+                          0.0, 0.0, 0.0, 0.0),
+                      color: Color(0xFF3E642A),
+                      textStyle: FlutterFlowTheme.of(context)
+                          .subtitle2
+                          .override(
+                            fontFamily: 'Poppins',
+                            color: Colors.white,
+                            fontSize: 25.0,
+                            fontWeight: FontWeight.w600,
+                          ),
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                        width: 1.0,
+                      ),
+                      borderRadius: BorderRadius.circular(12.0),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(
+                      0.0, 50.0, 0.0, 0.0),
+                  child: FFButtonWidget(
+                    onPressed: () async {
+                      context.pushNamed('Search_Page');
+                    },
+                    text: 'Snake Details',
+                    options: FFButtonOptions(
+                      width: 230.0,
+                      height: 50.0,
+                      padding: EdgeInsetsDirectional.fromSTEB(
+                          0.0, 0.0, 0.0, 0.0),
+                      iconPadding: EdgeInsetsDirectional.fromSTEB(
+                          0.0, 0.0, 0.0, 0.0),
+                      color: Color(0xFF3E642A),
+                      textStyle: FlutterFlowTheme.of(context)
+                          .subtitle2
+                          .override(
+                            fontFamily: 'Poppins',
+                            color: Colors.white,
+                            fontSize: 25.0,
+                            fontWeight: FontWeight.w600,
+                          ),
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                        width: 1.0,
+                      ),
+                      borderRadius: BorderRadius.circular(12.0),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(
+                      0.0, 50.0, 0.0, 0.0),
+                  child: FFButtonWidget(
+                    onPressed: () async {
+                      context.pushNamed('Emergency_Page');
+                    },
+                    text: 'Emergency',
+                    options: FFButtonOptions(
+                      width: 230.0,
+                      height: 50.0,
+                      padding: EdgeInsetsDirectional.fromSTEB(
+                          0.0, 0.0, 0.0, 0.0),
+                      iconPadding: EdgeInsetsDirectional.fromSTEB(
+                          0.0, 0.0, 0.0, 0.0),
+                      color: Color(0xFFFF0000),
+                      textStyle: FlutterFlowTheme.of(context)
+                          .subtitle2
+                          .override(
+                            fontFamily: 'Poppins',
+                            color: Colors.white,
+                            fontSize: 25.0,
+                            fontWeight: FontWeight.w600,
+                          ),
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                        width: 1.0,
+                      ),
+                      borderRadius: BorderRadius.circular(12.0),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(
+                      0.0, 60.0, 0.0, 0.0),
+                  child: Image.asset(
+                    'assets/images/snake_1.png',
+                    width: 100.0,
+                    height: 100.0,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(
+                      0.0, 20.0, 0.0, 0.0),
+                  child: InkWell(
+                    onTap: () async {
+                      context.pushNamed('About_Us_Page');
+                    },
+                    child: Text(
+                      'About Us',
+                      style: FlutterFlowTheme.of(context)
+                          .bodyText1
+                          .override(
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w600,
+                            fontSize: 18
+                          ),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ),

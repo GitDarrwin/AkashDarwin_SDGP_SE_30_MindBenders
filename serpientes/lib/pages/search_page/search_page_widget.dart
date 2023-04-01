@@ -259,8 +259,11 @@ class _SearchPageWidgetState extends State<SearchPageWidget> {
                             ),
                           ),
                         ),
-                      Divider(
-                        thickness: 3.0,
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
+                        child: Divider(
+                          thickness: 3.0,
+                        ),
                       ),
                       if(searchedSnake != null)
                         Padding(

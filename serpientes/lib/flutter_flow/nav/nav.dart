@@ -77,16 +77,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => SearchPageWidget(),
         ),
         FFRoute(
-          name: 'Loading_Page',
-          path: '/loadingPage',
-          builder: (context, params) => LoadingPageWidget(name: '', confidence: 0,),
-        ),
-        // FFRoute(
-        //   name: 'ML_Page',
-        //   path: '/mLPage',
-        //   // builder: (context, params) => MLPageWidget(),
-        // ),
-        FFRoute(
           name: 'Medical_Help_Page',
           path: '/medicalHelpPage',
           builder: (context, params) => MedicalHelpPageWidget(),

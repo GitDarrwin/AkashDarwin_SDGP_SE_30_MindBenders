@@ -42,12 +42,49 @@ class _LoadingPageWidgetState extends State<LoadingPageWidget> {
     _model = createModel(context, () => LoadingPageModel());
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       await Future.delayed(const Duration(milliseconds: 2000));
-      await gettingSnakeDetails();
-      AnimatedSnackBar.material(
-        "Result Found!",
-        type: AnimatedSnackBarType.info,
-      ).show(context);
-      dialogboxpopup(name,confidence);
+      if (confidence > 40 ){
+        await gettingSnakeDetails();
+        AnimatedSnackBar.material(
+          "Result Found!",
+          type: AnimatedSnackBarType.info,
+        ).show(context);
+        dialogboxpopup(name,confidence);
+      }else{
+        AnimatedSnackBar.material(
+          "Result not Found!",
+          type: AnimatedSnackBarType.error,
+        ).show(context);
+        await Dialogs.materialDialog(
+
+            msg: "Can't find type of Snake !!",
+            title: "Cant' Find",
+            color: Colors.white,
+            context: context,
+            titleStyle: FlutterFlowTheme.of(context).bodyText1.override(
+              fontFamily: 'Poppins',
+              fontSize: 25.0,
+              fontWeight: FontWeight.bold,
+            ),
+            msgStyle: FlutterFlowTheme.of(context).bodyText1.override(
+              fontFamily: 'Poppins',
+              fontSize: 16.0,
+            ),
+            msgAlign: TextAlign.center,
+            actions: [
+              IconsButton(
+                onPressed: () {
+                  context.pushNamed('Menue_Option_Page');
+                },
+                text: 'Ok',
+                iconData: Icons.tag_faces_rounded,
+                color: Colors.red,
+                textStyle: TextStyle(color: Colors.white),
+                iconColor: Colors.white,
+              ),
+            ]);
+      }
+
+      // context.goNamed('Menue_Option_Page');
     });
   }
 
@@ -61,115 +98,96 @@ class _LoadingPageWidgetState extends State<LoadingPageWidget> {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: Color(0xFF3E642A),
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Container(
-                  width: 410.9,
-                  height: 858.8,
-                  decoration: BoxDecoration(
-                    color: Color(0xBACDCBE8BA),
-                  ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(270.0, 20.0, 0.0, 0.0),
-                        child: FlutterFlowIconButton(
-                          borderColor: Colors.transparent,
-                          borderRadius: 30.0,
-                          borderWidth: 1.0,
-                          buttonSize: 60.0,
-                          icon: Icon(
-                            Icons.home_outlined,
-                            color: FlutterFlowTheme.of(context).primaryText,
-                            size: 30.0,
-                          ),
-                          onPressed: () async {
-                            context.pushNamed('Menue_Option_Page');
-                          },
-                        ),
-                      ),
-                      Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 180.0, 0.0, 0.0),
-                        child: Icon(
-                          Icons.cloud_upload,
-                          color: Colors.black,
-                          size: 180.0,
-                        ),
-                      ),
-                      Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 0.0, 0.0),
-                        child: Text(
-                          'Processing......',
-                          style: FlutterFlowTheme.of(context).bodyText1.override(
-                                fontFamily: 'Poppins',
-                                fontSize: 30.0,
-                                fontWeight: FontWeight.bold,
-                              ),
-                        ),
-                      ),
-                      FlutterFlowIconButton(
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Container(
+                width: width,
+                height: height,
+                decoration: BoxDecoration(
+                  color: Color(0xBACDCBE8BA),
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(270.0, 20.0, 0.0, 0.0),
+                      child: FlutterFlowIconButton(
                         borderColor: Colors.transparent,
                         borderRadius: 30.0,
                         borderWidth: 1.0,
-                        buttonSize: 100.0,
+                        buttonSize: 60.0,
                         icon: Icon(
-                          Icons.watch,
+                          Icons.home_outlined,
                           color: FlutterFlowTheme.of(context).primaryText,
                           size: 30.0,
                         ),
-                        onPressed: () {
-                          print('IconButton pressed ...');
+                        onPressed: () async {
+                          context.pushNamed('Menue_Option_Page');
                         },
                       ),
-                      Image.asset(
-                        'assets/images/snake_1.png',
-                        width: 100.0,
-                        height: 100.0,
-                        fit: BoxFit.cover,
+                    ),
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 140.0, 0.0, 0.0),
+                      child: Icon(
+                        Icons.cloud_upload,
+                        color: Colors.black,
+                        size: 180.0,
                       ),
-                    ],
-                  ),
+                    ),
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 0.0, 0.0),
+                      child: Text(
+                        'Processing......',
+                        style: FlutterFlowTheme.of(context).bodyText1.override(
+                              fontFamily: 'Poppins',
+                              fontSize: 30.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                      ),
+                    ),
+                    FlutterFlowIconButton(
+                      borderColor: Colors.transparent,
+                      borderRadius: 30.0,
+                      borderWidth: 1.0,
+                      buttonSize: 100.0,
+                      icon: Icon(
+                        Icons.watch,
+                        color: FlutterFlowTheme.of(context).primaryText,
+                        size: 30.0,
+                      ),
+                      onPressed: () {
+                        print('IconButton pressed ...');
+                      },
+                    ),
+                    Image.asset(
+                      'assets/images/snake_1.png',
+                      width: 100.0,
+                      height: 100.0,
+                      fit: BoxFit.cover,
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
     );
   }
 
-  void dialogboxpopup(String snakeName, int confidence) {
-     if ((snakeName).isEmpty) {
-     Dialogs.materialDialog(
-          msg: "Can't find type of Snake !!",
-          title: "Cant' Find",
-          color: Colors.white,
-          context: context,
-          actions: [
-            IconsButton(
-              onPressed: () {
-                context.pushNamed('Menue_Option_Page');
-              },
-              text: 'Ok',
-              iconData: Icons.tag_faces_rounded,
-              color: Colors.red,
-              textStyle: TextStyle(color: Colors.white),
-              iconColor: Colors.white,
-            ),
-          ]);
-    } else {
+  void dialogboxpopup(String snakeName, int confidence) async {
        // MTSCustomDialogBox(
        //   iconImage:  Image(
        //       image: NetworkImage(snakeDetails[1])),
@@ -190,11 +208,22 @@ class _LoadingPageWidgetState extends State<LoadingPageWidget> {
        //     );
        //   },
        // );
-        Dialogs.materialDialog(
-          msg: "P Level : "+confidence.toString()+'\nDo you want more Details ?',
+        await Dialogs.materialDialog(
+          useSafeArea: false,
+          msg: "Prediction Level : "+confidence.toString()+'%\n\nDo you want more Details ?',
           title: widget.name,
           color: Colors.white,
           context: context,
+          msgAlign: TextAlign.center,
+          titleStyle: FlutterFlowTheme.of(context).bodyText1.override(
+          fontFamily: 'Poppins',
+          fontSize: 30.0,
+          fontWeight: FontWeight.bold,
+        ),
+          msgStyle: FlutterFlowTheme.of(context).bodyText1.override(
+          fontFamily: 'Poppins',
+          fontSize: 17.0,
+        ),
           actions: [
             IconsOutlineButton(
               onPressed: () {
@@ -216,11 +245,12 @@ class _LoadingPageWidgetState extends State<LoadingPageWidget> {
               text: 'ok',
               iconData: Icons.tag_faces_rounded,
               color: Colors.green,
-              textStyle: TextStyle(color: Colors.white),
+              textStyle: TextStyle(
+                  color: Colors.white
+              ),
               iconColor: Colors.white,
             ),
           ]);
-    }
   }
 
   Future<void> gettingSnakeDetails() async {
