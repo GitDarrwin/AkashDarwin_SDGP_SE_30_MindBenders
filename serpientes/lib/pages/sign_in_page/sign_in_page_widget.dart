@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import '../../Utils/UserModel.dart';
 import '../../Utils/auth.dart';
+import '../forget_password_page/forget_password_page_widget.dart';
 import '../sign_up_page/sign_up_page_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -292,7 +293,13 @@ class _SignInPageWidgetState extends State<SignInPageWidget> {
                     padding:
                         EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 200.0, 0.0),
                     child: GestureDetector(
-                      onTap: () => resetpassword(),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) =>  ForgetPasswordPageWidget()),
+                        );
+                        // resetpassword()
+                      },
                       child: RichText(
                         text: TextSpan(
                           children: [
