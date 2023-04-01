@@ -5,11 +5,12 @@ import 'dart:math';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:tflite/tflite.dart';
 
+import '../../Utils/snakefind.dart';
 import '../loading_page/loading_page_widget.dart';
 import '../m_l_page/m_l_page_widget.dart';
 import '../sign_in_page/sign_in_page_widget.dart';
+
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -21,6 +22,7 @@ export 'menue_option_page_model.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:http/http.dart' as http;
+import 'package:image_cropper/image_cropper.dart';
 
 
 
@@ -37,12 +39,6 @@ class _MenueOptionPageWidgetState extends State<MenueOptionPageWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final _unfocusNode = FocusNode();
   late File  selectedMedia;
-  late var result;
-  // late List _classifiedResult;
-
-  final species_list = ["Ahaetulla nasuta", "Ahaetulla prasina", "Albino cobra", "Arani", "Buff-striped keel back", "CGR", "Checkered keel back",
-  "Chrysopelea ornata", "Cobra", "Common krait", "Daboia russelii", "Flowery wolf snake", "Forsten's cat snake", "Green pit viper", "Green vine snake",
-  "Hump-nosed viper", "Pipe snake", "Python", "Rat snake", "Russell's viper", "Sri Lanka cat snake", "Trinket snake", "Wolf snake"];
 
   String? name_email= FirebaseAuth.instance.currentUser?.email;
 
@@ -50,7 +46,6 @@ class _MenueOptionPageWidgetState extends State<MenueOptionPageWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => MenueOptionPageModel());
-    // loadModel();
   }
 
   // loadModel() async {
@@ -92,49 +87,49 @@ class _MenueOptionPageWidgetState extends State<MenueOptionPageWidget> {
   //   });
   // }
 
-  Future<void> sendImage(File imageFile) async {
-    // Define endpoint URL
-    var request = http.MultipartRequest('POST', Uri.parse('http://localhost:5000/predict'));
-    request.files.add(await http.MultipartFile.fromPath('image', imageFile.path));
-
-    http.StreamedResponse response = await request.send();
-
-    if (response.statusCode == 200) {
-      result= await response.stream.bytesToString();
-    }
-    else {
-      print(response.reasonPhrase);
-    }
-
-    // try {
-    //   // Create multipart request
-    //   final request = http.MultipartRequest('POST', Uri.parse(endpoint));
-    //
-    //   // Add image file to request
-    //   final bytes = await imageFile.readAsBytes();
-    //   final image = http.MultipartFile.fromBytes('image', bytes);
-    //   request.files.add(image);
-    //
-    //   // Send request to Flask app
-    //   final response = await request.send();
-    //
-    //   // Read response from Flask app
-    //   final String responseString = await response.stream.bytesToString();
-    //
-    //   // Parse JSON response
-    //   final jsonResponse = json.decode(responseString);
-    //
-    //   // Get predicted class and confidence level
-    //   final predictedClass = jsonResponse['predicted_class'];
-    //   final confidenceLevel = jsonResponse['confidence_level'];
-    //
-    //   // Do something with prediction results
-    //   print('Predicted class: $predictedClass');
-    //   print('Confidence level: $confidenceLevel');
-    // } catch (error) {
-    //   print('Error sending image: $error');
-    // }
-  }
+  // Future<void> sendImage(File imageFile) async {
+  //   // Define endpoint URL
+  //   var request = http.MultipartRequest('POST', Uri.parse('http://localhost:4000/predict'));
+  //   request.files.add(await http.MultipartFile.fromPath('image', imageFile.path));
+  //
+  //   http.StreamedResponse response = await request.send();
+  //
+  //   if (response.statusCode == 200) {
+  //     result= await response.stream.bytesToString();
+  //   }
+  //   else {
+  //     print(response.reasonPhrase);
+  //   }
+  //
+  //   // try {
+  //   //   // Create multipart request
+  //   //   final request = http.MultipartRequest('POST', Uri.parse(endpoint));
+  //   //
+  //   //   // Add image file to request
+  //   //   final bytes = await imageFile.readAsBytes();
+  //   //   final image = http.MultipartFile.fromBytes('image', bytes);
+  //   //   request.files.add(image);
+  //   //
+  //   //   // Send request to Flask app
+  //   //   final response = await request.send();
+  //   //
+  //   //   // Read response from Flask app
+  //   //   final String responseString = await response.stream.bytesToString();
+  //   //
+  //   //   // Parse JSON response
+  //   //   final jsonResponse = json.decode(responseString);
+  //   //
+  //   //   // Get predicted class and confidence level
+  //   //   final predictedClass = jsonResponse['predicted_class'];
+  //   //   final confidenceLevel = jsonResponse['confidence_level'];
+  //   //
+  //   //   // Do something with prediction results
+  //   //   print('Predicted class: $predictedClass');
+  //   //   print('Confidence level: $confidenceLevel');
+  //   // } catch (error) {
+  //   //   print('Error sending image: $error');
+  //   // }
+  // }
 
 
   @override
@@ -158,6 +153,30 @@ class _MenueOptionPageWidgetState extends State<MenueOptionPageWidget> {
       if (image==null)return;
       final imageTemp = File(image.path);
 
+      // CroppedFile croppedFile = await ImageCropper().cropImage(
+      //   sourcePath: imageFile.path,
+      //   aspectRatioPresets: [
+      //     CropAspectRatioPreset.square,
+      //     CropAspectRatioPreset.ratio3x2,
+      //     CropAspectRatioPreset.original,
+      //     CropAspectRatioPreset.ratio4x3,
+      //     CropAspectRatioPreset.ratio16x9
+      //   ],
+      //   uiSettings: [
+      //     AndroidUiSettings(
+      //         toolbarTitle: 'Cropper',
+      //         toolbarColor: Colors.deepOrange,
+      //         toolbarWidgetColor: Colors.white,
+      //         initAspectRatio: CropAspectRatioPreset.original,
+      //         lockAspectRatio: false),
+      //     IOSUiSettings(
+      //       title: 'Cropper',
+      //     ),
+      //     WebUiSettings(
+      //       context: context,
+      //     ),
+      //   ],
+      // );
       setState(() {
         selectedMedia = imageTemp;
       });
@@ -386,20 +405,10 @@ class _MenueOptionPageWidgetState extends State<MenueOptionPageWidget> {
                               child: FFButtonWidget(
                                 onPressed: () async {
                                   await pickImage();
-
-                                  // await runPathImage(selectedMedia.path);
-                                  await sendImage(selectedMedia);
-
-                                  Map<String, dynamic> jsonResult = json.decode(result);
-                                  String name = species_list[jsonResult['predicted_class']];
-                                  double confidence = jsonResult['confidence_level'];
-                                  
-                                  print("Name : "+ name+ " confidence : "+ confidence.round().toString());
-
-                                  print(name);
+                                  List result =  await snakeFind().sendImage(selectedMedia);
                                   Navigator.push(
                                     context,
-                                    MaterialPageRoute(builder: (context) =>  LoadingPageWidget(name: name,confidence: confidence.round(),)),
+                                    MaterialPageRoute(builder: (context) =>  LoadingPageWidget(name: result[0],confidence: result[1].round(),)),
                                   );
                                 },
                                 text: 'Take an Image',

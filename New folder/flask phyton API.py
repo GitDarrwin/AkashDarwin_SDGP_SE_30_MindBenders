@@ -4,7 +4,7 @@ from flask import Flask, request, jsonify
 import numpy as np
 
 # Load saved model
-model = load_model('model.h5')
+model = load_model('D:\\IIT\\2 Year\\2 sem\\SDGP project\\AkashDarwin_SDGP_SE_30_MindBenders\\API\\model.h5')
 
 
 app = Flask(__name__)
@@ -35,4 +35,4 @@ def predict():
     return jsonify(response)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=4000)
+    app.run(host='0.0.0.0', port=5000)

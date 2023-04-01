@@ -1,3 +1,9 @@
+import 'dart:io';
+
+import 'package:image_picker/image_picker.dart';
+
+import '../../Utils/snakefind.dart';
+import '../loading_page/loading_page_widget.dart';
 import '../search_page/search_page_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -19,6 +25,7 @@ class RecentPageWidget extends StatefulWidget {
 
 class _RecentPageWidgetState extends State<RecentPageWidget> {
   late RecentPageModel _model;
+  late var selectedMedia;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final _unfocusNode = FocusNode();
@@ -36,6 +43,8 @@ class _RecentPageWidgetState extends State<RecentPageWidget> {
     _unfocusNode.dispose();
     super.dispose();
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -167,39 +176,12 @@ class _RecentPageWidgetState extends State<RecentPageWidget> {
                             EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 0.0, 0.0),
                         child: FFButtonWidget(
                           onPressed: () async {
-                            final selectedMedia = await selectMedia(
-                              mediaSource: MediaSource.photoGallery,
-                              multiImage: false,
+                            await pickImage();
+                            var result = await snakeFind().sendImage(selectedMedia);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) =>  LoadingPageWidget(name: result[0],confidence: result[1].round(),)),
                             );
-                            if (selectedMedia != null &&
-                                selectedMedia.every((m) =>
-                                    validateFileFormat(m.storagePath, context))) {
-                              setState(() => _model.isMediaUploading = true);
-                              var selectedUploadedFiles = <FFUploadedFile>[];
-
-                              try {
-                                selectedUploadedFiles = selectedMedia
-                                    .map((m) => FFUploadedFile(
-                                          name: m.storagePath.split('/').last,
-                                          bytes: m.bytes,
-                                          height: m.dimensions?.height,
-                                          width: m.dimensions?.width,
-                                        ))
-                                    .toList();
-                              } finally {
-                                _model.isMediaUploading = false;
-                              }
-                              if (selectedUploadedFiles.length ==
-                                  selectedMedia.length) {
-                                setState(() {
-                                  _model.uploadedLocalFile =
-                                      selectedUploadedFiles.first;
-                                });
-                              } else {
-                                setState(() {});
-                                return;
-                              }
-                            }
                           },
                           text: 'Choose From Gallery',
                           options: FFButtonOptions(
@@ -233,5 +215,44 @@ class _RecentPageWidgetState extends State<RecentPageWidget> {
         ),
       ),
     );
+  }
+
+  Future<void> pickImage() async {
+    try{
+      final image = await ImagePicker().pickImage(source: ImageSource.gallery,maxHeight: 224,maxWidth: 224);
+
+      if (image==null)return;
+      final imageTemp = File(image.path);
+
+      // CroppedFile croppedFile = await ImageCropper().cropImage(
+      //   sourcePath: imageFile.path,
+      //   aspectRatioPresets: [
+      //     CropAspectRatioPreset.square,
+      //     CropAspectRatioPreset.ratio3x2,
+      //     CropAspectRatioPreset.original,
+      //     CropAspectRatioPreset.ratio4x3,
+      //     CropAspectRatioPreset.ratio16x9
+      //   ],
+      //   uiSettings: [
+      //     AndroidUiSettings(
+      //         toolbarTitle: 'Cropper',
+      //         toolbarColor: Colors.deepOrange,
+      //         toolbarWidgetColor: Colors.white,
+      //         initAspectRatio: CropAspectRatioPreset.original,
+      //         lockAspectRatio: false),
+      //     IOSUiSettings(
+      //       title: 'Cropper',
+      //     ),
+      //     WebUiSettings(
+      //       context: context,
+      //     ),
+      //   ],
+      // );
+      setState(() {
+        selectedMedia = imageTemp;
+      });
+    }catch (error){
+      print("fails to open");
+    }
   }
 }
