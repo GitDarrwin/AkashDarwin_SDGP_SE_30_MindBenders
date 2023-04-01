@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 
+import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -20,7 +21,6 @@ import 'package:flutter/material.dart';
 import 'menue_option_page_model.dart';
 export 'menue_option_page_model.dart';
 import 'package:image_picker/image_picker.dart';
-import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:image_cropper/image_cropper.dart';
 
@@ -38,7 +38,7 @@ class _MenueOptionPageWidgetState extends State<MenueOptionPageWidget> {
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final _unfocusNode = FocusNode();
-  late File  selectedMedia;
+  late var  selectedMedia;
 
   String? name_email= FirebaseAuth.instance.currentUser?.email;
 
@@ -150,7 +150,10 @@ class _MenueOptionPageWidgetState extends State<MenueOptionPageWidget> {
     try{
       final image = await ImagePicker().pickImage(source: ImageSource.camera,maxHeight: 224,maxWidth: 224);
 
-      if (image==null)return;
+      if (image==null){
+        selectedMedia = null;
+        return;
+      };
       final imageTemp = File(image.path);
 
       // CroppedFile croppedFile = await ImageCropper().cropImage(
@@ -404,12 +407,21 @@ class _MenueOptionPageWidgetState extends State<MenueOptionPageWidget> {
                                   0.0, 100.0, 0.0, 0.0),
                               child: FFButtonWidget(
                                 onPressed: () async {
-                                  await pickImage();
-                                  List result =  await snakeFind().sendImage(selectedMedia);
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(builder: (context) =>  LoadingPageWidget(name: result[0],confidence: result[1].round(),)),
-                                  );
+                                  try{
+                                    await pickImage();
+                                    if(selectedMedia!=null){
+                                      List result =  await snakeFind().sendImage(selectedMedia);
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(builder: (context) =>  LoadingPageWidget(name: result[0],confidence: result[1].round(),)),
+                                      );
+                                    }
+                                  }catch (error){
+                                    AnimatedSnackBar.material(
+                                      "Something went wrong !",
+                                      type: AnimatedSnackBarType.error,
+                                    ).show(context);
+                                  }
                                 },
                                 text: 'Take an Image',
                                 options: FFButtonOptions(

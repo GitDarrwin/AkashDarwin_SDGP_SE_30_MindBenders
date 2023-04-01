@@ -1,3 +1,4 @@
+import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:material_dialogs/dialogs.dart';
@@ -13,6 +14,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'loading_page_model.dart';
 export 'loading_page_model.dart';
+import 'package:tb_custom_dialog_box/tb_custom_dialog_box.dart';
 
 class LoadingPageWidget extends StatefulWidget {
   final String name;
@@ -40,7 +42,11 @@ class _LoadingPageWidgetState extends State<LoadingPageWidget> {
     _model = createModel(context, () => LoadingPageModel());
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       await Future.delayed(const Duration(milliseconds: 2000));
-      gettingSnakeDetails();
+      await gettingSnakeDetails();
+      AnimatedSnackBar.material(
+        "Result Found!",
+        type: AnimatedSnackBarType.info,
+      ).show(context);
       dialogboxpopup(name,confidence);
     });
   }
@@ -164,8 +170,28 @@ class _LoadingPageWidgetState extends State<LoadingPageWidget> {
             ),
           ]);
     } else {
+       // MTSCustomDialogBox(
+       //   iconImage:  Image(
+       //       image: NetworkImage(snakeDetails[1])),
+       //   descriptions: "Prediction Level : "+confidence.toString()+'%\nDo you want more Details ?',
+       //   title: widget.name,
+       //   okButtonText: "Ok",
+       //   borderRadius: 20,
+       //   padding: 20,
+       //   isCancelButtonVisible: true,
+       //   cancelButtonText: "No",
+       //   cancelButtononPressed: () {
+       //     Navigator.of(context).pop();
+       //   },
+       //   okButtononPressed: () {
+       //     Navigator.pop(
+       //       context,
+       //       MaterialPageRoute(builder: (context) =>  MLPageWidget(snakeDetails)),
+       //     );
+       //   },
+       // );
         Dialogs.materialDialog(
-          msg: "Confidence Level : "+confidence.toString()+'\nDo you want more Details ?',
+          msg: "P Level : "+confidence.toString()+'\nDo you want more Details ?',
           title: widget.name,
           color: Colors.white,
           context: context,

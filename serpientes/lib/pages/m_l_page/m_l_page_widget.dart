@@ -85,61 +85,83 @@ class _MLPageWidgetState extends State<MLPageWidget> {
                       ),
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                            EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(20.0),
                           child: Image.network(
                             widget.snakeDetails[1],
-                            width: 222.8,
-                            height: 187.7,
+                            width: 275,
+                            height: 190.7,
                             fit: BoxFit.cover,
+                            loadingBuilder: (BuildContext context, Widget child,
+                                ImageChunkEvent? loadingProgress) {
+                              if (loadingProgress == null) {
+                                return child;
+                              }
+                              return Center(
+                                child: CircularProgressIndicator(
+                                  value: loadingProgress.expectedTotalBytes != null
+                                      ? loadingProgress.cumulativeBytesLoaded /
+                                      loadingProgress.expectedTotalBytes!
+                                      : null,
+                                ),
+                              );
+                            },
                           ),
                         ),
                       ),
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                            EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
                         child: Text(
                           widget.snakeDetails[0],
                           style: FlutterFlowTheme.of(context).bodyText1.override(
                                 fontFamily: 'Poppins',
-                                fontSize: 20.0,
+                                fontSize: 25.0,
                                 fontWeight: FontWeight.bold,
-                              ),
-                        ),
-                      ),
-                      Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
-                        child: Text(
-                          widget.snakeDetails[3],
-                          style: FlutterFlowTheme.of(context).bodyText1.override(
-                                fontFamily: 'Poppins',
-                                fontSize: 14.0,
-                              ),
-                        ),
-                      ),
-                      Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 250.0, 0.0),
-                        child: Text(
-                          'Description',
-                          style: FlutterFlowTheme.of(context).bodyText1.override(
-                                fontFamily: 'Poppins',
-                                fontWeight: FontWeight.w600,
                                 decoration: TextDecoration.underline,
                               ),
                         ),
                       ),
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(15.0, 10.0, 15.0, 0.0),
+                            EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
+                        child: Text(
+                          widget.snakeDetails[3],
+                          style: FlutterFlowTheme.of(context).bodyText1.override(
+                                fontFamily: 'Poppins',
+                                fontSize: 16.0,
+                              ),
+                        ),
+                      ),
+                      Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 240.0, 0.0),
+                        child: Text(
+                          'Description',
+                          style: FlutterFlowTheme.of(context).bodyText1.override(
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.w600,
+                                decoration: TextDecoration.underline,
+                                fontSize: 19.0,
+                              ),
+                        ),
+                      ),
+                      Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(20.0, 10.0, 15.0, 0.0),
                         child: Text(
                           widget.snakeDetails[2],
                           style: FlutterFlowTheme.of(context).bodyText1.override(
                                 fontFamily: 'Poppins',
-                                fontSize: 13.0,
+                                fontSize: 16.0,
                               ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 5.0),
+                        child: Divider(
+                          thickness: 3.0,
                         ),
                       ),
                       Text(
@@ -148,17 +170,18 @@ class _MLPageWidgetState extends State<MLPageWidget> {
                               fontFamily: 'Poppins',
                               fontWeight: FontWeight.bold,
                               decoration: TextDecoration.underline,
+                              fontSize: 19.0,
                             ),
                       ),
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
+                            EdgeInsetsDirectional.fromSTEB(20.0, 10.0, 10.0, 0.0),
                         child: Text(
                           'Lay the casualty down, rest and reassure\nIf the bite is on a limb, apply a broad pressure bandage over\nthe bite site as soon as possible. Then apply a further\nelasticized or firm bandage - start at fingers or toes and move\nup the limb as far as can be reached.\nQuickly Transport to a medical center ',
                           textAlign: TextAlign.start,
                           style: FlutterFlowTheme.of(context).bodyText1.override(
                                 fontFamily: 'Poppins',
-                                fontSize: 13.0,
+                                fontSize: 15.0,
                               ),
                         ),
                       ),

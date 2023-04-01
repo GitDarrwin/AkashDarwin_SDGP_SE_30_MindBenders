@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../Utils/snakefind.dart';
@@ -125,7 +126,7 @@ class _RecentPageWidgetState extends State<RecentPageWidget> {
                               onTap: () async {
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) =>  SearchPageWidget(name: "pala polonga")),
+                                  MaterialPageRoute(builder: (context) =>  SearchPageWidget(name: "green pit viper")),
                                 );
                               },
                               child: Image.asset(
@@ -176,12 +177,21 @@ class _RecentPageWidgetState extends State<RecentPageWidget> {
                             EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 0.0, 0.0),
                         child: FFButtonWidget(
                           onPressed: () async {
-                            await pickImage();
-                            var result = await snakeFind().sendImage(selectedMedia);
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) =>  LoadingPageWidget(name: result[0],confidence: result[1].round(),)),
-                            );
+                            try{
+                              await pickImage();
+                              if(selectedMedia!=null){
+                                List result =  await snakeFind().sendImage(selectedMedia);
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) =>  LoadingPageWidget(name: result[0],confidence: result[1].round(),)),
+                                );
+                              }
+                            }catch (error){
+                              AnimatedSnackBar.material(
+                                "Something went wrong !",
+                                type: AnimatedSnackBarType.error,
+                              ).show(context);
+                            }
                           },
                           text: 'Choose From Gallery',
                           options: FFButtonOptions(
@@ -221,7 +231,10 @@ class _RecentPageWidgetState extends State<RecentPageWidget> {
     try{
       final image = await ImagePicker().pickImage(source: ImageSource.gallery,maxHeight: 224,maxWidth: 224);
 
-      if (image==null)return;
+      if (image==null){
+        selectedMedia = null;
+        return;
+      };
       final imageTemp = File(image.path);
 
       // CroppedFile croppedFile = await ImageCropper().cropImage(
