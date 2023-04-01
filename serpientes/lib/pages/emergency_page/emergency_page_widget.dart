@@ -47,83 +47,75 @@ class _EmergencyPageWidgetState extends State<EmergencyPageWidget> {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: Color(0xFF3E642A),
       body: SafeArea(
-        child: GestureDetector(
-          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Container(
-                  width: 445.6,
-                  height: 862.1,
-                  decoration: BoxDecoration(
-                    color: Color(0xBACDCBE8BA),
+        child: Container(
+          width: width,
+          height: height,
+          decoration: BoxDecoration(
+            color: Color(0xBACDCBE8BA),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Padding(
+                padding:
+                EdgeInsetsDirectional.fromSTEB(270.0, 30.0, 0.0, 0.0),
+                child: FlutterFlowIconButton(
+                  borderColor: Colors.transparent,
+                  borderRadius: 30.0,
+                  borderWidth: 1.0,
+                  buttonSize: 60.0,
+                  icon: Icon(
+                    Icons.home_outlined,
+                    color: FlutterFlowTheme.of(context).primaryText,
+                    size: 30.0,
                   ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Padding(
-                        padding:
-                        EdgeInsetsDirectional.fromSTEB(270.0, 30.0, 0.0, 0.0),
-                        child: FlutterFlowIconButton(
-                          borderColor: Colors.transparent,
-                          borderRadius: 30.0,
-                          borderWidth: 1.0,
-                          buttonSize: 60.0,
-                          icon: Icon(
-                            Icons.home_outlined,
-                            color: FlutterFlowTheme.of(context).primaryText,
-                            size: 30.0,
-                          ),
-                          onPressed: () async {
-                            context.pushNamed('Menue_Option_Page');
-                          },
-                        ),
+                  onPressed: () async {
+                    context.pushNamed('Menue_Option_Page');
+                  },
+                ),
+              ),
+              Padding(
+                padding:
+                    EdgeInsetsDirectional.fromSTEB(0.0, 150.0, 0.0, 0.0),
+                child: Text(
+                  'Calling 1990......',
+                  style: FlutterFlowTheme.of(context).bodyText1.override(
+                        fontFamily: 'Poppins',
+                        fontSize: 40.0,
+                        fontWeight: FontWeight.bold,
                       ),
-                      Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 150.0, 0.0, 0.0),
-                        child: Text(
-                          'Calling 1990......',
-                          style: FlutterFlowTheme.of(context).bodyText1.override(
-                                fontFamily: 'Poppins',
-                                fontSize: 40.0,
-                                fontWeight: FontWeight.bold,
-                              ),
-                        ),
-                      ),
-                      Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 0.0, 0.0),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(30.0),
-                          child: Image.asset(
-                            'assets/images/ambulance.png',
-                            width: 321.5,
-                            height: 161.1,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 100.0, 0.0, 0.0),
-                        child: Image.asset(
-                          'assets/images/snake_1.png',
-                          width: 100.0,
-                          height: 100.0,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ],
+                ),
+              ),
+              Padding(
+                padding:
+                    EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 0.0, 0.0),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(30.0),
+                  child: Image.asset(
+                    'assets/images/ambulance.png',
+                    width: 321.5,
+                    height: 161.1,
+                    fit: BoxFit.cover,
                   ),
                 ),
-              ],
-            ),
+              ),
+              Padding(
+                padding:
+                    EdgeInsetsDirectional.fromSTEB(0.0, 100.0, 0.0, 0.0),
+                child: Image.asset(
+                  'assets/images/snake_1.png',
+                  width: 100.0,
+                  height: 100.0,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ],
           ),
         ),
       ),

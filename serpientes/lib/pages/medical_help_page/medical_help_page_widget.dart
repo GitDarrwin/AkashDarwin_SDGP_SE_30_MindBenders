@@ -37,69 +37,63 @@ class _MedicalHelpPageWidgetState extends State<MedicalHelpPageWidget> {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: Color(0xFF3E642A),
       body: SafeArea(
-        child: GestureDetector(
-          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Container(
-                  width: 438.8,
-                  height: 863.4,
-                  decoration: BoxDecoration(
-                    color: Color(0xBACDCBE8BA),
+        child: Container(
+          width: width,
+          height: height,
+          decoration: BoxDecoration(
+            color: Color(0xBACDCBE8BA),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Padding(
+                padding:
+                    EdgeInsetsDirectional.fromSTEB(270.0, 20.0, 0.0, 0.0),
+                child: FlutterFlowIconButton(
+                  borderColor: Colors.transparent,
+                  borderRadius: 30.0,
+                  borderWidth: 1.0,
+                  buttonSize: 60.0,
+                  icon: Icon(
+                    Icons.home_outlined,
+                    color: FlutterFlowTheme.of(context).primaryText,
+                    size: 30.0,
                   ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(270.0, 20.0, 0.0, 0.0),
-                        child: FlutterFlowIconButton(
-                          borderColor: Colors.transparent,
-                          borderRadius: 30.0,
-                          borderWidth: 1.0,
-                          buttonSize: 60.0,
-                          icon: Icon(
-                            Icons.home_outlined,
-                            color: FlutterFlowTheme.of(context).primaryText,
-                            size: 30.0,
-                          ),
-                          onPressed: () async {
-                            context.pushNamed('Menue_Option_Page');
-                          },
-                        ),
-                      ),
-                      Text(
-                        'Medical Help',
-                        style: FlutterFlowTheme.of(context).bodyText1.override(
-                              fontFamily: 'Poppins',
-                              fontSize: 30.0,
-                              fontWeight: FontWeight.bold,
-                              decoration: TextDecoration.underline,
-                            ),
-                      ),
-                      Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
-                        child: FlutterFlowWebView(
-                          url:
-                              'https://www.cdc.gov/niosh/topics/snakes/symptoms.html#:~:text=Seek%20medical%20attention%20as%20soon,from%20venom%20can%20be%20stopped.',
-                          bypass: false,
-                          height: 660.0,
-                          verticalScroll: true,
-                          horizontalScroll: false,
-                        ),
-                      ),
-                    ],
+                  onPressed: () async {
+                    context.pushNamed('Menue_Option_Page');
+                  },
+                ),
+              ),
+              Text(
+                'Medical Help',
+                style: FlutterFlowTheme.of(context).bodyText1.override(
+                      fontFamily: 'Poppins',
+                      fontSize: 30.0,
+                      fontWeight: FontWeight.bold,
+                      decoration: TextDecoration.underline,
+                    ),
+              ),
+              Padding(
+                padding:
+                    EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                child: SingleChildScrollView(
+                  child: FlutterFlowWebView(
+                    url:
+                        'https://www.cdc.gov/niosh/topics/snakes/symptoms.html#:~:text=Seek%20medical%20attention%20as%20soon,from%20venom%20can%20be%20stopped.',
+                    bypass: false,
+                    height: height-168,
+                    verticalScroll: true,
+                    horizontalScroll: true,
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
