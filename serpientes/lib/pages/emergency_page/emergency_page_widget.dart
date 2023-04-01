@@ -1,3 +1,5 @@
+import 'package:animated_snack_bar/animated_snack_bar.dart';
+
 import '../../flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -29,6 +31,10 @@ class _EmergencyPageWidgetState extends State<EmergencyPageWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      AnimatedSnackBar.material(
+        "Direct Emergency Medical Services",
+        type: AnimatedSnackBarType.error,
+      ).show(context);
       await Future.delayed(const Duration(milliseconds: 2000));
       await launchUrl(Uri(
         scheme: 'tel',

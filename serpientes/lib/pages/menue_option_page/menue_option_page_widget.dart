@@ -315,6 +315,10 @@ class _MenueOptionPageWidgetState extends State<MenueOptionPageWidget> {
                         context,
                         MaterialPageRoute(builder: (context) =>  SignInPageWidget()),
                       );
+                      AnimatedSnackBar.material(
+                        'Successfully SignOut',
+                        type: AnimatedSnackBarType.info,
+                      ).show(context);
                     },
                     title: Text(
                       'Sign out',

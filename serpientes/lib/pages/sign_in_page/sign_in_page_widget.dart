@@ -1,5 +1,8 @@
+import 'package:animated_snack_bar/animated_snack_bar.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import '../../Utils/UserModel.dart';
 import '../../Utils/auth.dart';
 import '../sign_up_page/sign_up_page_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -43,24 +46,38 @@ class _SignInPageWidgetState extends State<SignInPageWidget> {
     super.dispose();
   }
 
-  Future<UserCredential?> signInWithGoogle() async {
-    // Create an instance of the firebase auth and google signin
-    FirebaseAuth auth = FirebaseAuth.instance;
-    final GoogleSignIn googleSignIn = GoogleSignIn();
-    //Triger the authentication flow
-    final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
+  final FirebaseAuth  _auth= FirebaseAuth.instance;
+  final  _db= FirebaseFirestore.instance;
 
-    //Obtain the auth details from the request
-    final GoogleSignInAuthentication googleAuth =
-    await googleUser!.authentication;
-    //Create a new credentials
-    final AuthCredential credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth.accessToken,
-      idToken: googleAuth.idToken,
-    );
-    //Sign in the user with the credentials
-    final UserCredential userCredential =
-    await auth.signInWithCredential(credential);
+  Future<UserCredential?> signInWithGoogle() async {
+    try {
+      final GoogleSignIn googleSignIn = GoogleSignIn();
+      //Triger the authentication flow
+      final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
+
+      //Obtain the auth details from the request
+      final GoogleSignInAuthentication googleAuth =
+      await googleUser!.authentication;
+      //Create a new credentials
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+      //Sign in the user with the credentials.
+      await _auth.signInWithCredential(credential);
+      UserModel user = UserModel(email: googleUser.email, fullname: googleUser.displayName!);
+      await _db.collection("Users").doc(googleUser.email).set(user.toJson());
+
+      AnimatedSnackBar.material(
+        'Successfully Login in using Google Account',
+        type: AnimatedSnackBarType.success,
+      ).show(context);
+    }catch (error){
+      AnimatedSnackBar.material(
+        "Something went wrong. Please check your Google Account and try again",
+        type: AnimatedSnackBarType.error,
+      ).show(context);
+    }
     return null;
   }
 

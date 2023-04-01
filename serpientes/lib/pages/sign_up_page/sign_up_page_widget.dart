@@ -1,3 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+import '../../Utils/UserModel.dart';
 import '../../Utils/auth.dart';
 import '/flutter_flow/flutter_flow_autocomplete_options_list.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -21,6 +24,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final _unfocusNode = FocusNode();
+  final  _db= FirebaseFirestore.instance;
 
   final bool _isLogin = true;
   bool _loading = false;
@@ -28,18 +32,14 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _comfirmpasswordController = TextEditingController();
+  final TextEditingController _firstNameController = TextEditingController();
+  final TextEditingController _lastNameController = TextEditingController();
 
 
   @override
   void initState() {
     super.initState();
     _model = createModel(context, () => SignUpPageModel());
-
-    _model.textController1 ??= TextEditingController();
-    _model.textController2 ??= TextEditingController();
-    _model.textController3 ??= TextEditingController();
-    _model.textController4 ??= TextEditingController();
-    _model.textController5 ??= TextEditingController();
   }
 
   @override
@@ -121,7 +121,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                         child: Container(
                           width: 300.0,
                           child: TextFormField(
-                            controller: _model.textController1,
+                            controller: _firstNameController,
                             autofocus: false,
                             autofillHints: [AutofillHints.email],
                             textCapitalization: TextCapitalization.words,
@@ -186,7 +186,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                         child: Container(
                           width: 300.0,
                           child: TextFormField(
-                            controller: _model.textController2,
+                            controller: _lastNameController,
                             autofocus: false,
                             textCapitalization: TextCapitalization.words,
                             obscureText: false,
@@ -544,14 +544,17 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
     final email = _emailController.value.text;
     final password = _passwordController.value.text;
     final compassword = _comfirmpasswordController.value.text;
+    final fullname = _firstNameController.value.text + " " + _lastNameController.value.text;
 
     if((password.length>6) & (password==compassword)){
       setState(() {
         _loading = true;
       });
+      UserModel user = UserModel(email: email, fullname: fullname);
 
       //Checking if is login or register
       await Auth().registerWithEmailAndPassword(email, password);
+      _db.collection("Users").doc(user.email).set(user.toJson());
 
       setState(() {
         _loading = false;
