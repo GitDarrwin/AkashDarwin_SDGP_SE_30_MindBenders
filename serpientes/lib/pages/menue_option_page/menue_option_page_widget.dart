@@ -7,6 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:image_cropper/image_cropper.dart';
 import '../../Utils/snakefind.dart';
 import '../loading_page/loading_page_widget.dart';
 import '../sign_in_page/sign_in_page_widget.dart';
@@ -77,19 +78,42 @@ class _MenueOptionPageWidgetState extends State<MenueOptionPageWidget> {
 
   Future<void> pickImage() async {
     try{
-      final image = await ImagePicker().pickImage(source: ImageSource.camera,maxHeight: 224,maxWidth: 224);
+      final image = await ImagePicker().pickImage(source: ImageSource.camera);
 
       if (image==null){
         selectedMedia = null;
         return;
       };
       final imageTemp = File(image.path);
+
+      CroppedFile? croppedFile = await ImageCropper().cropImage(
+        sourcePath: imageTemp.path,
+        aspectRatioPresets: [
+          CropAspectRatioPreset.square,
+          CropAspectRatioPreset.ratio3x2,
+          CropAspectRatioPreset.original,
+          CropAspectRatioPreset.ratio4x3,
+          CropAspectRatioPreset.ratio16x9
+        ],
+        uiSettings: [
+          AndroidUiSettings(
+              showCropGrid: false,
+              statusBarColor: Color.fromARGB(255, 26, 153, 68),
+              toolbarTitle: 'Image Crop',
+              toolbarColor: Color.fromARGB(255, 26, 153, 68),
+              toolbarWidgetColor: Colors.white,
+              initAspectRatio: CropAspectRatioPreset.original,
+              lockAspectRatio: false),
+        ],
+      );
       setState(() {
-        selectedMedia = imageTemp;
+        selectedMedia = croppedFile;
       });
     }catch (error){
       print("fails to open");
     }
+
+
   }
 
   @override
@@ -319,7 +343,7 @@ class _MenueOptionPageWidgetState extends State<MenueOptionPageWidget> {
                       try{
                         await pickImage();
                         if(selectedMedia!=null){
-                          List result =  await snakeFind().sendImage(selectedMedia);
+                          List result =  await snakeFind().sendImage(selectedMedia.path);
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) =>  LoadingPageWidget(name: result[0],confidence: result[1].round(),)),

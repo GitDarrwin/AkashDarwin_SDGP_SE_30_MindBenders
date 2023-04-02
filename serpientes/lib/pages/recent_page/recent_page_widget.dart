@@ -16,6 +16,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'recent_page_model.dart';
 export 'recent_page_model.dart';
+import 'package:image_cropper/image_cropper.dart';
 
 class RecentPageWidget extends StatefulWidget {
   const RecentPageWidget({Key? key}) : super(key: key);
@@ -174,7 +175,7 @@ class _RecentPageWidgetState extends State<RecentPageWidget> {
                     try{
                       await pickImage();
                       if(selectedMedia!=null){
-                        List result =  await snakeFind().sendImage(selectedMedia);
+                        List result =  await snakeFind().sendImage(selectedMedia.path);
                         Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) =>  LoadingPageWidget(name: result[0],confidence: result[1].round(),)),
@@ -219,7 +220,7 @@ class _RecentPageWidgetState extends State<RecentPageWidget> {
 
   Future<void> pickImage() async {
     try{
-      final image = await ImagePicker().pickImage(source: ImageSource.gallery,maxHeight: 224,maxWidth: 224);
+      final image = await ImagePicker().pickImage(source: ImageSource.gallery);
 
       if (image==null){
         selectedMedia = null;
@@ -227,35 +228,33 @@ class _RecentPageWidgetState extends State<RecentPageWidget> {
       };
       final imageTemp = File(image.path);
 
-      // CroppedFile croppedFile = await ImageCropper().cropImage(
-      //   sourcePath: imageFile.path,
-      //   aspectRatioPresets: [
-      //     CropAspectRatioPreset.square,
-      //     CropAspectRatioPreset.ratio3x2,
-      //     CropAspectRatioPreset.original,
-      //     CropAspectRatioPreset.ratio4x3,
-      //     CropAspectRatioPreset.ratio16x9
-      //   ],
-      //   uiSettings: [
-      //     AndroidUiSettings(
-      //         toolbarTitle: 'Cropper',
-      //         toolbarColor: Colors.deepOrange,
-      //         toolbarWidgetColor: Colors.white,
-      //         initAspectRatio: CropAspectRatioPreset.original,
-      //         lockAspectRatio: false),
-      //     IOSUiSettings(
-      //       title: 'Cropper',
-      //     ),
-      //     WebUiSettings(
-      //       context: context,
-      //     ),
-      //   ],
-      // );
+      CroppedFile? croppedFile = await ImageCropper().cropImage(
+        sourcePath: imageTemp.path,
+        aspectRatioPresets: [
+          CropAspectRatioPreset.square,
+          CropAspectRatioPreset.ratio3x2,
+          CropAspectRatioPreset.original,
+          CropAspectRatioPreset.ratio4x3,
+          CropAspectRatioPreset.ratio16x9
+        ],
+        uiSettings: [
+          AndroidUiSettings(
+              showCropGrid: false,
+              statusBarColor: Color.fromARGB(255, 26, 153, 68),
+              toolbarTitle: 'Image Crop',
+              toolbarColor: Color.fromARGB(255, 26, 153, 68),
+              toolbarWidgetColor: Colors.white,
+              initAspectRatio: CropAspectRatioPreset.original,
+              lockAspectRatio: false),
+        ],
+      );
       setState(() {
-        selectedMedia = imageTemp;
+        selectedMedia = croppedFile;
       });
     }catch (error){
       print("fails to open");
     }
+
+
   }
 }

@@ -75,6 +75,7 @@ dependencies:
   tb_custom_dialog_box: ^0.0.3
   email_validator: ^2.1.17
   loading_animation_widget: ^1.2.0+4
+  image_cropper: ^3.0.2
 
 
 dependency_overrides:

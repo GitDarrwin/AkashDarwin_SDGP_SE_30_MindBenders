@@ -8,11 +8,11 @@ class snakeFind {
     "Chrysopelea ornata", "Cobra", "Common krait", "Daboia russelii", "Flowery wolf snake", "Forsten's cat snake", "Green pit viper", "Green vine snake",
     "Hump-nosed viper", "Pipe snake", "Python", "Rat snake", "Russell's viper", "Sri Lanka cat snake", "Trinket snake", "Wolf snake"];
 
-  Future sendImage(File imageFile) async {
+  Future sendImage(String imageFile) async {
     var result = null;
     // Define endpoint URL
     var request = http.MultipartRequest('POST', Uri.parse('http://localhost:4000/predict'));
-    request.files.add(await http.MultipartFile.fromPath('image', imageFile.path));
+    request.files.add(await http.MultipartFile.fromPath('image', imageFile));
 
     http.StreamedResponse response = await request.send();
 
