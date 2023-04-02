@@ -173,7 +173,7 @@ class _MLPageWidgetState extends State<MLPageWidget> {
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(20.0, 10.0, 10.0, 0.0),
+                        EdgeInsetsDirectional.fromSTEB(20.0, 10.0, 10.0, 30.0),
                     child: Text(
                       'Lay the casualty down, rest and reassure\nIf the bite is on a limb, apply a broad pressure bandage over\nthe bite site as soon as possible. Then apply a further\nelasticized or firm bandage - start at fingers or toes and move\nup the limb as far as can be reached.\nQuickly Transport to a medical center ',
                       textAlign: TextAlign.start,

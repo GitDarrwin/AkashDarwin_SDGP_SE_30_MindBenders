@@ -382,7 +382,7 @@ class _SignInPageWidgetState extends State<SignInPageWidget> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0, 20.0),
+                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0, 25.0),
                     child: Container(
                       width: 50.0,
                       height: 50.0,

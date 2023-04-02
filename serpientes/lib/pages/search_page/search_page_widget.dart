@@ -321,7 +321,7 @@ class _SearchPageWidgetState extends State<SearchPageWidget> {
                   ),
                 if (searchedSnake != null && selectname == true)
                   Padding(
-                    padding: EdgeInsets.only(bottom: 20),
+                    padding: EdgeInsets.only(bottom: 25),
                     child: Text(
                       'Venom : Highly Venomous',
                       textAlign: TextAlign.start,

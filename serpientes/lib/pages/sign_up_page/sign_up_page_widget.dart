@@ -517,7 +517,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                 ),
                 Padding(
                   padding:
-                      EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 20.0),
+                      EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 25.0),
                   child: FFButtonWidget(
                     onPressed: () => handleSubmit(),
                     text: 'Sign Up',
