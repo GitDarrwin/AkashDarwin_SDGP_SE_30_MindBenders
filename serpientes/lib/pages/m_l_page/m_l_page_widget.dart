@@ -40,7 +40,7 @@ class _MLPageWidgetState extends State<MLPageWidget> {
       backgroundColor: Color.fromARGB(255, 26, 153, 68),
       body: WillPopScope(
         onWillPop: () async {
-          context.goNamed("Menue_Option_Page");
+          context.pushNamed("Menue_Option_Page");
           return false;
         },
         child: SafeArea(
@@ -68,7 +68,7 @@ class _MLPageWidgetState extends State<MLPageWidget> {
                         size: 30.0,
                       ),
                       onPressed: () async {
-                        context.goNamed('Menue_Option_Page');
+                        context.pushNamed('Menue_Option_Page');
                       },
                     ),
                   ),
