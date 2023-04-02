@@ -136,12 +136,12 @@ class _SignInPageWidgetState extends State<SignInPageWidget> {
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 90.0, 0.0),
+                        EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 80.0, 0.0),
                     child: Text(
                       'Hi there! Nice to see you again\n',
                       style: FlutterFlowTheme.of(context).bodyText1.override(
                             fontFamily: 'Poppins',
-                            color: Color(0xCD3E642A),
+                        fontWeight: FontWeight.w500,
                           ),
                     ),
                   ),
@@ -153,6 +153,7 @@ class _SignInPageWidgetState extends State<SignInPageWidget> {
                       style: FlutterFlowTheme.of(context).bodyText1.override(
                             fontFamily: 'Poppins',
                             color: Color(0xFFFF0000),
+                            fontWeight: FontWeight.w500,
                           ),
                     ),
                   ),
@@ -219,6 +220,7 @@ class _SignInPageWidgetState extends State<SignInPageWidget> {
                       style: FlutterFlowTheme.of(context).bodyText1.override(
                             fontFamily: 'Poppins',
                             color: Color(0xFFFF0000),
+                            fontWeight: FontWeight.w500,
                           ),
                     ),
                   ),
@@ -291,14 +293,13 @@ class _SignInPageWidgetState extends State<SignInPageWidget> {
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 200.0, 0.0),
+                        EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 200.0, 0.0),
                     child: GestureDetector(
                       onTap: () {
                         Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) =>  ForgetPasswordPageWidget()),
                         );
-                        // resetpassword()
                       },
                       child: RichText(
                         text: TextSpan(
@@ -312,6 +313,7 @@ class _SignInPageWidgetState extends State<SignInPageWidget> {
                               FlutterFlowTheme.of(context).bodyText1.override(
                                     fontFamily: 'Poppins',
                                     fontSize: 13,
+                                    fontWeight: FontWeight.w500,
                                     color: Color(0xFF3E642A),
                                   ),
                         ),
@@ -360,6 +362,7 @@ class _SignInPageWidgetState extends State<SignInPageWidget> {
                         style:
                             FlutterFlowTheme.of(context).bodyText1.override(
                                   fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.w500,
                                   color: Color(0xFFFF0000),
                                   fontSize: 16.0,
                                 ),
@@ -379,7 +382,7 @@ class _SignInPageWidgetState extends State<SignInPageWidget> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0, 20.0),
+                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0, 20.0),
                     child: Container(
                       width: 50.0,
                       height: 50.0,
@@ -426,11 +429,5 @@ class _SignInPageWidgetState extends State<SignInPageWidget> {
         type: AnimatedSnackBarType.error,
       ).show(context);
     }
-  }
-
-  resetpassword() async {
-    final email = _emailController.value.text;
-
-    await Auth().resetpassword(email);
   }
 }
