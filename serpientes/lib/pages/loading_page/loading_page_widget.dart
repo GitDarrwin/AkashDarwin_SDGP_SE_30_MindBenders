@@ -10,11 +10,8 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'loading_page_model.dart';
 export 'loading_page_model.dart';
-import 'package:tb_custom_dialog_box/tb_custom_dialog_box.dart';
 
 class LoadingPageWidget extends StatefulWidget {
   final String name;
@@ -42,7 +39,7 @@ class _LoadingPageWidgetState extends State<LoadingPageWidget> {
     _model = createModel(context, () => LoadingPageModel());
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       await Future.delayed(const Duration(milliseconds: 2000));
-      if (confidence > 40 ){
+      if (confidence > 40 )  {
         await gettingSnakeDetails();
         AnimatedSnackBar.material(
           "Result Found!",
@@ -82,9 +79,8 @@ class _LoadingPageWidgetState extends State<LoadingPageWidget> {
                 iconColor: Colors.white,
               ),
             ]);
+        context.pushNamed('Menue_Option_Page');
       }
-
-      // context.goNamed('Menue_Option_Page');
     });
   }
 
@@ -167,20 +163,20 @@ class _LoadingPageWidgetState extends State<LoadingPageWidget> {
 
   void dialogboxpopup(String snakeName, int confidence) async {
         await Dialogs.materialDialog(
-          useSafeArea: false,
           msg: "Prediction Level : "+confidence.toString()+'%\n\nDo you want more Details ?',
           title: widget.name,
           color: Colors.white,
           context: context,
           msgAlign: TextAlign.center,
           titleStyle: FlutterFlowTheme.of(context).bodyText1.override(
-          fontFamily: 'Poppins',
-          fontSize: 30.0,
-          fontWeight: FontWeight.bold,
-        ),
+                    fontFamily: 'Poppins',
+                    fontSize: 30.0,
+                    fontWeight: FontWeight.bold,
+                  ),
           msgStyle: FlutterFlowTheme.of(context).bodyText1.override(
           fontFamily: 'Poppins',
           fontSize: 17.0,
+
         ),
           actions: [
             IconsOutlineButton(
@@ -209,6 +205,7 @@ class _LoadingPageWidgetState extends State<LoadingPageWidget> {
               iconColor: Colors.white,
             ),
           ]);
+        context.pushNamed('Menue_Option_Page');
   }
 
   Future<void> gettingSnakeDetails() async {

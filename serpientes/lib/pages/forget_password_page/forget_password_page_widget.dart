@@ -286,7 +286,7 @@ class _ForgetPasswordPageWidgetState extends State<ForgetPasswordPageWidget> {
                   ),
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(
-                        0.0, 45.0, 0.0, 0.0),
+                        0.0, 45.0, 0.0, 20.0),
                     child: FFButtonWidget(
                       onPressed: () {
                         var email = _emailController.text;

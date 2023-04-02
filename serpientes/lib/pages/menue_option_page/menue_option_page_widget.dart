@@ -3,27 +3,21 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:animated_snack_bar/animated_snack_bar.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-
 import '../../Utils/snakefind.dart';
 import '../loading_page/loading_page_widget.dart';
-import '../m_l_page/m_l_page_widget.dart';
 import '../sign_in_page/sign_in_page_widget.dart';
-
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/flutter_flow/upload_media.dart';
 import 'package:flutter/material.dart';
 import 'menue_option_page_model.dart';
 export 'menue_option_page_model.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:http/http.dart' as http;
-import 'package:image_cropper/image_cropper.dart';
-
 
 
 class MenueOptionPageWidget extends StatefulWidget {
@@ -41,96 +35,14 @@ class _MenueOptionPageWidgetState extends State<MenueOptionPageWidget> {
   late var  selectedMedia;
 
   String? name_email= FirebaseAuth.instance.currentUser?.email;
+  Map<String, dynamic>? user;
 
   @override
   void initState() {
     super.initState();
     _model = createModel(context, () => MenueOptionPageModel());
+    getUser(name_email!);
   }
-
-  // loadModel() async {
-  //   Tflite.close();
-  //   try{
-  //      await Tflite.loadModel(
-  //         model: "assets/modelmobile.tflite",
-  //         labels: "assets/labels.txt",
-  //         numThreads: 1, // defaults to 1
-  //         isAsset: true, // defaults to true, set to false to load resources outside assets
-  //         useGpuDelegate: false // defaults to false, set to true to use GPU delegate
-  //     );
-  //      print("load model");
-  //   } catch(error){
-  //     print(error);
-  //   }
-  // }
-
-  // runPathImage(String filepath) async {
-  //   print(filepath);
-  //   // int startTime = new DateTime.now().millisecondsSinceEpoch;
-  //   var recognitions = await Tflite.runModelOnImage(
-  //       path: filepath,   // required
-  //       imageMean: 117.0,   // defaults to 117.0
-  //       imageStd: 1.0,  // defaults to 1.0
-  //       numResults: 5,    // defaults to 5
-  //       threshold: 0.1,   // defaults to 0.1
-  //       asynch: true      // defaults to true
-  //   );
-  //
-  //   // int endTime = new DateTime.now().millisecondsSinceEpoch;
-  //   // print("Inference took ${endTime - startTime}ms");
-  //    setState(() {
-  //     _classifiedResult = recognitions!;
-  //     print(recognitions);
-  //     // recognitions?.map((result){
-  //     //   print(result["label"]);
-  //     // });
-  //   });
-  // }
-
-  // Future<void> sendImage(File imageFile) async {
-  //   // Define endpoint URL
-  //   var request = http.MultipartRequest('POST', Uri.parse('http://localhost:4000/predict'));
-  //   request.files.add(await http.MultipartFile.fromPath('image', imageFile.path));
-  //
-  //   http.StreamedResponse response = await request.send();
-  //
-  //   if (response.statusCode == 200) {
-  //     result= await response.stream.bytesToString();
-  //   }
-  //   else {
-  //     print(response.reasonPhrase);
-  //   }
-  //
-  //   // try {
-  //   //   // Create multipart request
-  //   //   final request = http.MultipartRequest('POST', Uri.parse(endpoint));
-  //   //
-  //   //   // Add image file to request
-  //   //   final bytes = await imageFile.readAsBytes();
-  //   //   final image = http.MultipartFile.fromBytes('image', bytes);
-  //   //   request.files.add(image);
-  //   //
-  //   //   // Send request to Flask app
-  //   //   final response = await request.send();
-  //   //
-  //   //   // Read response from Flask app
-  //   //   final String responseString = await response.stream.bytesToString();
-  //   //
-  //   //   // Parse JSON response
-  //   //   final jsonResponse = json.decode(responseString);
-  //   //
-  //   //   // Get predicted class and confidence level
-  //   //   final predictedClass = jsonResponse['predicted_class'];
-  //   //   final confidenceLevel = jsonResponse['confidence_level'];
-  //   //
-  //   //   // Do something with prediction results
-  //   //   print('Predicted class: $predictedClass');
-  //   //   print('Confidence level: $confidenceLevel');
-  //   // } catch (error) {
-  //   //   print('Error sending image: $error');
-  //   // }
-  // }
-
 
   @override
   void dispose() {
@@ -144,6 +56,23 @@ class _MenueOptionPageWidgetState extends State<MenueOptionPageWidget> {
   Future<void> logout() async {
     final GoogleSignIn googleSign = GoogleSignIn();
     await googleSign.signOut();
+  }
+
+  getUser(String userAccountEmail) async {
+    QuerySnapshot<Map<String, dynamic>> snap = await FirebaseFirestore.instance
+        .collection("Users")
+        .where('Email', isEqualTo: userAccountEmail)
+        .get();
+    List<QueryDocumentSnapshot<Map<String, dynamic>>>Users = snap.docs;
+    if (Users.isNotEmpty) {
+      setState(() {
+        user = Users[0].data();
+      });
+    } else {
+      setState(() {
+        user = null;
+      });
+    }
   }
 
   Future<void> pickImage() async {
@@ -202,7 +131,15 @@ class _MenueOptionPageWidgetState extends State<MenueOptionPageWidget> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                    child: Text(
+                      user?['Name'] ?? '',
+                      style: FlutterFlowTheme.of(context).bodyText1.override(
+                        fontFamily: 'Poppins',
+                        fontSize: 15.5,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
                   ),
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
@@ -211,7 +148,7 @@ class _MenueOptionPageWidgetState extends State<MenueOptionPageWidget> {
                       style: FlutterFlowTheme.of(context).bodyText1.override(
                             fontFamily: 'Poppins',
                             fontSize: 13.0,
-                            fontWeight: FontWeight.w700,
+                            fontWeight: FontWeight.w500,
                           ),
                     ),
                   ),

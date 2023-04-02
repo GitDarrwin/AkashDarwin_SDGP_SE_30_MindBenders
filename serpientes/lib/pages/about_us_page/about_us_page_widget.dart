@@ -37,17 +37,15 @@ class _AboutUsPageWidgetState extends State<AboutUsPageWidget> {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
     return Scaffold(
       key: scaffoldKey,
-      backgroundColor: Color(0xFF3E642A),
+      backgroundColor: Color.fromARGB(255, 26, 153, 68),
       body: SafeArea(
         child: Container(
-          width: width,
-          height: height,
+          width: double.infinity,
+          height: double.infinity,
           decoration: BoxDecoration(
-            color: Color.fromARGB(255, 26, 153, 68),
+            color: Color(0xBACDCBE8BA),
           ),
           child: Column(
             mainAxisSize: MainAxisSize.max,

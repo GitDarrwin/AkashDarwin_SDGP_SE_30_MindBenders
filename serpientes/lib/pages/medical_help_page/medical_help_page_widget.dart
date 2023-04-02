@@ -37,13 +37,15 @@ class _MedicalHelpPageWidgetState extends State<MedicalHelpPageWidget> {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: Color.fromARGB(255, 26, 153, 68),
       body: SafeArea(
         child: Container(
-          width: double.infinity,
-          height: double.infinity,
+          width: width,
+          height: height,
           decoration: BoxDecoration(
             color: Color(0xBACDCBE8BA),
           ),
@@ -85,7 +87,7 @@ class _MedicalHelpPageWidgetState extends State<MedicalHelpPageWidget> {
                     url:
                         'https://www.cdc.gov/niosh/topics/snakes/symptoms.html#:~:text=Seek%20medical%20attention%20as%20soon,from%20venom%20can%20be%20stopped.',
                     bypass: false,
-                    height: double.infinity-167,
+                    height: height-166,
                     verticalScroll: true,
                     horizontalScroll: true,
                   ),
