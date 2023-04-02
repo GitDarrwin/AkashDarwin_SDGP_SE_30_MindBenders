@@ -29,8 +29,6 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
   final _unfocusNode = FocusNode();
   final  _db= FirebaseFirestore.instance;
 
-  final bool _isLogin = true;
-  final _formkey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _comfirmpasswordController = TextEditingController();
@@ -56,7 +54,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      backgroundColor: Color(0xFF3E642A),
+      backgroundColor: Color.fromARGB(255, 26, 153, 68),
       body: SafeArea(
         child: Container(
           width: double.infinity,

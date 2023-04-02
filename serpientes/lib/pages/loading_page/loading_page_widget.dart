@@ -4,7 +4,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:material_dialogs/dialogs.dart';
 import 'package:material_dialogs/widgets/buttons/icon_button.dart';
 import 'package:material_dialogs/widgets/buttons/icon_outline_button.dart';
-
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import '../m_l_page/m_l_page_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -98,15 +98,13 @@ class _LoadingPageWidgetState extends State<LoadingPageWidget> {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
     return Scaffold(
       key: scaffoldKey,
-      backgroundColor: Color(0xFF3E642A),
+      backgroundColor: Color.fromARGB(255, 26, 153, 68),
       body: SafeArea(
         child: Container(
-          width: width,
-          height: height,
+          width: double.infinity,
+          height: double.infinity,
           decoration: BoxDecoration(
             color: Color(0xBACDCBE8BA),
           ),
@@ -133,18 +131,17 @@ class _LoadingPageWidgetState extends State<LoadingPageWidget> {
               ),
               Padding(
                 padding:
-                    EdgeInsetsDirectional.fromSTEB(0.0, 140.0, 0.0, 0.0),
-                child: Icon(
-                  Icons.cloud_upload,
-                  color: Colors.black,
-                  size: 180.0,
+                    EdgeInsetsDirectional.fromSTEB(0.0, 190.0, 0.0, 0.0),
+                child: LoadingAnimationWidget.inkDrop(
+                  color: Color.fromARGB(255, 26, 153, 68),
+                  size: 90,
                 ),
               ),
               Padding(
                 padding:
                     EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 0.0, 0.0),
                 child: Text(
-                  'Processing......',
+                  'Processing',
                   style: FlutterFlowTheme.of(context).bodyText1.override(
                         fontFamily: 'Poppins',
                         fontSize: 30.0,
@@ -152,25 +149,14 @@ class _LoadingPageWidgetState extends State<LoadingPageWidget> {
                       ),
                 ),
               ),
-              FlutterFlowIconButton(
-                borderColor: Colors.transparent,
-                borderRadius: 30.0,
-                borderWidth: 1.0,
-                buttonSize: 100.0,
-                icon: Icon(
-                  Icons.watch,
-                  color: FlutterFlowTheme.of(context).primaryText,
-                  size: 30.0,
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 180, 0.0, 0.0),
+                child: Image.asset(
+                  'assets/images/snake_1.png',
+                  width: 100.0,
+                  height: 100.0,
+                  fit: BoxFit.cover,
                 ),
-                onPressed: () {
-                  print('IconButton pressed ...');
-                },
-              ),
-              Image.asset(
-                'assets/images/snake_1.png',
-                width: 100.0,
-                height: 100.0,
-                fit: BoxFit.cover,
               ),
             ],
           ),
@@ -180,26 +166,6 @@ class _LoadingPageWidgetState extends State<LoadingPageWidget> {
   }
 
   void dialogboxpopup(String snakeName, int confidence) async {
-       // MTSCustomDialogBox(
-       //   iconImage:  Image(
-       //       image: NetworkImage(snakeDetails[1])),
-       //   descriptions: "Prediction Level : "+confidence.toString()+'%\nDo you want more Details ?',
-       //   title: widget.name,
-       //   okButtonText: "Ok",
-       //   borderRadius: 20,
-       //   padding: 20,
-       //   isCancelButtonVisible: true,
-       //   cancelButtonText: "No",
-       //   cancelButtononPressed: () {
-       //     Navigator.of(context).pop();
-       //   },
-       //   okButtononPressed: () {
-       //     Navigator.pop(
-       //       context,
-       //       MaterialPageRoute(builder: (context) =>  MLPageWidget(snakeDetails)),
-       //     );
-       //   },
-       // );
         await Dialogs.materialDialog(
           useSafeArea: false,
           msg: "Prediction Level : "+confidence.toString()+'%\n\nDo you want more Details ?',

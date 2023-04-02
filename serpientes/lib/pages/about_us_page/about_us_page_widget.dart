@@ -47,7 +47,7 @@ class _AboutUsPageWidgetState extends State<AboutUsPageWidget> {
           width: width,
           height: height,
           decoration: BoxDecoration(
-            color: Color(0xBACDCBE8BA),
+            color: Color.fromARGB(255, 26, 153, 68),
           ),
           child: Column(
             mainAxisSize: MainAxisSize.max,

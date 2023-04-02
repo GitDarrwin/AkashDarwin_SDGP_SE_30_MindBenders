@@ -69,7 +69,7 @@ class _SearchPageWidgetState extends State<SearchPageWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      backgroundColor: Color(0xFF3E642A),
+      backgroundColor: Color.fromARGB(255, 26, 153, 68),
       body: SafeArea(
         child: Container(
           width: double.infinity,

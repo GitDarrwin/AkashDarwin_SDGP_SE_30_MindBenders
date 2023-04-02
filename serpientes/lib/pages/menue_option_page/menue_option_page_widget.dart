@@ -155,31 +155,6 @@ class _MenueOptionPageWidgetState extends State<MenueOptionPageWidget> {
         return;
       };
       final imageTemp = File(image.path);
-
-      // CroppedFile croppedFile = await ImageCropper().cropImage(
-      //   sourcePath: imageFile.path,
-      //   aspectRatioPresets: [
-      //     CropAspectRatioPreset.square,
-      //     CropAspectRatioPreset.ratio3x2,
-      //     CropAspectRatioPreset.original,
-      //     CropAspectRatioPreset.ratio4x3,
-      //     CropAspectRatioPreset.ratio16x9
-      //   ],
-      //   uiSettings: [
-      //     AndroidUiSettings(
-      //         toolbarTitle: 'Cropper',
-      //         toolbarColor: Colors.deepOrange,
-      //         toolbarWidgetColor: Colors.white,
-      //         initAspectRatio: CropAspectRatioPreset.original,
-      //         lockAspectRatio: false),
-      //     IOSUiSettings(
-      //       title: 'Cropper',
-      //     ),
-      //     WebUiSettings(
-      //       context: context,
-      //     ),
-      //   ],
-      // );
       setState(() {
         selectedMedia = imageTemp;
       });
@@ -197,7 +172,7 @@ class _MenueOptionPageWidgetState extends State<MenueOptionPageWidget> {
       onWillPop: () async { return false; },
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: Color(0xFF3E642A),
+        backgroundColor: Color.fromARGB(255, 26, 153, 68),
         drawer: Container(
           width: 220.0,
           child: Drawer(
