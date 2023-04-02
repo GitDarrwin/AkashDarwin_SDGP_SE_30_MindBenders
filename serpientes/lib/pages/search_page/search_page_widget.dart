@@ -118,7 +118,7 @@ class _SearchPageWidgetState extends State<SearchPageWidget> {
                       controller: _model.textController,
                       onChanged: (_) => EasyDebounce.debounce(
                         '_model.textController',
-                        Duration(milliseconds: 1000),
+                        Duration(milliseconds: 0),
                         () => setState(() {
                           selectname = false;
                           getResultData();
@@ -201,8 +201,13 @@ class _SearchPageWidgetState extends State<SearchPageWidget> {
                                     ),
                               ),
                               onTap: () async {
-                                _model.textController.text = allData[index];
-                                await getSnake(allData[index]);
+                                _model.textController.text = resultData[index];
+                                FocusScopeNode currentFocus = FocusScope.of(context);
+
+                                if (!currentFocus.hasPrimaryFocus) {
+                                  currentFocus.unfocus();
+                                }
+                                await getSnake(resultData[index]);
                                 setState(() {
                                   selectname = true;
                                 });
@@ -371,5 +376,6 @@ class _SearchPageWidgetState extends State<SearchPageWidget> {
         }
       }
     }
+    print(resultData);
   }
 }

@@ -393,6 +393,7 @@ class _SignInPageWidgetState extends State<SignInPageWidget> {
                       child: GestureDetector(
                         onTap: () async {
                           await signInWithGoogle();
+                          if (FirebaseAuth.instance.currentUser != null)
                           context.pushNamed('Menue_Option_Page');
                         },
                         child: Image.asset(
