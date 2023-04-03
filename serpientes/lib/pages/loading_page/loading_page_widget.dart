@@ -193,8 +193,8 @@ class _LoadingPageWidgetState extends State<LoadingPageWidget> {
   Future<void> firstDo() async {
     await gettingDetails();
 
-    confidence =  snakeDetail[1];
-    name = snakeDetail[0];
+    confidence =  await snakeDetail[1];
+    name = await snakeDetail[0];
     if (confidence > 40 )  {
       await gettingSnakeDetails();
       AnimatedSnackBar.material(
