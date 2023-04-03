@@ -27,9 +27,6 @@ class _SignInPageWidgetState extends State<SignInPageWidget> {
   final _unfocusNode = FocusNode();
 
 
-  final bool _isLogin = true;
-  bool _loading = false;
-  final _formkey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 

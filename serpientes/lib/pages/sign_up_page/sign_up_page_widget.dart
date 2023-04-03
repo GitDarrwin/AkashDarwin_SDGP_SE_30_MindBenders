@@ -1,8 +1,5 @@
-import 'dart:ffi';
-
 import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:email_validator/email_validator.dart';
 import 'package:email_validator/email_validator.dart';
 import '../../Utils/UserModel.dart';
 import '../../Utils/auth.dart';

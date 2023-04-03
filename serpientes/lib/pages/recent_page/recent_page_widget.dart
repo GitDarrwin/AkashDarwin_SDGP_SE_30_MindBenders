@@ -1,19 +1,13 @@
 import 'dart:io';
-
 import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:image_picker/image_picker.dart';
-
-import '../../Utils/snakefind.dart';
 import '../loading_page/loading_page_widget.dart';
 import '../search_page/search_page_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/flutter_flow/upload_media.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'recent_page_model.dart';
 export 'recent_page_model.dart';
 import 'package:image_cropper/image_cropper.dart';
@@ -45,7 +39,6 @@ class _RecentPageWidgetState extends State<RecentPageWidget> {
     _unfocusNode.dispose();
     super.dispose();
   }
-
 
 
   @override
@@ -175,10 +168,10 @@ class _RecentPageWidgetState extends State<RecentPageWidget> {
                     try{
                       await pickImage();
                       if(selectedMedia!=null){
-                        List result =  await snakeFind().sendImage(selectedMedia.path);
+                        // List result =  await snakeFind().sendImage(selectedMedia.path);
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) =>  LoadingPageWidget(name: result[0],confidence: result[1].round(),)),
+                          MaterialPageRoute(builder: (context) =>  LoadingPageWidget(path: selectedMedia.path))
                         );
                       }
                     }catch (error){

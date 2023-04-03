@@ -53,6 +53,7 @@ class _SearchPageWidgetState extends State<SearchPageWidget> {
     _model.textController ??= TextEditingController();
     _model.textController.text = widget.name ?? '';
     if (widget.name != null) {
+      selectname=true;
       getSnake(widget.name!);
     }
   }
@@ -328,18 +329,6 @@ class _SearchPageWidgetState extends State<SearchPageWidget> {
                       style: FlutterFlowTheme.of(context).bodyText1.override(
                             fontFamily: 'Poppins',
                             fontSize: 16.0,
-                          ),
-                    ),
-                  ),
-                if (searchedSnake == null && selectname == true)
-                  Padding(
-                    padding: EdgeInsets.all(50),
-                    child: Text(
-                      'No Results Found !',
-                      textAlign: TextAlign.start,
-                      style: FlutterFlowTheme.of(context).bodyText1.override(
-                            fontFamily: 'Poppins',
-                            fontSize: 20.0,
                           ),
                     ),
                   ),

@@ -1,2 +1,5 @@
 keras
 flask
+numpy
+pillow
+tensorflow

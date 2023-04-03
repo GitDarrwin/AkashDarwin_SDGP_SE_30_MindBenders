@@ -11,7 +11,7 @@ class snakeFind {
   Future sendImage(String imageFile) async {
     var result = null;
     // Define endpoint URL
-    var request = http.MultipartRequest('POST', Uri.parse('http://localhost:4000/predict'));
+    var request = http.MultipartRequest('POST', Uri.parse('http://13.50.238.163:8501/predict'));
     request.files.add(await http.MultipartFile.fromPath('image', imageFile));
 
     http.StreamedResponse response = await request.send();
@@ -31,7 +31,7 @@ class snakeFind {
     String name = species_list[jsonResult['predicted_class']];
     double confidence = jsonResult['confidence_level']*100;
     print("Name : "+ name+ " confidence : "+ confidence.round().toString());
-    return [name,confidence];
+    return [name,confidence.round()];
   }
 
 

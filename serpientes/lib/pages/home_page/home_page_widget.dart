@@ -1,13 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
-
-import '../menue_option_page/menue_option_page_widget.dart';
-import '../sign_in_page/sign_in_page_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'home_page_model.dart';
 export 'home_page_model.dart';
 
@@ -39,8 +34,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
           context.goNamed('Menue_Option_Page');
           print("menue page");
         }
-
-      // context.pushNamed('Sign_in_page');
     });
   }
 
