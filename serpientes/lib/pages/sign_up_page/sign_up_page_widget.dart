@@ -24,14 +24,14 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final _unfocusNode = FocusNode();
-  final  _db= FirebaseFirestore.instance;
+  final _db = FirebaseFirestore.instance;
 
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _comfirmpasswordController = TextEditingController();
+  final TextEditingController _comfirmpasswordController =
+      TextEditingController();
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
-
 
   @override
   void initState() {
@@ -65,7 +65,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
               children: [
                 Padding(
                   padding:
-                  EdgeInsetsDirectional.fromSTEB(270.0, 30.0, 0.0, 0.0),
+                      EdgeInsetsDirectional.fromSTEB(270.0, 30.0, 0.0, 0.0),
                   child: FlutterFlowIconButton(
                     borderColor: Colors.transparent,
                     borderRadius: 30.0,
@@ -82,8 +82,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                   ),
                 ),
                 Padding(
-                  padding:
-                      EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 0.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 0.0, 0.0),
                   child: Image.asset(
                     'assets/images/snake_1.png',
                     width: 144.4,
@@ -92,8 +91,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                   ),
                 ),
                 Padding(
-                  padding:
-                      EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                   child: Text(
                     'Serpientes',
                     style: FlutterFlowTheme.of(context).bodyText1.override(
@@ -126,8 +124,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                   ),
                 ),
                 Padding(
-                  padding:
-                      EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 25.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 25.0, 0.0),
                   child: Container(
                     width: 300.0,
                     child: TextFormField(
@@ -168,14 +165,13 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                         ),
                         filled: true,
                       ),
-                      style:
-                          FlutterFlowTheme.of(context).bodyText1.override(
-                                fontFamily: 'Poppins',
-                                fontSize: 14.0,
-                              ),
+                      style: FlutterFlowTheme.of(context).bodyText1.override(
+                            fontFamily: 'Poppins',
+                            fontSize: 14.0,
+                          ),
                       textAlign: TextAlign.center,
-                      validator: _model.textController1Validator
-                          .asValidator(context),
+                      validator:
+                          _model.textController1Validator.asValidator(context),
                     ),
                   ),
                 ),
@@ -191,8 +187,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                   ),
                 ),
                 Padding(
-                  padding:
-                      EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 25.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 25.0, 0.0),
                   child: Container(
                     width: 300.0,
                     child: TextFormField(
@@ -232,14 +227,13 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                         ),
                         filled: true,
                       ),
-                      style:
-                          FlutterFlowTheme.of(context).bodyText1.override(
-                                fontFamily: 'Poppins',
-                                fontSize: 14.0,
-                              ),
+                      style: FlutterFlowTheme.of(context).bodyText1.override(
+                            fontFamily: 'Poppins',
+                            fontSize: 14.0,
+                          ),
                       textAlign: TextAlign.center,
-                      validator: _model.textController2Validator
-                          .asValidator(context),
+                      validator:
+                          _model.textController2Validator.asValidator(context),
                     ),
                   ),
                 ),
@@ -255,8 +249,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                   ),
                 ),
                 Padding(
-                  padding:
-                      EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 25.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 25.0, 0.0),
                   child: Container(
                     width: 300.0,
                     child: Autocomplete<String>(
@@ -267,8 +260,8 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                         }
                         return ['Option 1'].where((option) {
                           final lowercaseOption = option.toLowerCase();
-                          return lowercaseOption.contains(
-                              textEditingValue.text.toLowerCase());
+                          return lowercaseOption
+                              .contains(textEditingValue.text.toLowerCase());
                         });
                       },
                       optionsViewBuilder: (context, onSelected, options) {
@@ -281,16 +274,15 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                           textHighlightStyle: TextStyle(),
                           elevation: 4.0,
                           optionBackgroundColor:
-                              FlutterFlowTheme.of(context)
-                                  .primaryBackground,
-                          optionHighlightColor: FlutterFlowTheme.of(context)
-                              .secondaryBackground,
+                              FlutterFlowTheme.of(context).primaryBackground,
+                          optionHighlightColor:
+                              FlutterFlowTheme.of(context).secondaryBackground,
                           maxHeight: 200.0,
                         );
                       },
                       onSelected: (String selection) {
-                        setState(() =>
-                            _model.textFieldSelectedOption3 = selection);
+                        setState(
+                            () => _model.textFieldSelectedOption3 = selection);
                         FocusScope.of(context).unfocus();
                       },
                       fieldViewBuilder: (
@@ -301,7 +293,6 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                       ) {
                         _model.textController3 = textEditingController;
                         return TextFormField(
-
                           key: _model.textFieldKey3,
                           controller: _emailController,
                           focusNode: focusNode,
@@ -310,8 +301,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                           obscureText: false,
                           decoration: InputDecoration(
                             hintText: "Enter Valid Email",
-                            hintStyle:
-                                FlutterFlowTheme.of(context).bodyText2,
+                            hintStyle: FlutterFlowTheme.of(context).bodyText2,
                             enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
                                 color: Color(0x00000000),
@@ -342,12 +332,11 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                             ),
                             filled: true,
                           ),
-                          style: FlutterFlowTheme.of(context)
-                              .bodyText1
-                              .override(
-                                fontFamily: 'Poppins',
-                                fontSize: 14.0,
-                              ),
+                          style:
+                              FlutterFlowTheme.of(context).bodyText1.override(
+                                    fontFamily: 'Poppins',
+                                    fontSize: 14.0,
+                                  ),
                           textAlign: TextAlign.center,
                           validator: _model.textController3Validator
                               .asValidator(context),
@@ -368,8 +357,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                   ),
                 ),
                 Padding(
-                  padding:
-                      EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 25.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 25.0, 0.0),
                   child: Container(
                     width: 300.0,
                     child: TextFormField(
@@ -423,14 +411,13 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                           ),
                         ),
                       ),
-                      style:
-                          FlutterFlowTheme.of(context).bodyText1.override(
-                                fontFamily: 'Poppins',
-                                fontSize: 14.0,
-                              ),
+                      style: FlutterFlowTheme.of(context).bodyText1.override(
+                            fontFamily: 'Poppins',
+                            fontSize: 14.0,
+                          ),
                       textAlign: TextAlign.center,
-                      validator: _model.textController4Validator
-                          .asValidator(context),
+                      validator:
+                          _model.textController4Validator.asValidator(context),
                     ),
                   ),
                 ),
@@ -446,8 +433,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                   ),
                 ),
                 Padding(
-                  padding:
-                      EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 25.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 25.0, 0.0),
                   child: Container(
                     width: 300.0,
                     child: TextFormField(
@@ -501,30 +487,28 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                           ),
                         ),
                       ),
-                      style:
-                          FlutterFlowTheme.of(context).bodyText1.override(
-                                fontFamily: 'Poppins',
-                                fontSize: 14.0,
-                              ),
+                      style: FlutterFlowTheme.of(context).bodyText1.override(
+                            fontFamily: 'Poppins',
+                            fontSize: 14.0,
+                          ),
                       textAlign: TextAlign.center,
-                      validator: _model.textController5Validator
-                          .asValidator(context),
+                      validator:
+                          _model.textController5Validator.asValidator(context),
                     ),
                   ),
                 ),
                 Padding(
-                  padding:
-                      EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 25.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 25.0),
                   child: FFButtonWidget(
                     onPressed: () => handleSubmit(),
                     text: 'Sign Up',
                     options: FFButtonOptions(
                       width: 130.0,
                       height: 40.0,
-                      padding: EdgeInsetsDirectional.fromSTEB(
-                          0.0, 0.0, 0.0, 0.0),
-                      iconPadding: EdgeInsetsDirectional.fromSTEB(
-                          0.0, 0.0, 0.0, 0.0),
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                      iconPadding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       color: Color(0xCD3E642A),
                       textStyle:
                           FlutterFlowTheme.of(context).subtitle2.override(
@@ -547,17 +531,21 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
     );
   }
 
-  handleSubmit() async{
+  handleSubmit() async {
     final email = _emailController.value.text;
     final password = _passwordController.value.text;
     final compassword = _comfirmpasswordController.value.text;
-    final fullname = _firstNameController.value.text + " " + _lastNameController.value.text;
+    final fullname =
+        _firstNameController.value.text + " " + _lastNameController.value.text;
 
-    if((EmailValidator.validate(email)) && (password.length>6) && (password==compassword) &&
-        (_firstNameController.value.text.isNotEmpty || _lastNameController.value.text.isNotEmpty)){
+    if ((EmailValidator.validate(email)) &&
+        (password.length > 6) &&
+        (password == compassword) &&
+        (_firstNameController.value.text.isNotEmpty ||
+            _lastNameController.value.text.isNotEmpty)) {
       UserModel user = UserModel(email: email, fullname: fullname);
 
-      try{
+      try {
         //Checking if is login or register
         await Auth().registerWithEmailAndPassword(email, password);
         _db.collection("Users").doc(user.email).set(user.toJson());
@@ -567,13 +555,13 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
           type: AnimatedSnackBarType.success,
         ).show(context);
         context.pushNamed('Menue_Option_Page');
-      }catch (error){
+      } catch (error) {
         AnimatedSnackBar.material(
           "Something went wrong. Please check your credentials and try again",
           type: AnimatedSnackBarType.error,
         ).show(context);
       }
-    }else{
+    } else {
       AnimatedSnackBar.material(
         "Please fill correctly !",
         type: AnimatedSnackBarType.warning,
@@ -581,5 +569,3 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
     }
   }
 }
-
-

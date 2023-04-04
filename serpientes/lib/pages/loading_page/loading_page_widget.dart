@@ -15,6 +15,7 @@ export 'loading_page_model.dart';
 
 class LoadingPageWidget extends StatefulWidget {
   final String path;
+
   const LoadingPageWidget({Key? key, required this.path}) : super(key: key);
 
   @override
@@ -28,10 +29,11 @@ class _LoadingPageWidgetState extends State<LoadingPageWidget> {
   final _unfocusNode = FocusNode();
 
   _LoadingPageWidgetState(this.path);
+
   final String path;
   late int confidence;
   late String name;
-  List snakeDetail=[];
+  List snakeDetail = [];
 
   @override
   void initState() {
@@ -65,8 +67,7 @@ class _LoadingPageWidgetState extends State<LoadingPageWidget> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
-                padding:
-                    EdgeInsetsDirectional.fromSTEB(270.0, 20.0, 0.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(270.0, 20.0, 0.0, 0.0),
                 child: FlutterFlowIconButton(
                   borderColor: Colors.transparent,
                   borderRadius: 30.0,
@@ -83,16 +84,14 @@ class _LoadingPageWidgetState extends State<LoadingPageWidget> {
                 ),
               ),
               Padding(
-                padding:
-                    EdgeInsetsDirectional.fromSTEB(0.0, 220.0, 0.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 220.0, 0.0, 0.0),
                 child: LoadingAnimationWidget.inkDrop(
                   color: Color.fromARGB(255, 26, 153, 68),
                   size: 90,
                 ),
               ),
               Padding(
-                padding:
-                    EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 0.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 0.0, 0.0),
                 child: Text(
                   'Processing',
                   style: FlutterFlowTheme.of(context).bodyText1.override(
@@ -119,73 +118,75 @@ class _LoadingPageWidgetState extends State<LoadingPageWidget> {
   }
 
   void dialogboxpopup(String snakeName, int confidence) async {
-        await Dialogs.materialDialog(
-          msg: "Prediction Level : "+confidence.toString()+'%\n\nDo you want more Details ?',
-          title: name,
-          color: Colors.white,
-          context: context,
-          msgAlign: TextAlign.center,
-          titleStyle: FlutterFlowTheme.of(context).bodyText1.override(
-                    fontFamily: 'Poppins',
-                    fontSize: 30.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-          msgStyle: FlutterFlowTheme.of(context).bodyText1.override(
-          fontFamily: 'Poppins',
-          fontSize: 17.0,
-
-        ),
-          actions: [
-            IconsOutlineButton(
-              onPressed: () {
-                context.pushNamed('Menue_Option_Page');
-              },
-              text: 'No',
-              color: Colors.red,
-              iconData: Icons.cancel_outlined,
-              textStyle: TextStyle(color: Colors.white),
-              iconColor: Colors.white,
+    await Dialogs.materialDialog(
+        msg: "Prediction Level : " +
+            confidence.toString() +
+            '%\n\nDo you want more Details ?',
+        title: name,
+        color: Colors.white,
+        context: context,
+        msgAlign: TextAlign.center,
+        titleStyle: FlutterFlowTheme.of(context).bodyText1.override(
+              fontFamily: 'Poppins',
+              fontSize: 30.0,
+              fontWeight: FontWeight.bold,
             ),
-            IconsButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) =>  MLPageWidget(snakeDetail)),
-                );
-              },
-              text: 'ok',
-              iconData: Icons.tag_faces_rounded,
-              color: Colors.green,
-              textStyle: TextStyle(
-                  color: Colors.white
-              ),
-              iconColor: Colors.white,
+        msgStyle: FlutterFlowTheme.of(context).bodyText1.override(
+              fontFamily: 'Poppins',
+              fontSize: 17.0,
             ),
-          ]);
-        context.pushNamed('Menue_Option_Page');
+        actions: [
+          IconsOutlineButton(
+            onPressed: () {
+              context.pushNamed('Menue_Option_Page');
+            },
+            text: 'No',
+            color: Colors.red,
+            iconData: Icons.cancel_outlined,
+            textStyle: TextStyle(color: Colors.white),
+            iconColor: Colors.white,
+          ),
+          IconsButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => MLPageWidget(snakeDetail)),
+              );
+            },
+            text: 'ok',
+            iconData: Icons.tag_faces_rounded,
+            color: Colors.green,
+            textStyle: TextStyle(color: Colors.white),
+            iconColor: Colors.white,
+          ),
+        ]);
+    context.pushNamed('Menue_Option_Page');
   }
 
   Future<void> gettingSnakeDetails() async {
-    QuerySnapshot<Map<String, dynamic>> snap =
-        await FirebaseFirestore.instance
+    QuerySnapshot<Map<String, dynamic>> snap = await FirebaseFirestore.instance
         .collection("Sankes")
         .where('Name', isEqualTo: name.toLowerCase())
         .get();
-    List<QueryDocumentSnapshot<Map<String, dynamic>>>
-    snakes = snap.docs;
+    List<QueryDocumentSnapshot<Map<String, dynamic>>> snakes = snap.docs;
     if (snakes.isNotEmpty) {
       setState(() {
         var searchedSnake = snakes[0].data();
-        snakeDetail = [name,searchedSnake['image'],searchedSnake['Description'] ?? '',searchedSnake['Scientific Name'] ?? ''];
+        snakeDetail = [
+          name,
+          searchedSnake['image'],
+          searchedSnake['Description'] ?? '',
+          searchedSnake['Scientific Name'] ?? ''
+        ];
       });
     }
-
   }
 
   gettingDetails() async {
-    try{
+    try {
       snakeDetail = await snakeFind().sendImage(path);
-    }catch (e){
+    } catch (e) {
       confidence = 0;
     }
   }
@@ -193,35 +194,34 @@ class _LoadingPageWidgetState extends State<LoadingPageWidget> {
   Future<void> firstDo() async {
     await gettingDetails();
 
-    confidence =  await snakeDetail[1];
+    confidence = await snakeDetail[1];
     name = await snakeDetail[0];
-    if (confidence > 40 )  {
+    if (confidence > 40) {
       await gettingSnakeDetails();
       AnimatedSnackBar.material(
         "Result Found!",
         type: AnimatedSnackBarType.info,
       ).show(context);
-      dialogboxpopup(name,confidence);
-    }else{
+      dialogboxpopup(name, confidence);
+    } else {
       AnimatedSnackBar.material(
         "Result not Found!",
         type: AnimatedSnackBarType.error,
       ).show(context);
       await Dialogs.materialDialog(
-
           msg: "Can't find type of Snake !!",
           title: "Cant' Find",
           color: Colors.white,
           context: context,
           titleStyle: FlutterFlowTheme.of(context).bodyText1.override(
-            fontFamily: 'Poppins',
-            fontSize: 25.0,
-            fontWeight: FontWeight.bold,
-          ),
+                fontFamily: 'Poppins',
+                fontSize: 25.0,
+                fontWeight: FontWeight.bold,
+              ),
           msgStyle: FlutterFlowTheme.of(context).bodyText1.override(
-            fontFamily: 'Poppins',
-            fontSize: 16.0,
-          ),
+                fontFamily: 'Poppins',
+                fontSize: 16.0,
+              ),
           msgAlign: TextAlign.center,
           actions: [
             IconsButton(
@@ -238,5 +238,4 @@ class _LoadingPageWidgetState extends State<LoadingPageWidget> {
       context.pushNamed('Menue_Option_Page');
     }
   }
-
 }

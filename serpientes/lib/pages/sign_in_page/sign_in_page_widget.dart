@@ -26,7 +26,6 @@ class _SignInPageWidgetState extends State<SignInPageWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final _unfocusNode = FocusNode();
 
-
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
@@ -44,8 +43,8 @@ class _SignInPageWidgetState extends State<SignInPageWidget> {
     super.dispose();
   }
 
-  final FirebaseAuth  _auth= FirebaseAuth.instance;
-  final  _db= FirebaseFirestore.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final _db = FirebaseFirestore.instance;
 
   Future<UserCredential?> signInWithGoogle() async {
     try {
@@ -55,7 +54,7 @@ class _SignInPageWidgetState extends State<SignInPageWidget> {
 
       //Obtain the auth details from the request
       final GoogleSignInAuthentication googleAuth =
-      await googleUser!.authentication;
+          await googleUser!.authentication;
       //Create a new credentials
       final AuthCredential credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
@@ -63,14 +62,15 @@ class _SignInPageWidgetState extends State<SignInPageWidget> {
       );
       //Sign in the user with the credentials.
       await _auth.signInWithCredential(credential);
-      UserModel user = UserModel(email: googleUser.email, fullname: googleUser.displayName!);
+      UserModel user =
+          UserModel(email: googleUser.email, fullname: googleUser.displayName!);
       await _db.collection("Users").doc(googleUser.email).set(user.toJson());
 
       AnimatedSnackBar.material(
         'Successfully Login in using Google Account',
         type: AnimatedSnackBarType.success,
       ).show(context);
-    }catch (error){
+    } catch (error) {
       AnimatedSnackBar.material(
         "Something went wrong. Please check your Google Account and try again",
         type: AnimatedSnackBarType.error,
@@ -82,7 +82,9 @@ class _SignInPageWidgetState extends State<SignInPageWidget> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () async { return false; },
+      onWillPop: () async {
+        return false;
+      },
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: Color.fromARGB(255, 26, 153, 68),
@@ -138,7 +140,7 @@ class _SignInPageWidgetState extends State<SignInPageWidget> {
                       'Hi there! Nice to see you again\n',
                       style: FlutterFlowTheme.of(context).bodyText1.override(
                             fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w500,
+                            fontWeight: FontWeight.w500,
                           ),
                     ),
                   ),
@@ -164,8 +166,8 @@ class _SignInPageWidgetState extends State<SignInPageWidget> {
                         autofocus: false,
                         autofillHints: [AutofillHints.email],
                         obscureText: false,
-                        validator: (value){
-                          if (value == null || value.isEmpty){
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
                             return 'Please enter your email';
                           }
                           return null;
@@ -230,8 +232,8 @@ class _SignInPageWidgetState extends State<SignInPageWidget> {
                         controller: _passwordController,
                         autofocus: false,
                         obscureText: !_model.passwordVisibility,
-                        validator: (value){
-                          if (value == null || value.isEmpty){
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
                             return 'Please enter your Password';
                           }
                           return null;
@@ -295,7 +297,8 @@ class _SignInPageWidgetState extends State<SignInPageWidget> {
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) =>  ForgetPasswordPageWidget()),
+                          MaterialPageRoute(
+                              builder: (context) => ForgetPasswordPageWidget()),
                         );
                       },
                       child: RichText(
@@ -326,10 +329,10 @@ class _SignInPageWidgetState extends State<SignInPageWidget> {
                       options: FFButtonOptions(
                         width: 160.0,
                         height: 40.0,
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            0.0, 0.0, 0.0, 0.0),
-                        iconPadding: EdgeInsetsDirectional.fromSTEB(
-                            0.0, 0.0, 0.0, 0.0),
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        iconPadding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         color: Color(0xCD3E642A),
                         textStyle:
                             FlutterFlowTheme.of(context).subtitle2.override(
@@ -351,24 +354,23 @@ class _SignInPageWidgetState extends State<SignInPageWidget> {
                       onTap: () async {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) =>  SignUpPageWidget()),
+                          MaterialPageRoute(
+                              builder: (context) => SignUpPageWidget()),
                         );
                       },
                       child: Text(
                         'Sign Up',
-                        style:
-                            FlutterFlowTheme.of(context).bodyText1.override(
-                                  fontFamily: 'Poppins',
-                                  fontWeight: FontWeight.w500,
-                                  color: Color(0xFFFF0000),
-                                  fontSize: 16.0,
-                                ),
+                        style: FlutterFlowTheme.of(context).bodyText1.override(
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w500,
+                              color: Color(0xFFFF0000),
+                              fontSize: 16.0,
+                            ),
                       ),
                     ),
                   ),
                   Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0, 0.0),
+                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0, 0.0),
                     child: Text(
                       'Your social profiles',
                       textAlign: TextAlign.center,
@@ -391,7 +393,7 @@ class _SignInPageWidgetState extends State<SignInPageWidget> {
                         onTap: () async {
                           await signInWithGoogle();
                           if (FirebaseAuth.instance.currentUser != null)
-                          context.pushNamed('Menue_Option_Page');
+                            context.pushNamed('Menue_Option_Page');
                         },
                         child: Image.asset(
                           'assets/images/google_logo.webp',
@@ -409,7 +411,7 @@ class _SignInPageWidgetState extends State<SignInPageWidget> {
     );
   }
 
-  handleSubmit() async{
+  handleSubmit() async {
     final email = _emailController.value.text;
     final password = _passwordController.value.text;
 
@@ -421,7 +423,7 @@ class _SignInPageWidgetState extends State<SignInPageWidget> {
       ).show(context);
       //Checking if is login or register
       context.pushNamed('Menue_Option_Page');
-    }catch (error){
+    } catch (error) {
       AnimatedSnackBar.material(
         "Something went wrong. Please check your credentials and try again",
         type: AnimatedSnackBarType.error,

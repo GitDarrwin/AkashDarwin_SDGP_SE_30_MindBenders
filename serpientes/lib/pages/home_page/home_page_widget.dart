@@ -28,12 +28,12 @@ class _HomePageWidgetState extends State<HomePageWidget> {
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       await Future.delayed(const Duration(milliseconds: 3000));
       User? user = FirebaseAuth.instance.currentUser;
-        if (user == null) {
-          context.goNamed('Sign_in_page');
-        } else {
-          context.goNamed('Menue_Option_Page');
-          print("menue page");
-        }
+      if (user == null) {
+        context.goNamed('Sign_in_page');
+      } else {
+        context.goNamed('Menue_Option_Page');
+        print("menue page");
+      }
     });
   }
 
@@ -60,8 +60,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
-                padding:
-                    EdgeInsetsDirectional.fromSTEB(0.0, 200.0, 0.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 200.0, 0.0, 0.0),
                 child: Image.asset(
                   'assets/images/snake_1.png',
                   width: 213.0,
@@ -70,8 +69,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                 ),
               ),
               Padding(
-                padding:
-                    EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                 child: Text(
                   'Serpientes\n',
                   style: FlutterFlowTheme.of(context).bodyText1.override(
@@ -81,15 +79,13 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                 ),
               ),
               Padding(
-                padding:
-                    EdgeInsetsDirectional.fromSTEB(0.0, 130.0, 0.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 130.0, 0.0, 0.0),
                 child: Text(
                   'By Mind Benders\n',
                   textAlign: TextAlign.center,
                   style: FlutterFlowTheme.of(context).bodyText1.override(
                         fontFamily: 'Poppins',
-                        color: FlutterFlowTheme.of(context)
-                            .primaryBackground,
+                        color: FlutterFlowTheme.of(context).primaryBackground,
                         fontSize: 21.0,
                         fontWeight: FontWeight.w600,
                       ),

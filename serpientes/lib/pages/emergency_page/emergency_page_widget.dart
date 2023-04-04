@@ -66,8 +66,7 @@ class _EmergencyPageWidgetState extends State<EmergencyPageWidget> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
-                padding:
-                EdgeInsetsDirectional.fromSTEB(270.0, 30.0, 0.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(270.0, 30.0, 0.0, 0.0),
                 child: FlutterFlowIconButton(
                   borderColor: Colors.transparent,
                   borderRadius: 30.0,
@@ -84,8 +83,7 @@ class _EmergencyPageWidgetState extends State<EmergencyPageWidget> {
                 ),
               ),
               Padding(
-                padding:
-                    EdgeInsetsDirectional.fromSTEB(0.0, 150.0, 0.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 150.0, 0.0, 0.0),
                 child: Text(
                   'Calling 1990......',
                   style: FlutterFlowTheme.of(context).bodyText1.override(
@@ -96,8 +94,7 @@ class _EmergencyPageWidgetState extends State<EmergencyPageWidget> {
                 ),
               ),
               Padding(
-                padding:
-                    EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 0.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 0.0, 0.0),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(30.0),
                   child: Image.asset(
@@ -109,8 +106,7 @@ class _EmergencyPageWidgetState extends State<EmergencyPageWidget> {
                 ),
               ),
               Padding(
-                padding:
-                    EdgeInsetsDirectional.fromSTEB(0.0, 100.0, 0.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 100.0, 0.0, 0.0),
                 child: Image.asset(
                   'assets/images/snake_1.png',
                   width: 100.0,

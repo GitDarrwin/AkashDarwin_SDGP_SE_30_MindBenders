@@ -51,8 +51,7 @@ class _MedicalHelpPageWidgetState extends State<MedicalHelpPageWidget> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
-                padding:
-                    EdgeInsetsDirectional.fromSTEB(270.0, 20.0, 0.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(270.0, 20.0, 0.0, 0.0),
                 child: FlutterFlowIconButton(
                   borderColor: Colors.transparent,
                   borderRadius: 30.0,
@@ -78,14 +77,13 @@ class _MedicalHelpPageWidgetState extends State<MedicalHelpPageWidget> {
                     ),
               ),
               Padding(
-                padding:
-                    EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                 child: SingleChildScrollView(
                   child: FlutterFlowWebView(
                     url:
                         'https://www.cdc.gov/niosh/topics/snakes/symptoms.html#:~:text=Seek%20medical%20attention%20as%20soon,from%20venom%20can%20be%20stopped.',
                     bypass: false,
-                    height: height-166,
+                    height: height - 166,
                     verticalScroll: true,
                     horizontalScroll: true,
                   ),

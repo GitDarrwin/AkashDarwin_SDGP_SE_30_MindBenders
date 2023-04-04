@@ -7,7 +7,6 @@ import 'package:provider/provider.dart';
 import 'about_us_page_model.dart';
 export 'about_us_page_model.dart';
 
-
 class AboutUsPageWidget extends StatefulWidget {
   const AboutUsPageWidget({Key? key}) : super(key: key);
 
@@ -51,8 +50,7 @@ class _AboutUsPageWidgetState extends State<AboutUsPageWidget> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
-                padding:
-                    EdgeInsetsDirectional.fromSTEB(270.0, 20.0, 0.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(270.0, 20.0, 0.0, 0.0),
                 child: FlutterFlowIconButton(
                   borderColor: Colors.transparent,
                   borderRadius: 30.0,
@@ -69,8 +67,7 @@ class _AboutUsPageWidgetState extends State<AboutUsPageWidget> {
                 ),
               ),
               Padding(
-                padding:
-                    EdgeInsetsDirectional.fromSTEB(0.0, 35.0, 0.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 35.0, 0.0, 0.0),
                 child: Text(
                   'Who we are?',
                   textAlign: TextAlign.center,
@@ -83,8 +80,7 @@ class _AboutUsPageWidgetState extends State<AboutUsPageWidget> {
                 ),
               ),
               Padding(
-                padding:
-                    EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
                 child: Text(
                   'Mind Benders',
                   style: FlutterFlowTheme.of(context).bodyText1.override(
@@ -96,8 +92,7 @@ class _AboutUsPageWidgetState extends State<AboutUsPageWidget> {
                 ),
               ),
               Padding(
-                padding:
-                    EdgeInsetsDirectional.fromSTEB(40.0, 40.0, 30.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(40.0, 40.0, 30.0, 0.0),
                 child: Text(
                   'Mind Benders a  bunch of second-year university students\nfollowing the B Eng (Hons) Software Engineering degree at the Informatics Institute of Technology affiliated with the University of Westminster, UK.  ',
                   textAlign: TextAlign.justify,
@@ -111,8 +106,8 @@ class _AboutUsPageWidgetState extends State<AboutUsPageWidget> {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(
-                        25.0, 40.0, 0.0, 0.0),
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(25.0, 40.0, 0.0, 0.0),
                     child: Image.asset(
                       'assets/images/akash.png',
                       width: 100.0,
@@ -121,8 +116,8 @@ class _AboutUsPageWidgetState extends State<AboutUsPageWidget> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(
-                        20.0, 35.0, 0.0, 0.0),
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(20.0, 35.0, 0.0, 0.0),
                     child: Image.asset(
                       'assets/images/tharusha.png',
                       width: 100.0,
@@ -131,8 +126,8 @@ class _AboutUsPageWidgetState extends State<AboutUsPageWidget> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(
-                        20.0, 30.0, 0.0, 0.0),
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(20.0, 30.0, 0.0, 0.0),
                     child: Image.asset(
                       'assets/images/dumidu.png',
                       width: 100.0,
@@ -146,54 +141,50 @@ class _AboutUsPageWidgetState extends State<AboutUsPageWidget> {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(
-                        35.0, 10.0, 0.0, 0.0),
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(35.0, 10.0, 0.0, 0.0),
                     child: Text(
                       'Akash Dawrin',
-                      style:
-                          FlutterFlowTheme.of(context).bodyText1.override(
-                                fontFamily: 'Poppins',
-                                fontSize: 13.0,
-                              ),
+                      style: FlutterFlowTheme.of(context).bodyText1.override(
+                            fontFamily: 'Poppins',
+                            fontSize: 13.0,
+                          ),
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(
-                        40.0, 10.0, 0.0, 0.0),
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(40.0, 10.0, 0.0, 0.0),
                     child: Text(
                       'Tharusha \nGunawardana',
                       textAlign: TextAlign.center,
-                      style:
-                          FlutterFlowTheme.of(context).bodyText1.override(
-                                fontFamily: 'Poppins',
-                                fontSize: 13.0,
-                              ),
+                      style: FlutterFlowTheme.of(context).bodyText1.override(
+                            fontFamily: 'Poppins',
+                            fontSize: 13.0,
+                          ),
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(
-                        55.0, 10.0, 0.0, 0.0),
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(55.0, 10.0, 0.0, 0.0),
                     child: Text(
                       'Dumidu \nFernando',
                       textAlign: TextAlign.center,
-                      style:
-                          FlutterFlowTheme.of(context).bodyText1.override(
-                                fontFamily: 'Poppins',
-                                fontSize: 13.0,
-                              ),
+                      style: FlutterFlowTheme.of(context).bodyText1.override(
+                            fontFamily: 'Poppins',
+                            fontSize: 13.0,
+                          ),
                     ),
                   ),
                 ],
               ),
               Padding(
-                padding:
-                    EdgeInsetsDirectional.fromSTEB(0.0, 45.0, 0.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 45.0, 0.0, 0.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(
-                          60.0, 0.0, 0.0, 0.0),
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(60.0, 0.0, 0.0, 0.0),
                       child: Image.asset(
                         'assets/images/dinil.png',
                         width: 100.0,
@@ -202,8 +193,8 @@ class _AboutUsPageWidgetState extends State<AboutUsPageWidget> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(
-                          65.0, 0.0, 0.0, 0.0),
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(65.0, 0.0, 0.0, 0.0),
                       child: Image.asset(
                         'assets/images/tharkana.png',
                         width: 100.0,
@@ -218,27 +209,25 @@ class _AboutUsPageWidgetState extends State<AboutUsPageWidget> {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(
-                        80.0, 10.0, 0.0, 0.0),
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(80.0, 10.0, 0.0, 0.0),
                     child: Text(
                       'Dinil Perera',
-                      style:
-                          FlutterFlowTheme.of(context).bodyText1.override(
-                                fontFamily: 'Poppins',
-                                fontSize: 13.0,
-                              ),
+                      style: FlutterFlowTheme.of(context).bodyText1.override(
+                            fontFamily: 'Poppins',
+                            fontSize: 13.0,
+                          ),
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(
-                        80.0, 10.0, 0.0, 0.0),
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(80.0, 10.0, 0.0, 0.0),
                     child: Text(
                       'Tharkana Prabhath',
-                      style:
-                          FlutterFlowTheme.of(context).bodyText1.override(
-                                fontFamily: 'Poppins',
-                                fontSize: 13.0,
-                              ),
+                      style: FlutterFlowTheme.of(context).bodyText1.override(
+                            fontFamily: 'Poppins',
+                            fontSize: 13.0,
+                          ),
                     ),
                   ),
                 ],

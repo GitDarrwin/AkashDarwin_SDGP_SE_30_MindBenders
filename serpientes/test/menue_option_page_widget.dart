@@ -4,18 +4,16 @@ import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:image_cropper/image_cropper.dart';
-import '../loading_page/loading_page_widget.dart';
-import '../sign_in_page/sign_in_page_widget.dart';
-import '/flutter_flow/flutter_flow_icon_button.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
-import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'menue_option_page_model.dart';
-export 'menue_option_page_model.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:sdgp/flutter_flow/flutter_flow_icon_button.dart';
+import 'package:sdgp/flutter_flow/flutter_flow_theme.dart';
+import 'package:sdgp/flutter_flow/flutter_flow_widgets.dart';
+import 'package:sdgp/pages/loading_page/loading_page_widget.dart';
+import 'package:sdgp/pages/sign_in_page/sign_in_page_widget.dart';
 
 class MenueOptionPageWidget extends StatefulWidget {
   const MenueOptionPageWidget({Key? key}) : super(key: key);
@@ -25,8 +23,6 @@ class MenueOptionPageWidget extends StatefulWidget {
 }
 
 class _MenueOptionPageWidgetState extends State<MenueOptionPageWidget> {
-  late MenueOptionPageModel _model;
-
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final _unfocusNode = FocusNode();
   late var selectedMedia;
@@ -37,16 +33,7 @@ class _MenueOptionPageWidgetState extends State<MenueOptionPageWidget> {
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => MenueOptionPageModel());
     getUser(name_email!);
-  }
-
-  @override
-  void dispose() {
-    _model.dispose();
-
-    _unfocusNode.dispose();
-    super.dispose();
   }
 
   //google sing out service

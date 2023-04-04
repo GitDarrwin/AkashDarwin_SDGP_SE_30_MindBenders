@@ -7,7 +7,9 @@ export 'm_l_page_model.dart';
 
 class MLPageWidget extends StatefulWidget {
   final snakeDetails;
-  const MLPageWidget(List<dynamic> this.snakeDetails, {Key? key}) : super(key: key);
+
+  const MLPageWidget(List<dynamic> this.snakeDetails, {Key? key})
+      : super(key: key);
 
   @override
   _MLPageWidgetState createState() => _MLPageWidgetState();
@@ -100,7 +102,7 @@ class _MLPageWidgetState extends State<MLPageWidget> {
                             child: CircularProgressIndicator(
                               value: loadingProgress.expectedTotalBytes != null
                                   ? loadingProgress.cumulativeBytesLoaded /
-                                  loadingProgress.expectedTotalBytes!
+                                      loadingProgress.expectedTotalBytes!
                                   : null,
                             ),
                           );
@@ -122,8 +124,7 @@ class _MLPageWidgetState extends State<MLPageWidget> {
                     ),
                   ),
                   Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
+                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
                     child: Text(
                       widget.snakeDetails[3],
                       style: FlutterFlowTheme.of(context).bodyText1.override(
@@ -157,7 +158,8 @@ class _MLPageWidgetState extends State<MLPageWidget> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 5.0),
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 5.0),
                     child: Divider(
                       thickness: 3.0,
                     ),

@@ -1,15 +1,13 @@
 import 'dart:io';
 import 'package:animated_snack_bar/animated_snack_bar.dart';
+import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
-import '../loading_page/loading_page_widget.dart';
-import '../search_page/search_page_widget.dart';
-import '/flutter_flow/flutter_flow_icon_button.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
-import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
+import 'package:sdgp/flutter_flow/flutter_flow_icon_button.dart';
+import 'package:sdgp/flutter_flow/flutter_flow_theme.dart';
+import 'package:sdgp/flutter_flow/flutter_flow_widgets.dart';
+import 'package:sdgp/pages/loading_page/loading_page_widget.dart';
+import 'package:sdgp/pages/search_page/search_page_widget.dart';
 import 'package:flutter/material.dart';
-import 'recent_page_model.dart';
-export 'recent_page_model.dart';
 import 'package:image_cropper/image_cropper.dart';
 
 class RecentPageWidget extends StatefulWidget {
@@ -20,7 +18,6 @@ class RecentPageWidget extends StatefulWidget {
 }
 
 class _RecentPageWidgetState extends State<RecentPageWidget> {
-  late RecentPageModel _model;
   late var selectedMedia;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -29,16 +26,8 @@ class _RecentPageWidgetState extends State<RecentPageWidget> {
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => RecentPageModel());
   }
 
-  @override
-  void dispose() {
-    _model.dispose();
-
-    _unfocusNode.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -115,7 +104,7 @@ class _RecentPageWidgetState extends State<RecentPageWidget> {
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
-                                  SearchPageWidget(name: "green pit viper")),
+                                  SearchPageWidget(name: "pit viper")),
                         );
                       },
                       child: Image.asset(
@@ -137,7 +126,7 @@ class _RecentPageWidgetState extends State<RecentPageWidget> {
                         context,
                         MaterialPageRoute(
                             builder: (context) =>
-                                SearchPageWidget(name: "indian python")),
+                                SearchPageWidget(name: "python")),
                       );
                     },
                     child: Image.asset(
@@ -153,7 +142,7 @@ class _RecentPageWidgetState extends State<RecentPageWidget> {
                         context,
                         MaterialPageRoute(
                             builder: (context) =>
-                                SearchPageWidget(name: "ptyas mucosa")),
+                                SearchPageWidget(name: "dudhhghj")),
                       );
                     },
                     child: Image.asset(

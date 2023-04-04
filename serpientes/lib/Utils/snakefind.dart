@@ -4,23 +4,45 @@ import 'package:http/http.dart' as http;
 import 'dart:io';
 
 class snakeFind {
-  final species_list = ["Ahaetulla nasuta", "Ahaetulla prasina", "Albino cobra", "Arani", "Buff-striped keel back", "CGR", "Checkered keel back",
-    "Chrysopelea ornata", "Cobra", "Common krait", "Daboia russelii", "Flowery wolf snake", "Forsten's cat snake", "Green pit viper", "Green vine snake",
-    "Hump-nosed viper", "Pipe snake", "Python", "Rat snake", "Russell's viper", "Sri Lanka cat snake", "Trinket snake", "Wolf snake"];
+  final species_list = [
+    "Ahaetulla nasuta",
+    "Ahaetulla prasina",
+    "Albino cobra",
+    "Arani",
+    "Buff-striped keel back",
+    "CGR",
+    "Checkered keel back",
+    "Chrysopelea ornata",
+    "Cobra",
+    "Common krait",
+    "Daboia russelii",
+    "Flowery wolf snake",
+    "Forsten's cat snake",
+    "Green pit viper",
+    "Green vine snake",
+    "Hump-nosed viper",
+    "Pipe snake",
+    "Python",
+    "Rat snake",
+    "Russell's viper",
+    "Sri Lanka cat snake",
+    "Trinket snake",
+    "Wolf snake"
+  ];
 
   Future sendImage(String imageFile) async {
     var result = null;
     // Define endpoint URL
-    var request = http.MultipartRequest('POST', Uri.parse('http://13.50.238.163:8501/predict'));
+    var request = http.MultipartRequest(
+        'POST', Uri.parse('http://13.50.238.163:8501/predict'));
     request.files.add(await http.MultipartFile.fromPath('image', imageFile));
 
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode == 200) {
-      result= await response.stream.bytesToString();
+      result = await response.stream.bytesToString();
       return getList(result);
-    }
-    else {
+    } else {
       print(response.reasonPhrase);
     }
     return result;
@@ -29,10 +51,8 @@ class snakeFind {
   List<Object> getList(result) {
     Map<String, dynamic> jsonResult = json.decode(result);
     String name = species_list[jsonResult['predicted_class']];
-    double confidence = jsonResult['confidence_level']*100;
-    print("Name : "+ name+ " confidence : "+ confidence.round().toString());
-    return [name,confidence.round()];
+    double confidence = jsonResult['confidence_level'] * 100;
+    print("Name : " + name + " confidence : " + confidence.round().toString());
+    return [name, confidence.round()];
   }
-
-
 }

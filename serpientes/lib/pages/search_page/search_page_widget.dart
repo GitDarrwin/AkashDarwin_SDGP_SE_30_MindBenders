@@ -9,6 +9,7 @@ export 'search_page_model.dart';
 
 class SearchPageWidget extends StatefulWidget {
   final String? name;
+
   const SearchPageWidget({Key? key, this.name}) : super(key: key);
 
   @override
@@ -53,7 +54,7 @@ class _SearchPageWidgetState extends State<SearchPageWidget> {
     _model.textController ??= TextEditingController();
     _model.textController.text = widget.name ?? '';
     if (widget.name != null) {
-      selectname=true;
+      selectname = true;
       getSnake(widget.name!);
     }
   }
@@ -203,7 +204,8 @@ class _SearchPageWidgetState extends State<SearchPageWidget> {
                               ),
                               onTap: () async {
                                 _model.textController.text = resultData[index];
-                                FocusScopeNode currentFocus = FocusScope.of(context);
+                                FocusScopeNode currentFocus =
+                                    FocusScope.of(context);
 
                                 if (!currentFocus.hasPrimaryFocus) {
                                   currentFocus.unfocus();

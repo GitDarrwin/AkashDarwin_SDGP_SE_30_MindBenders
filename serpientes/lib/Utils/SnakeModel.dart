@@ -15,15 +15,14 @@ class SnakeModel {
     required this.image_url,
   });
 
-  factory SnakeModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> document){
+  factory SnakeModel.fromSnapshot(
+      DocumentSnapshot<Map<String, dynamic>> document) {
     final data = document.data();
     return SnakeModel(
-        id:  document.id,
+        id: document.id,
         snake_name: data!["Name"],
-        des:data["Description"],
-        scince_name:data["Scientific Name"],
-        image_url:data["image"]
-    );
+        des: data["Description"],
+        scince_name: data["Scientific Name"],
+        image_url: data["image"]);
   }
-
 }
