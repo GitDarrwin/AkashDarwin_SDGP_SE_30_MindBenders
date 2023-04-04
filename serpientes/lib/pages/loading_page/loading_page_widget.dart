@@ -196,7 +196,7 @@ class _LoadingPageWidgetState extends State<LoadingPageWidget> {
 
     confidence = await snakeDetail[1];
     name = await snakeDetail[0];
-    if (confidence > 40) {
+    if (confidence > 60) {
       await gettingSnakeDetails();
       AnimatedSnackBar.material(
         "Result Found!",

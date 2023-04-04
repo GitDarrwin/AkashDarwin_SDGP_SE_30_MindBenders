@@ -218,9 +218,6 @@ extension IterableExt<T> on Iterable<T> {
 void setAppLanguage(BuildContext context, String language) =>
     MyApp.of(context).setLocale(language);
 
-void setDarkModeSetting(BuildContext context, ThemeMode themeMode) =>
-    MyApp.of(context).setThemeMode(themeMode);
-
 void showSnackbar(
   BuildContext context,
   String message, {

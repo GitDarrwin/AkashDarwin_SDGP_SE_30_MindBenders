@@ -2,8 +2,6 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'about_us_page_model.dart';
 export 'about_us_page_model.dart';
 
@@ -94,12 +92,10 @@ class _AboutUsPageWidgetState extends State<AboutUsPageWidget> {
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(40.0, 40.0, 30.0, 0.0),
                 child: Text(
-                  'Mind Benders a  bunch of second-year university students\nfollowing the B Eng (Hons) Software Engineering degree at the Informatics Institute of Technology affiliated with the University of Westminster, UK.  ',
-                  textAlign: TextAlign.justify,
+                  'Mind Benders a  bunch of second-year university students following the B Eng (Hons) Software Engineering degree at the Informatics Institute of Technology affiliated with the University of Westminster, UK.  ',
+                  textAlign: TextAlign.left,
                   style: FlutterFlowTheme.of(context).bodyText1.override(
-                        fontFamily: 'Poppins',
-                        fontSize: 15.5,
-                      ),
+                      fontFamily: 'Poppins', fontSize: 15.5, lineHeight: 1.6),
                 ),
               ),
               Row(
@@ -148,6 +144,7 @@ class _AboutUsPageWidgetState extends State<AboutUsPageWidget> {
                       style: FlutterFlowTheme.of(context).bodyText1.override(
                             fontFamily: 'Poppins',
                             fontSize: 13.0,
+                            fontWeight: FontWeight.w500,
                           ),
                     ),
                   ),
@@ -160,6 +157,7 @@ class _AboutUsPageWidgetState extends State<AboutUsPageWidget> {
                       style: FlutterFlowTheme.of(context).bodyText1.override(
                             fontFamily: 'Poppins',
                             fontSize: 13.0,
+                            fontWeight: FontWeight.w500,
                           ),
                     ),
                   ),
@@ -172,6 +170,7 @@ class _AboutUsPageWidgetState extends State<AboutUsPageWidget> {
                       style: FlutterFlowTheme.of(context).bodyText1.override(
                             fontFamily: 'Poppins',
                             fontSize: 13.0,
+                            fontWeight: FontWeight.w500,
                           ),
                     ),
                   ),
@@ -216,6 +215,7 @@ class _AboutUsPageWidgetState extends State<AboutUsPageWidget> {
                       style: FlutterFlowTheme.of(context).bodyText1.override(
                             fontFamily: 'Poppins',
                             fontSize: 13.0,
+                            fontWeight: FontWeight.w500,
                           ),
                     ),
                   ),
@@ -227,6 +227,7 @@ class _AboutUsPageWidgetState extends State<AboutUsPageWidget> {
                       style: FlutterFlowTheme.of(context).bodyText1.override(
                             fontFamily: 'Poppins',
                             fontSize: 13.0,
+                            fontWeight: FontWeight.w500,
                           ),
                     ),
                   ),
