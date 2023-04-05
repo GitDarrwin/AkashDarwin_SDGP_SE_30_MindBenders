@@ -23,7 +23,7 @@ Setting up the Firebase/Firestore database and ensuring that it could handle the
 
 <h3>Solutions</h3>
 To overcome these challenges, we took the following steps:<br>
-We researched several image processing models and eventually settled on InceptionV3, which had a high level of accuracy in detecting venomous snakes.
+We researched several image processing models and eventually settled on InceptionV3, which had a high level of accuracy at an average of 82% in detecting venomous snakes.
 We worked closely with the backend team to ensure that the frontend and backend were fully integrated and that data could be passed between the two without any issues.
 We performed extensive load testing on the Firebase/Firestore database and optimized its performance to ensure that it could handle large volumes of user data.
 
