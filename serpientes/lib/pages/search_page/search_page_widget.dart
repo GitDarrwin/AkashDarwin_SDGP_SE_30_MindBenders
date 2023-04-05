@@ -28,7 +28,7 @@ class _SearchPageWidgetState extends State<SearchPageWidget> {
   final db = FirebaseFirestore.instance;
   List allData = [];
   List resultData = [];
-
+// get requested snake details from the database
   getSnake(String name) async {
     QuerySnapshot<Map<String, dynamic>> snap = await FirebaseFirestore.instance
         .collection("Sankes")
@@ -112,6 +112,7 @@ class _SearchPageWidgetState extends State<SearchPageWidget> {
                         ),
                   ),
                 ),
+                // search box
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                   child: Container(
@@ -237,6 +238,7 @@ class _SearchPageWidgetState extends State<SearchPageWidget> {
                           ),
                     ),
                   ),
+                //giving details of searched snake
                 if (searchedSnake != null && selectname == true)
                   Padding(
                     padding:
@@ -310,6 +312,7 @@ class _SearchPageWidgetState extends State<SearchPageWidget> {
                       thickness: 3.0,
                     ),
                   ),
+                // getting snakes scientific name
                 if (searchedSnake != null && selectname == true)
                   Padding(
                     padding:
@@ -326,7 +329,7 @@ class _SearchPageWidgetState extends State<SearchPageWidget> {
                   Padding(
                     padding: EdgeInsets.only(bottom: 25),
                     child: Text(
-                      'Venom : Highly Venomous',
+                      'Venom : Venomous',
                       textAlign: TextAlign.start,
                       style: FlutterFlowTheme.of(context).bodyText1.override(
                             fontFamily: 'Poppins',

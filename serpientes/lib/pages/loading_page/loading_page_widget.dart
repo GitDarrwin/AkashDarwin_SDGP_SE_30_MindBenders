@@ -116,6 +116,7 @@ class _LoadingPageWidgetState extends State<LoadingPageWidget> {
       ),
     );
   }
+// display pop up and ask user want more details
 
   void dialogboxpopup(String snakeName, int confidence) async {
     await Dialogs.materialDialog(
@@ -163,7 +164,7 @@ class _LoadingPageWidgetState extends State<LoadingPageWidget> {
         ]);
     context.pushNamed('Menue_Option_Page');
   }
-
+// getting Snake details from the database
   Future<void> gettingSnakeDetails() async {
     QuerySnapshot<Map<String, dynamic>> snap = await FirebaseFirestore.instance
         .collection("Sankes")
@@ -190,7 +191,7 @@ class _LoadingPageWidgetState extends State<LoadingPageWidget> {
       confidence = 0;
     }
   }
-
+// after sending image display pop up box if result is found or not
   Future<void> firstDo() async {
     await gettingDetails();
 

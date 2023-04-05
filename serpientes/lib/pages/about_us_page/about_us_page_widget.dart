@@ -152,7 +152,7 @@ class _AboutUsPageWidgetState extends State<AboutUsPageWidget> {
                     padding:
                         EdgeInsetsDirectional.fromSTEB(40.0, 10.0, 0.0, 0.0),
                     child: Text(
-                      'Tharusha \nGunawardana',
+                      'Tharusha \nGunawardena',
                       textAlign: TextAlign.center,
                       style: FlutterFlowTheme.of(context).bodyText1.override(
                             fontFamily: 'Poppins',

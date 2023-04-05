@@ -100,6 +100,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                         ),
                   ),
                 ),
+                // sign up page for new users
                 Padding(
                   padding:
                       EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 190.0, 0.0),
@@ -497,6 +498,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                     ),
                   ),
                 ),
+                // users can register them using sign up button
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 25.0),
                   child: FFButtonWidget(
@@ -530,7 +532,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
       ),
     );
   }
-
+// form validators
   handleSubmit() async {
     final email = _emailController.value.text;
     final password = _passwordController.value.text;

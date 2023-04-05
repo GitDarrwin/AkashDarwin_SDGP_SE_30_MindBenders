@@ -67,6 +67,7 @@ class _MedicalHelpPageWidgetState extends State<MedicalHelpPageWidget> {
                   },
                 ),
               ),
+              // Display Medical Help Section
               Text(
                 'Medical Help',
                 style: FlutterFlowTheme.of(context).bodyText1.override(
@@ -76,6 +77,7 @@ class _MedicalHelpPageWidgetState extends State<MedicalHelpPageWidget> {
                       decoration: TextDecoration.underline,
                     ),
               ),
+              // Redirect To the National Institute for Occupational Safety And Health Webpage
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                 child: SingleChildScrollView(

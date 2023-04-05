@@ -45,11 +45,11 @@ class _SignInPageWidgetState extends State<SignInPageWidget> {
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final _db = FirebaseFirestore.instance;
-
+// user can sign in with google account
   Future<UserCredential?> signInWithGoogle() async {
     try {
       final GoogleSignIn googleSignIn = GoogleSignIn();
-      //Triger the authentication flow
+      //Trigger the authentication flow
       final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
 
       //Obtain the auth details from the request
@@ -121,6 +121,7 @@ class _SignInPageWidgetState extends State<SignInPageWidget> {
                           ),
                     ),
                   ),
+                  // start of the logging form
                   Padding(
                     padding:
                         EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 190.0, 0.0),
@@ -301,6 +302,7 @@ class _SignInPageWidgetState extends State<SignInPageWidget> {
                               builder: (context) => ForgetPasswordPageWidget()),
                         );
                       },
+                      // forgot password section user can reset password
                       child: RichText(
                         text: TextSpan(
                           children: [
@@ -320,6 +322,7 @@ class _SignInPageWidgetState extends State<SignInPageWidget> {
                       ),
                     ),
                   ),
+                  // sign in button
                   Padding(
                     padding:
                         EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
@@ -358,6 +361,7 @@ class _SignInPageWidgetState extends State<SignInPageWidget> {
                               builder: (context) => SignUpPageWidget()),
                         );
                       },
+                      //new users can sign up using this button
                       child: Text(
                         'Sign Up',
                         style: FlutterFlowTheme.of(context).bodyText1.override(
@@ -369,6 +373,7 @@ class _SignInPageWidgetState extends State<SignInPageWidget> {
                       ),
                     ),
                   ),
+                  // social profile paths
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0, 0.0),
                     child: Text(
@@ -418,7 +423,7 @@ class _SignInPageWidgetState extends State<SignInPageWidget> {
     try {
       await Auth().signInWithEmailAndPassword(email, password);
       AnimatedSnackBar.material(
-        'Successfully Logged In',
+        'Successfully Logged In', // after logging display this massage
         type: AnimatedSnackBarType.success,
       ).show(context);
       //Checking if is login or register

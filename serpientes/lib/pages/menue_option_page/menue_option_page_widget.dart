@@ -71,7 +71,7 @@ class _MenueOptionPageWidgetState extends State<MenueOptionPageWidget> {
       });
     }
   }
-
+// Giving Access to the camera to take Picture
   Future<void> pickImage() async {
     try {
       final image = await ImagePicker().pickImage(source: ImageSource.camera);
@@ -82,7 +82,7 @@ class _MenueOptionPageWidgetState extends State<MenueOptionPageWidget> {
       }
       ;
       final imageTemp = File(image.path);
-
+// user can crop images to make image clear.
       CroppedFile? croppedFile = await ImageCropper().cropImage(
         sourcePath: imageTemp.path,
         aspectRatioPresets: [
@@ -115,7 +115,7 @@ class _MenueOptionPageWidgetState extends State<MenueOptionPageWidget> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-
+// Side menu panel
     return WillPopScope(
       onWillPop: () async {
         return false;
@@ -175,6 +175,7 @@ class _MenueOptionPageWidgetState extends State<MenueOptionPageWidget> {
                           ),
                     ),
                   ),
+                  // display medical help section in side menu panel
                   Divider(
                     thickness: 3.0,
                   ),
@@ -199,6 +200,7 @@ class _MenueOptionPageWidgetState extends State<MenueOptionPageWidget> {
                       dense: false,
                     ),
                   ),
+                  // // display Emergency section in side menu panel
                   InkWell(
                     onTap: () async {
                       context.pushNamed('Emergency_Page');
@@ -220,6 +222,7 @@ class _MenueOptionPageWidgetState extends State<MenueOptionPageWidget> {
                       dense: false,
                     ),
                   ),
+                  // // display about us section in side menu panel
                   InkWell(
                     onTap: () async {
                       context.pushNamed('About_Us_Page');
@@ -241,6 +244,7 @@ class _MenueOptionPageWidgetState extends State<MenueOptionPageWidget> {
                       dense: false,
                     ),
                   ),
+                  //  // display sign ou section in side menu panel that user can sign out
                   ListTile(
                     onTap: () async {
                       //Use this log out user
@@ -274,6 +278,7 @@ class _MenueOptionPageWidgetState extends State<MenueOptionPageWidget> {
                   Divider(
                     thickness: 3.0,
                   ),
+                  // Display Exit button to close the application
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0.0, 280, 0.0, 0.0),
                     child: ListTile(
@@ -355,6 +360,7 @@ class _MenueOptionPageWidgetState extends State<MenueOptionPageWidget> {
                         ).show(context);
                       }
                     },
+                    // menu page buttons
                     text: 'Take an Image',
                     options: FFButtonOptions(
                       width: 230.0,

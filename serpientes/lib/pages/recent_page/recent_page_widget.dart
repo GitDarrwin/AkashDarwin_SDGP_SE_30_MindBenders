@@ -72,6 +72,7 @@ class _RecentPageWidgetState extends State<RecentPageWidget> {
                   },
                 ),
               ),
+              // User can choose recently searched snakes
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 220.0, 0.0),
                 child: Text(
@@ -83,6 +84,7 @@ class _RecentPageWidgetState extends State<RecentPageWidget> {
                       ),
                 ),
               ),
+              // redirected to the recent searched snake details page
               Row(
                 mainAxisSize: MainAxisSize.max,
                 children: [
@@ -186,6 +188,7 @@ class _RecentPageWidgetState extends State<RecentPageWidget> {
                       ).show(context);
                     }
                   },
+                  // user can choose a image from the gallery
                   text: 'Choose From Gallery',
                   options: FFButtonOptions(
                     width: 230.0,
@@ -213,7 +216,7 @@ class _RecentPageWidgetState extends State<RecentPageWidget> {
       ),
     );
   }
-
+// picking images using image picker
   Future<void> pickImage() async {
     try {
       final image = await ImagePicker().pickImage(source: ImageSource.gallery);

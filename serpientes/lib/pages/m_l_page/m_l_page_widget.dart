@@ -136,6 +136,7 @@ class _MLPageWidgetState extends State<MLPageWidget> {
                   Padding(
                     padding:
                         EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 240.0, 0.0),
+                    // Display Snake Details
                     child: Text(
                       'Description',
                       style: FlutterFlowTheme.of(context).bodyText1.override(
@@ -173,6 +174,7 @@ class _MLPageWidgetState extends State<MLPageWidget> {
                           fontSize: 19.0,
                         ),
                   ),
+                  // display First-aid details
                   Padding(
                     padding:
                         EdgeInsetsDirectional.fromSTEB(20.0, 10.0, 10.0, 30.0),
